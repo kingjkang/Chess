@@ -5,11 +5,11 @@ public class Pawn extends ChessPiece{
 	private boolean firstStepDone;
 
 	public Pawn(int nx, int ny, boolean color){
-		ChessBoard[nx][ny] = this;
 		x = nx;
 		y = ny;
-		value = 1;
 		this.color = color;
+		value = 5;
+		ChessBoard[x][y] = this;
 		firstStepDone = false;
 	}
 	
@@ -25,7 +25,7 @@ public class Pawn extends ChessPiece{
 
 	@Override
 	public void showMoves(){
-	
+		
 	}
 	
 	public String toString(){
@@ -47,7 +47,7 @@ public class Pawn extends ChessPiece{
 			}
 		}
 		else{
-			if(deltaX > 0 || deltaY > 2){
+			if(deltaX > 1 || deltaY > 2){
 				return false;
 			}
 		}
@@ -55,31 +55,54 @@ public class Pawn extends ChessPiece{
 		/* Black --> goes down" */
 		if(color == black){
 			if(ny > y){
-				/* Check if going down is in bounds */
-				if(ny <= 7 && ny >= 2){
-					/* Check if moving laterally 
-					 * Can't move forward and stay in same x if anyone is in front */
-					if(nx == x){
-						if(ChessBoard[nx][ny] == null && !inCheck(nx, ny)){
-							return true;
-						}
-						else{
-							return false;
-						}	
+				/* Can't move forward and stay in same x if anyone is in front */
+				if(nx == x){
+					if(ChessBoard[nx][ny] == null && !inCheck(nx, ny)){
+						return true;
 					}
 					else{
-						if(ChessBoard[nx][ny].color == white){
-							
-						}
+						return false;
+					}	
+				}
+				else{
+					if(ChessBoard[nx][ny].color == white && !inCheck(nx, ny)){
+						return true;
 					}
+					else{
+						return false;
+					}
+				}
+			}
+			else{
+				return false;
 			}
 		}
 		
 		/* White --> goes up" */
 		else{
-			
+			if(ny < y){
+				/* Can't move forward and stay in same x if anyone is in front */
+				if(nx == x){
+					if(ChessBoard[nx][ny] == null && !inCheck(nx, ny)){
+						return true;
+					}
+					else{
+						return false;
+					}	
+				}
+				else{
+					if(ChessBoard[nx][ny].color == white && !inCheck(nx, ny)){
+						return true;
+					}
+					else{
+						return false;
+					}
+				}
+			}
+			else{
+				return false;
+			}
 		}
-		return false;
 	}
 
 	public void evolve(String piece){
