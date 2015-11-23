@@ -58,7 +58,6 @@ public abstract class ChessPiece {
 		ChessBoard[5][6] = new Bishop(5, 6, black);
 		ChessBoard[6][6] = new Knight(6, 6, black);
 		ChessBoard[7][6] = new Rook(7, 6, black);
-		
 		*/
 		
 	}

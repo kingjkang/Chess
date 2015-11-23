@@ -35,6 +35,10 @@ public class Pawn extends ChessPiece{
 	@Override
 	public boolean isValidMove(int nx, int ny) {
 		
+		if(nx > 8 || nx < 0 || ny > 8 || ny < 0){
+			return false;
+		}
+		
 		int deltaX = Math.abs(nx - x);
 		int deltaY = Math.abs(ny - y);
 		if(firstStepDone){
@@ -49,14 +53,14 @@ public class Pawn extends ChessPiece{
 		}
 		
 		/* Black --> goes down" */
-		if(color){
+		if(color == black){
 			if(ny > y){
 				/* Check if going down is in bounds */
 				if(ny <= 7 && ny >= 2){
 					/* Check if moving laterally 
 					 * Can't move forward and stay in same x if anyone is in front */
 					if(nx == x){
-						if(ChessBoard[x][y] == null && !inCheck(nx, ny)){
+						if(ChessBoard[nx][ny] == null && !inCheck(nx, ny)){
 							return true;
 						}
 						else{
@@ -64,12 +68,10 @@ public class Pawn extends ChessPiece{
 						}	
 					}
 					else{
+						if(ChessBoard[nx][ny].color == white){
+							
+						}
 					}
-				}
-				/* Out of bounds going down */
-				else{
-					return false;
-				}
 			}
 		}
 		
