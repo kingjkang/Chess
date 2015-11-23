@@ -1,36 +1,78 @@
 package project6;
 
 public class Pawn extends ChessPiece{
+	
+	private boolean firstStepDone;
 
-	public Pawn(int row, int col, boolean color){
-		GameBoard[row][col].add(this);
+	public Pawn(int nx, int ny, boolean color){
+		ChessBoard[nx][ny] = this;
+		x = nx;
+		y = ny;
 		value = 1;
 		this.color = color;
+		firstStepDone = false;
 	}
 	
 	@Override
-	public void move(int row, int col) {
-		if(isValidMove(row, col)){
-			GameBoard[x][y].remove(this);
-			x = row;
-			y = col;
-			GameBoard[x][y].add(this);
+	public void move(int nx, int ny) {
+		if(isValidMove(nx, ny)){
+			ChessBoard[x][y] = null;
+			x = nx;
+			y = ny;
+			ChessBoard[x][y] = this;
 		}
 	}
 
 	@Override
-	public void showMoves() {
-		
+	public void showMoves(){
+	
+	}
+	
+	public String toString(){
+		return "P";
 	}
 
 	@Override
-	public boolean isValidMove(int row, int col) {
-		/* Black --> goes down" */
-		if(color){
-			if(col > y && col != 8){
-				
+	public boolean isValidMove(int nx, int ny) {
+		
+		int deltaX = Math.abs(nx - x);
+		int deltaY = Math.abs(ny - y);
+		if(firstStepDone){
+			if(deltaX > 1 || deltaY > 1){
+				return false;
 			}
 		}
+		else{
+			if(deltaX > 0 || deltaY > 2){
+				return false;
+			}
+		}
+		
+		/* Black --> goes down" */
+		if(color){
+			if(ny > y){
+				/* Check if going down is in bounds */
+				if(ny <= 7 && ny >= 2){
+					/* Check if moving laterally 
+					 * Can't move forward and stay in same x if anyone is in front */
+					if(nx == x){
+						if(ChessBoard[x][y] == null && !inCheck(nx, ny)){
+							return true;
+						}
+						else{
+							return false;
+						}	
+					}
+					else{
+					}
+				}
+				/* Out of bounds going down */
+				else{
+					return false;
+				}
+			}
+		}
+		
 		/* White --> goes up" */
 		else{
 			
@@ -38,4 +80,8 @@ public class Pawn extends ChessPiece{
 		return false;
 	}
 
+	public void evolve(String piece){
+		
+	}
+	
 }
