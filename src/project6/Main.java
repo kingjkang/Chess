@@ -28,6 +28,7 @@ import javafx.scene.control.Control;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseDragEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.ColumnConstraints;
@@ -51,6 +52,7 @@ public class Main extends Application{
 	Scene tay1989;
 	BorderPane universe;
 	BorderPane borderPaneCenter, borderPaneRight, borderPaneLeft, borderPaneTop, borderPaneBottom;
+	ImageView whiteRook;
 	
 	public GridPane createBoard(){
 		GridPane board = new GridPane();
@@ -81,7 +83,7 @@ public class Main extends Application{
 		universe = new BorderPane();
 		
 		staplesCenter = primaryStage;
-		staplesCenter.setTitle("Chess");
+		staplesCenter.setTitle("Wizard's Chess");
 		
 		universe.setCenter(createBoard());
 		
