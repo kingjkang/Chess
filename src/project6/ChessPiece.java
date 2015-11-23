@@ -12,7 +12,8 @@ public abstract class ChessPiece {
 	
 	public abstract void move(int row, int col);
 	
+	public abstract void isValidMove(int row, int col);
+	
 	public abstract void showMoves();
 	
-	//lets see collisions 
 }
