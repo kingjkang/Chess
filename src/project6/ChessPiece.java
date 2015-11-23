@@ -16,9 +16,11 @@ public abstract class ChessPiece {
 	
 	public abstract void showMoves();
 	
-<<<<<<< HEAD
-=======
 	public static ChessBoard[][] GameBoard = new ChessBoard[8][8];
 	
->>>>>>> 56adeb67c5fbaa35d8c9b632289e9a5c1984c206
+	public static boolean checkCheck(){
+		//check if the king is put in check
+		
+		return false;
+	}
 }
