@@ -14,4 +14,5 @@ public abstract class ChessPiece {
 	
 	public abstract void showMoves();
 	
+	//lets see collisions 
 }
