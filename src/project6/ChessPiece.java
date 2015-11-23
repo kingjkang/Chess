@@ -18,4 +18,9 @@ public abstract class ChessPiece {
 	
 	public static ChessBoard[][] GameBoard = new ChessBoard[8][8];
 	
+	public static boolean checkCheck(){
+		//check if the king is put in check
+		
+		return false;
+	}
 }
