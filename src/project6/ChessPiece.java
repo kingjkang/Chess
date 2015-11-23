@@ -2,13 +2,13 @@ package project6;
 
 public abstract class ChessPiece {
 	
-	private int value;
+	protected int value;
 	
-	/*True = white, False = black*/
-	private boolean color;
+	/*False = white, True = black*/
+	protected boolean color;
 	
-	private int x;
-	private int y;
+	protected int x;
+	protected int y;
 	
 	public abstract void move(int row, int col);
 	
@@ -16,6 +16,6 @@ public abstract class ChessPiece {
 	
 	public abstract void showMoves();
 	
-	
+	public static ChessBoard[][] GameBoard = new ChessBoard[8][8];
 	
 }
