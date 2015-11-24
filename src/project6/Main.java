@@ -57,8 +57,8 @@ public class Main extends Application{
 	
 	public void getImages(){
 		//Image piece = new Image();
-		var rootDir; 
-		rootDir = "{__DIR__}".replaceAll("%20", " ");
+		//var rootDir; 
+		//rootDir = "{__DIR__}".replaceAll("%20", " ");
 	}
 	
 	public GridPane createBoard(){
