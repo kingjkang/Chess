@@ -13,19 +13,28 @@ public class Rook extends ChessPiece{
 		ChessBoard[x][y] = this;
 	}
 	
-	@Override
-	public void move(int nx, int ny) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
 	public boolean isValidMove(int nx, int ny) {
-		// TODO Auto-generated method stub
+		
+		if(x == nx && y == ny){
+			return false;
+		}
+		
+		if(nx < 0 || nx > 7 || ny < 0 || nx > 0){
+			return false;
+		}
+		
+		if(color == black){
+			if(x == nx){
+				
+			}
+		}
+		
+		else{
+			
+		}
 		return false;
 	}
 
-	@Override
 	public void showMoves() {
 		// TODO Auto-generated method stub
 		

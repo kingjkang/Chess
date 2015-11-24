@@ -13,17 +13,6 @@ public class Pawn extends ChessPiece{
 		firstStepDone = false;
 	}
 	
-	@Override
-	public void move(int nx, int ny) {
-		if(isValidMove(nx, ny)){
-			ChessBoard[x][y] = null;
-			x = nx;
-			y = ny;
-			ChessBoard[x][y] = this;
-		}
-	}
-
-	@Override
 	public void showMoves(){
 		
 	}
@@ -32,15 +21,19 @@ public class Pawn extends ChessPiece{
 		return "P";
 	}
 
-	@Override
 	public boolean isValidMove(int nx, int ny) {
 		
-		if(nx > 8 || nx < 0 || ny > 8 || ny < 0){
+		if(nx > 7 || nx < 0 || ny > 7 || ny < 0){
 			return false;
 		}
 		
 		int deltaX = Math.abs(nx - x);
 		int deltaY = Math.abs(ny - y);
+		
+		if(deltaX == 0 && deltaY == 0){
+			return false;
+		}
+		
 		if(firstStepDone){
 			if(deltaX > 1 || deltaY > 1){
 				return false;

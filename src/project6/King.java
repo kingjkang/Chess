@@ -2,17 +2,18 @@ package project6;
 
 public class King extends ChessPiece{
 
-	
-	
-	@Override
-	public void move(int nx, int ny) {
-		// TODO Auto-generated method stub
-		
+	public King(int nx, int ny, boolean color){
+		x = nx;
+		y = ny;
+		this.color = color;
+		value = 10;
+		ChessBoard[x][y] = this;
 	}
+	
 
 	@Override
 	public boolean isValidMove(int nx, int ny) {
-		// TODO Auto-generated method stub
+		
 		return false;
 	}
 
