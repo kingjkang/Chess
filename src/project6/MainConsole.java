@@ -1,5 +1,7 @@
 package project6;
 
+import java.util.Scanner;
+
 public class MainConsole {
 
 	public static void initBoard(){
@@ -32,9 +34,24 @@ public class MainConsole {
 	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
+		Scanner kb = new Scanner(System.in);
+		int xc, yc, ox, oy;
+		
 		System.out.println("lol");
 		ChessPiece.initializeBoard();
 		printBoard();
+		
+		while (true){
+			ox = kb.nextInt();
+			oy = kb.nextInt();
+			
+			xc = kb.nextInt();
+			yc = kb.nextInt();
+			
+			ChessPiece.move1(ox, oy, xc, yc);
+			
+			printBoard();
+		}
 		
 	}
 

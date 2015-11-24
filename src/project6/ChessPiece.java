@@ -38,6 +38,11 @@ public abstract class ChessPiece {
 		}
 	}
 	
+	public static void move1(int ox, int oy, int nx, int ny){
+		ChessBoard[nx][ny] = ChessBoard[ox][oy];
+		ChessBoard[ox][oy] = null;
+	}
+	
 	public abstract boolean isValidMove(int nx, int ny);
 	
 	public abstract void showMoves();
@@ -57,19 +62,19 @@ public abstract class ChessPiece {
 		}
 		
 		for(int i = 0; i < 8; i++){
-			ChessBoard[i][1] = new Pawn(i, 0, black);
-			ChessBoard[i][7] = new Pawn(i, 7, white);
+			ChessBoard[1][i] = new Pawn(1, i, black);
+			ChessBoard[6][i] = new Pawn(6, i, white);
 		}
 		
 		//Black Team
 		ChessBoard[0][0] = new Rook(0, 0, black);
-		ChessBoard[1][0] = new Knight(1, 0, black);
-		ChessBoard[2][0] = new Bishop(2, 0, black);
-		ChessBoard[3][0] = new King(3, 0, black);
-		ChessBoard[4][0] = new Queen(4, 0, black);
-		ChessBoard[5][0] = new Bishop(5, 0, black);
-		ChessBoard[6][0] = new Knight(6, 0, black);
-		ChessBoard[7][0] = new Rook(7, 0, black);
+		ChessBoard[0][1] = new Knight(0, 1, black);
+		ChessBoard[0][2] = new Bishop(0, 2, black);
+		ChessBoard[0][3] = new King(0, 3, black);
+		ChessBoard[0][4] = new Queen(0, 4, black);
+		ChessBoard[0][5] = new Bishop(0, 5, black);
+		ChessBoard[0][6] = new Knight(0, 6, black);
+		ChessBoard[0][7] = new Rook(0, 7, black);
 		for(int j = 0; j < 2; j++){
 		  for(int i = 0; i < 8; i++){
 		    blacks.add(ChessBoard[i][j]);
@@ -77,14 +82,14 @@ public abstract class ChessPiece {
 		}
 		
 		//White Team
-		ChessBoard[0][6] = new Rook(0, 6, white);
-		ChessBoard[1][6] = new Knight(1, 6, white);
-		ChessBoard[2][6] = new Bishop(2, 6, white);
-		ChessBoard[3][6] = new King(3, 6, white);
-		ChessBoard[4][6] = new Queen(4, 6, white);
-		ChessBoard[5][6] = new Bishop(5, 6, white);
-		ChessBoard[6][6] = new Knight(6, 6, white);
-		ChessBoard[7][6] = new Rook(7, 6, white);
+		ChessBoard[7][0] = new Rook(7, 0, white);
+		ChessBoard[7][1] = new Knight(7, 1, white);
+		ChessBoard[7][2] = new Bishop(7, 2, white);
+		ChessBoard[7][3] = new King(7, 3, white);
+		ChessBoard[7][4] = new Queen(7, 4, white);
+		ChessBoard[7][5] = new Bishop(7, 5, white);
+		ChessBoard[7][6] = new Knight(7, 6, white);
+		ChessBoard[7][7] = new Rook(7, 7, white);
 		for(int j = 6; j < 8; j++){
 		  for(int i = 0; i < 8; i++){
 		    whites.add(ChessBoard[i][j]);
