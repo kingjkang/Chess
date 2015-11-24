@@ -53,6 +53,13 @@ public class Main extends Application{
 	BorderPane universe;
 	BorderPane borderPaneCenter, borderPaneRight, borderPaneLeft, borderPaneTop, borderPaneBottom;
 	ImageView whiteRook;
+	//http://www.javacodegeeks.com/2013/10/javafx-2-how-to-load-image.html
+	
+	public void getImages(){
+		//Image piece = new Image();
+		var rootDir; 
+		rootDir = "{__DIR__}".replaceAll("%20", " ");
+	}
 	
 	public GridPane createBoard(){
 		GridPane board = new GridPane();
