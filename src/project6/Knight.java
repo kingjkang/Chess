@@ -8,11 +8,14 @@ public class Knight extends ChessPiece{
 		this.color = color;
 		value = 3;
 		ChessBoard[x][y] = this;
+		if(color == black){
+			label = "H";
+		}
+		else{
+			label = "h";
+		}
 	}
 	
-	public String toString(){
-		return "K";
-	}
 	
 	public boolean isValidMove(int nx, int ny) {
 		//this checks to see if it is wininn the range/scope of the chessboard

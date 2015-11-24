@@ -29,8 +29,4 @@ public class Bishop extends ChessPiece{
 		
 	}
 	
-	public String toString(){
-		return label;
-	}
-
 }

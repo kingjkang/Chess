@@ -16,7 +16,7 @@ public abstract class ChessPiece {
 	protected String label = "C";
 	
 	public String toString(){
-		return "C";
+		return label;
 	}
 	
 	public ArrayList<Move> Moves = new ArrayList<Move>();

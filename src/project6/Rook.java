@@ -111,8 +111,5 @@ public class Rook extends ChessPiece{
 	public void castle(){
 		
 	}
-	
-	public String toString(){
-		return label;
-	}
+
 }

@@ -29,8 +29,5 @@ public class Queen extends ChessPiece{
 		
 	}
 	
-	public String toString(){
-		return label;
-	}
 
 }

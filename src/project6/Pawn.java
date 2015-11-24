@@ -23,10 +23,6 @@ public class Pawn extends ChessPiece{
 		
 	}
 	
-	public String toString(){
-		return label;
-	}
-
 	public boolean isValidMove(int nx, int ny) {
 		
 		if(nx > 7 || nx < 0 || ny > 7 || ny < 0){
