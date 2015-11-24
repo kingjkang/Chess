@@ -8,6 +8,12 @@ public class King extends ChessPiece{
 		this.color = color;
 		value = 10;
 		ChessBoard[x][y] = this;
+		if(color == black){
+			label = "K";
+		}
+		else{
+			label = "k";
+		}
 	}
 	
 
@@ -24,7 +30,7 @@ public class King extends ChessPiece{
 	}
 	
 	public String toString(){
-		return "K";
+		return label;
 	}
 
 }

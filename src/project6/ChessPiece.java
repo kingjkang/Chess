@@ -13,11 +13,13 @@ public abstract class ChessPiece {
 	protected int x;
 	protected int y;
 	
+	protected String label = "C";
+	
 	public String toString(){
 		return "C";
 	}
 	
-	public ArrayList<Move> validMoves = new ArrayList<Move>();
+	public ArrayList<Move> Moves = new ArrayList<Move>();
 	
 	public void move(int nx, int ny){
 		if(isValidMove(nx, ny)){

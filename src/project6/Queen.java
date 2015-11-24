@@ -8,6 +8,12 @@ public class Queen extends ChessPiece{
 		this.color = color;
 		value = 9;
 		ChessBoard[x][y] = this;
+		if(color == black){
+			label = "Q";
+		}
+		else{
+			label = "q";
+		}
 	}
 	
 
@@ -24,7 +30,7 @@ public class Queen extends ChessPiece{
 	}
 	
 	public String toString(){
-		return "Q";
+		return label;
 	}
 
 }

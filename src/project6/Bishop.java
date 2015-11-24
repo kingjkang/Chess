@@ -8,6 +8,12 @@ public class Bishop extends ChessPiece{
 		this.color = color;
 		value = 3;
 		ChessBoard[x][y] = this;
+		if(color == black){
+			label = "B";
+		}
+		else{
+			label = "b";
+		}
 	}
 	
 
@@ -24,7 +30,7 @@ public class Bishop extends ChessPiece{
 	}
 	
 	public String toString(){
-		return "B";
+		return label;
 	}
 
 }

@@ -11,6 +11,12 @@ public class Pawn extends ChessPiece{
 		value = 5;
 		ChessBoard[x][y] = this;
 		firstStepDone = false;
+		if(color == black){
+			label = "P";
+		}
+		else{
+			label = "p";
+		}
 	}
 	
 	public void showMoves(){
@@ -18,7 +24,7 @@ public class Pawn extends ChessPiece{
 	}
 	
 	public String toString(){
-		return "P";
+		return label;
 	}
 
 	public boolean isValidMove(int nx, int ny) {
