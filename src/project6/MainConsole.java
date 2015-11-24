@@ -3,7 +3,7 @@ package project6;
 import java.util.Scanner;
 
 public class MainConsole {
-
+	
 	public static void initBoard(){
 		System.out.print("+" + " - " + " - " + " - " + " - " + " - " + " - " + " - " + " - " + "+\n");
 		for (int i = 0; i < 8; i++){
