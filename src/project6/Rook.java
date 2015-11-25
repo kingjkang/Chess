@@ -1,9 +1,10 @@
 package project6;
 
+import java.util.ArrayList;
+
 public class Rook extends ChessPiece{
 
 	private boolean firstStepDone;
-	private boolean canCastle;
 	
 	public Rook(int r, int c, boolean color){
 		row = r;
@@ -17,6 +18,14 @@ public class Rook extends ChessPiece{
 		else{
 			label = "r";
 		}
+	}
+	
+	public boolean canCastle(){
+		if(firstStepDone){
+			//if king can do it
+			return true;
+		}
+		return false;
 	}
 	
 	public boolean isValidMove(int r, int c) {
@@ -105,6 +114,55 @@ public class Rook extends ChessPiece{
 	}
 
 	public void showMoves() {
+		
+		Moves = new ArrayList<Move>(0);
+		
+		int r = Math.floorMod(row + 1, 8);		
+		while(r != row){
+			if(ChessBoard[r][col] != null){
+				if(isValidMove(r, col)){
+					Moves.add(new Move(r, col));
+				}
+				break;
+			}
+			Moves.add(new Move(r, col));
+			r = Math.floorMod(r + 1, 8);
+		}
+		
+		r = Math.floorMod(row + 1, 8);
+		while(r != row){
+			if(ChessBoard[r][col] != null){
+				if(isValidMove(r, col)){
+					Moves.add(new Move(r, col));
+				}
+				break;
+			}
+			Moves.add(new Move(r, col));
+			r = Math.floorMod(r - 1, 8);
+		}
+		
+		int c = Math.floorMod(col + 1, 8);
+		while(c != row){
+			if(ChessBoard[row][c] != null){
+				if(isValidMove(row, c)){
+					Moves.add(new Move(row, c));
+				}
+				break;
+			}
+			Moves.add(new Move(row, c));
+			c = Math.floorMod(c + 1, 8);
+		}
+		
+		while(c != row){
+			if(ChessBoard[row][c] != null){
+				if(isValidMove(row, c)){
+					Moves.add(new Move(row, c));
+				}
+				break;
+			}
+			Moves.add(new Move(row, c));
+			c = Math.floorMod(c - 1, 8);
+		}
 		
 	}
 	

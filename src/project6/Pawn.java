@@ -11,7 +11,7 @@ public class Pawn extends ChessPiece{
 		row = r;
 		col = c;
 		this.color = color;
-		value = 5;
+		value = 1;
 		ChessBoard[row][col] = this;
 		firstStepDone = false;
 		if(color == black){
@@ -96,10 +96,8 @@ public class Pawn extends ChessPiece{
 			}
 		}
 		
-		/* Black --> goes down" */
 		if(color == black){
 			if(r > row){
-				/* Can't move forward and stay in same x if anyone is in front */
 				if(c == col){
 					if(ChessBoard[r][c] == null && !inCheck(r, c)){
 						return true;
@@ -121,11 +119,8 @@ public class Pawn extends ChessPiece{
 				return false;
 			}
 		}
-		
-		/* White --> goes up" */
 		else{
 			if(r < row){
-				/* Can't move forward and stay in same x if anyone is in front */
 				if(c == col){
 					if(ChessBoard[r][c] == null && !inCheck(r, c)){
 						return true;
