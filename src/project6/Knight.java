@@ -3,11 +3,11 @@ package project6;
 public class Knight extends ChessPiece{
 
 	public Knight(int nx, int ny, boolean color){
-		x = nx;
-		y = ny;
+		row = nx;
+		col = ny;
 		this.color = color;
 		value = 3;
-		ChessBoard[x][y] = this;
+		ChessBoard[row][col] = this;
 		if(color == black){
 			label = "H";
 		}
@@ -24,7 +24,7 @@ public class Knight extends ChessPiece{
 		}
 		
 		//checking the 8 valid moves 
-		if (nx == (x+1) && ny == (y-2)){
+		if (nx == (row+1) && ny == (col-2)){
 			//top right move
 			//and check if the move will put the king in check
 			if (inCheck(nx, ny)){
@@ -32,45 +32,45 @@ public class Knight extends ChessPiece{
 			}
 			return true;
 		}
-		else if (nx == (x+2) && ny == (y-1)){
+		else if (nx == (row+2) && ny == (col-1)){
 			//right right move
 			if (inCheck(nx, ny)){
 				return false;
 			}
 			return true;
 		}
-		else if (nx == (x+2) && ny == (y+1)){
+		else if (nx == (row+2) && ny == (col+1)){
 			//right right move
 			if (inCheck(nx, ny)){
 				return false;
 			}
 			return true;
 		}
-		else if (nx == (x+1) && ny == (y+2)){
+		else if (nx == (row+1) && ny == (col+2)){
 			if (inCheck(nx, ny)){
 				return false;
 			}
 			return true;
 		}
-		else if (nx == (x-1) && ny == (y+2)){
+		else if (nx == (row-1) && ny == (col+2)){
 			if (inCheck(nx, ny)){
 				return false;
 			}
 			return true;
 		}
-		else if (nx == (x-2) && ny == (y+1)){
+		else if (nx == (row-2) && ny == (col+1)){
 			if (inCheck(nx, ny)){
 				return false;
 			}
 			return true;
 		}
-		else if (nx == (x-2) && ny == (y-1)){
+		else if (nx == (row-2) && ny == (col-1)){
 			if (inCheck(nx, ny)){
 				return false;
 			}
 			return true;
 		}
-		else if (nx == (x-1) && ny == (y-2)){
+		else if (nx == (row-1) && ny == (col-2)){
 			if (inCheck(nx, ny)){
 				return false;
 			}

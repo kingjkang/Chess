@@ -3,11 +3,11 @@ package project6;
 public class King extends ChessPiece{
 
 	public King(int nx, int ny, boolean color){
-		x = nx;
-		y = ny;
+		row = nx;
+		col = ny;
 		this.color = color;
 		value = 10;
-		ChessBoard[x][y] = this;
+		ChessBoard[row][col] = this;
 		if(color == black){
 			label = "K";
 		}
@@ -25,8 +25,7 @@ public class King extends ChessPiece{
 
 	@Override
 	public void showMoves() {
-		// TODO Auto-generated method stub
-		
+
 	}
 	
 

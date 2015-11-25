@@ -5,12 +5,12 @@ public class Rook extends ChessPiece{
 	private boolean firstStepDone;
 	private boolean canCastle;
 	
-	public Rook(int nx, int ny, boolean color){
-		x = nx;
-		y = ny;
+	public Rook(int r, int c, boolean color){
+		row = r;
+		col = c;
 		this.color = color;
 		value = 5;
-		ChessBoard[x][y] = this;
+		ChessBoard[row][col] = this;
 		if(color == black){
 			label = "R";
 		}
@@ -19,48 +19,48 @@ public class Rook extends ChessPiece{
 		}
 	}
 	
-	public boolean isValidMove(int nx, int ny) {
+	public boolean isValidMove(int r, int c) {
 		
-		if(x == nx && y == ny){
+		if(row == r && col == c){
 			return false;
 		}
 		
-		if(x != nx && y != ny){
+		if(row != r && col != c){
 			return false;
 		}
 		
-		if(nx < 0 || nx > 7 || ny < 0 || nx > 0){
+		if(r < 0 || r > 7 || c < 0 || r > 0){
 			return false;
 		}
 		
 		
-		if(x == nx){
-			if(y > ny){
-				for(int yc = y-1; yc >= ny; yc--){
-					if(yc == ny){
-						if(ChessBoard[x][yc].color != color && !inCheck(nx, ny)){
+		if(row == r){
+			if(col > c){
+				for(int yc = col-1; yc >= c; yc--){
+					if(yc == c){
+						if(ChessBoard[row][yc].color != color && !inCheck(r, c)){
 							return true;
 						}
 						else{
 							return false;
 						}
 					}
-					else if(ChessBoard[x][yc] != null){
+					else if(ChessBoard[row][yc] != null){
 						return false;
 					}
 				}
 			}
 			else{
-				for(int yc = y+1; yc <= ny; yc++){
-					if(yc == ny){
-						if(ChessBoard[x][yc].color != color && !inCheck(nx, ny)){
+				for(int yc = col+1; yc <= c; yc++){
+					if(yc == c){
+						if(ChessBoard[row][yc].color != color && !inCheck(r, c)){
 							return true;
 						}
 						else{
 							return false;
 						}
 					}
-					else if(ChessBoard[x][yc] != null){
+					else if(ChessBoard[row][yc] != null){
 						return false;
 					}
 				}
@@ -68,32 +68,32 @@ public class Rook extends ChessPiece{
 		}
 
 		else{
-			if(x > nx){
-				for(int xc = x-1; xc >= ny; xc--){
-					if(xc == nx){
-						if(ChessBoard[nx][y].color != color && !inCheck(nx, ny)){
+			if(row > r){
+				for(int xc = row-1; xc >= c; xc--){
+					if(xc == r){
+						if(ChessBoard[xc][col].color != color && !inCheck(r, c)){
 							return true;
 						}
 						else{
 							return false;
 						}
 					}
-					else if(ChessBoard[xc][y] != null){
+					else if(ChessBoard[xc][col] != null){
 						return false;
 					}
 				}
 			}
 			else{
-				for(int xc = x+1; xc <= ny; xc++){
-					if(xc == nx){
-						if(ChessBoard[nx][y].color != color && !inCheck(nx, ny)){
+				for(int xc = row+1; xc <= c; xc++){
+					if(xc == r){
+						if(ChessBoard[xc][col].color != color && !inCheck(r, c)){
 							return true;
 						}
 						else{
 							return false;
 						}
 					}
-					else if(ChessBoard[xc][y] != null){
+					else if(ChessBoard[xc][col] != null){
 						return false;
 					}
 				}

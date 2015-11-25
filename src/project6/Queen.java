@@ -3,11 +3,11 @@ package project6;
 public class Queen extends ChessPiece{
 
 	public Queen(int nx, int ny, boolean color){
-		x = nx;
-		y = ny;
+		row = nx;
+		col = ny;
 		this.color = color;
 		value = 9;
-		ChessBoard[x][y] = this;
+		ChessBoard[row][col] = this;
 		if(color == black){
 			label = "Q";
 		}

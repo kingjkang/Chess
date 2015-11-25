@@ -10,8 +10,8 @@ public abstract class ChessPiece {
 	public static boolean black = true;
 	public static boolean white = false;
 	
-	protected int x;
-	protected int y;
+	protected int row;
+	protected int col;
 	
 	protected String label = "C";
 	
@@ -21,20 +21,20 @@ public abstract class ChessPiece {
 	
 	public ArrayList<Move> Moves = new ArrayList<Move>();
 	
-	public void move(int nx, int ny){
-		if(isValidMove(nx, ny)){
-			ChessBoard[x][y] = null;
-			if(ChessBoard[nx][ny] != null){
+	public void move(int r, int c){
+		if(isValidMove(r, c)){
+			ChessBoard[row][col] = null;
+			if(ChessBoard[r][c] != null){
 				if(color == black){
-					whites.remove(ChessBoard[nx][ny]);
+					whites.remove(ChessBoard[r][c]);
 				}
 				else{
-					blacks.remove(ChessBoard[nx][ny]);
+					blacks.remove(ChessBoard[r][c]);
 				}
 			}
-			x = nx;
-			y = ny;
-			ChessBoard[x][y] = this;
+			row = r;
+			col = c;
+			ChessBoard[row][col] = this;
 		}
 	}
 	
@@ -43,7 +43,7 @@ public abstract class ChessPiece {
 		ChessBoard[ox][oy] = null;
 	}
 	
-	public abstract boolean isValidMove(int nx, int ny);
+	public abstract boolean isValidMove(int r, int c);
 	
 	public abstract void showMoves();
 	

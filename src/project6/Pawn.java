@@ -1,15 +1,18 @@
 package project6;
 
+import java.util.ArrayList;
+import java.util.Scanner;
+
 public class Pawn extends ChessPiece{
 	
 	private boolean firstStepDone;
 
-	public Pawn(int nx, int ny, boolean color){
-		x = nx;
-		y = ny;
+	public Pawn(int r, int c, boolean color){
+		row = r;
+		col = c;
 		this.color = color;
 		value = 5;
-		ChessBoard[x][y] = this;
+		ChessBoard[row][col] = this;
 		firstStepDone = false;
 		if(color == black){
 			label = "P";
@@ -21,38 +24,84 @@ public class Pawn extends ChessPiece{
 	
 	public void showMoves(){
 		
+		Moves = new ArrayList<Move>(0);
+		
+		if(color == black){
+			if(isValidMove(row+1, col)){
+				Moves.add(new Move(row + 1, col));
+			}
+			if(isValidMove(row+2, col)){
+				Moves.add(new Move(row + 2, col));
+			}
+			if(isValidMove(row+1, col+1)){
+				Moves.add(new Move(row + 1, col + 1));
+			}
+			if(isValidMove(row+1, col-1)){
+				Moves.add(new Move(row + 1, col - 1));
+			}
+		}
+		else{
+			if(isValidMove(row-1, col)){
+				Moves.add(new Move(row - 1, col));
+			}
+			if(isValidMove(row-2, col)){
+				Moves.add(new Move(row - 2, col));
+			}
+			if(isValidMove(row-1, col+1)){
+				Moves.add(new Move(row - 1, col + 1));
+			}
+			if(isValidMove(row-1, col-1)){
+				Moves.add(new Move(row - 1, col - 1));
+			}
+		}
+		
 	}
 	
-	public boolean isValidMove(int nx, int ny) {
+	@Override
+	public void move(int r, int c){
+		super.move(r, c);
+		firstStepDone = true;
+		boolean validPiece = false;
+		if(row == 7 || row == 0){
+			Scanner kb = new Scanner(System.in);
+			while(!validPiece){
+				System.out.print("What Piece> ");
+				String piece = kb.nextLine();
+				validPiece = evolve(piece);
+			}
+		}
+	}
+	
+	public boolean isValidMove(int r, int c) {
 		
-		if(nx > 7 || nx < 0 || ny > 7 || ny < 0){
+		if(row == r && col == c){
 			return false;
 		}
 		
-		int deltaX = Math.abs(nx - x);
-		int deltaY = Math.abs(ny - y);
-		
-		if(deltaX == 0 && deltaY == 0){
+		if(r > 7 || r < 0 || c > 7 || c < 0){
 			return false;
 		}
 		
-		if(firstStepDone){
-			if(deltaX > 1 || deltaY > 1){
+		int deltaX = Math.abs(r - row);
+		int deltaY = Math.abs(c - col);
+		
+		if(!firstStepDone){
+			if(deltaX > 0 || deltaY > 2){
 				return false;
 			}
 		}
 		else{
-			if(deltaX > 1 || deltaY > 2){
+			if(deltaX > 1 || deltaY > 1){
 				return false;
 			}
 		}
 		
 		/* Black --> goes down" */
 		if(color == black){
-			if(ny > y){
+			if(r > row){
 				/* Can't move forward and stay in same x if anyone is in front */
-				if(nx == x){
-					if(ChessBoard[nx][ny] == null && !inCheck(nx, ny)){
+				if(c == col){
+					if(ChessBoard[r][c] == null && !inCheck(r, c)){
 						return true;
 					}
 					else{
@@ -60,7 +109,7 @@ public class Pawn extends ChessPiece{
 					}	
 				}
 				else{
-					if(ChessBoard[nx][ny].color == white && !inCheck(nx, ny)){
+					if(ChessBoard[r][c].color != color  && !inCheck(r, c)){
 						return true;
 					}
 					else{
@@ -75,10 +124,10 @@ public class Pawn extends ChessPiece{
 		
 		/* White --> goes up" */
 		else{
-			if(ny < y){
+			if(r < row){
 				/* Can't move forward and stay in same x if anyone is in front */
-				if(nx == x){
-					if(ChessBoard[nx][ny] == null && !inCheck(nx, ny)){
+				if(c == col){
+					if(ChessBoard[r][c] == null && !inCheck(r, c)){
 						return true;
 					}
 					else{
@@ -86,7 +135,7 @@ public class Pawn extends ChessPiece{
 					}	
 				}
 				else{
-					if(ChessBoard[nx][ny].color == white && !inCheck(nx, ny)){
+					if(ChessBoard[r][c].color == white && !inCheck(r, c)){
 						return true;
 					}
 					else{
@@ -100,8 +149,42 @@ public class Pawn extends ChessPiece{
 		}
 	}
 
-	public void evolve(String piece){
+	public boolean evolve(String piece){
 		
+		boolean validPiece = false;
+		
+		ChessPiece upgrade = null;
+		if(piece == "Queen"){
+			upgrade = new Queen(row, col, color);
+			validPiece = true;
+		}
+		else if(piece == "Rook"){
+			upgrade = new Rook(row, col, color);
+			validPiece = true;
+		}
+		else if(piece == "Bishop"){
+			upgrade = new Bishop(row, col, color);
+			validPiece = true;
+		}
+		else if(piece == "Knight"){
+			upgrade = new Knight(row, col, color);
+			validPiece = true;
+		}
+		
+		if(validPiece){
+			ChessBoard[row][col] = upgrade;
+			if(color == black){
+				blacks.remove(this);
+				blacks.add(upgrade);
+			}
+			else{
+				whites.remove(this);
+				whites.add(upgrade);
+			}
+		}
+		
+		return validPiece;
+
 	}
 	
 }
