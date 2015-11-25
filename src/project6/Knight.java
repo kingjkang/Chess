@@ -1,10 +1,12 @@
 package project6;
 
+import java.util.ArrayList;
+
 public class Knight extends ChessPiece{
 
-	public Knight(int nx, int ny, boolean color){
-		row = nx;
-		col = ny;
+	public Knight(int r, int c, boolean color){
+		row = r;
+		col = c;
 		this.color = color;
 		value = 3;
 		ChessBoard[row][col] = this;
@@ -17,71 +19,94 @@ public class Knight extends ChessPiece{
 	}
 	
 	
-	public boolean isValidMove(int nx, int ny) {
-		//this checks to see if it is wininn the range/scope of the chessboard
-		if(nx > 7 || nx < 0 || ny > 7 || ny < 0){
+	public boolean isValidMove(int r, int c) {
+
+		if(r > 7 || r < 0 || c > 7 || c < 0){
 			return false;
 		}
 		
-		//checking the 8 valid moves 
-		if (nx == (row+1) && ny == (col-2)){
-			//top right move
-			//and check if the move will put the king in check
-			if (inCheck(nx, ny)){
-				return false;
+		if(ChessBoard[r][c].color != color){
+			if (r == (row+1) && c == (col-2)){
+				if (inCheck(r, c)){
+					return false;
+				}
+				return true;
 			}
-			return true;
-		}
-		else if (nx == (row+2) && ny == (col-1)){
-			//right right move
-			if (inCheck(nx, ny)){
-				return false;
+			else if (r == (row+2) && c == (col-1)){
+				if (inCheck(r, c)){
+					return false;
+				}
+				return true;
 			}
-			return true;
-		}
-		else if (nx == (row+2) && ny == (col+1)){
-			//right right move
-			if (inCheck(nx, ny)){
-				return false;
+			else if (r == (row+2) && c == (col+1)){
+				if (inCheck(r, c)){
+					return false;
+				}
+				return true;
 			}
-			return true;
-		}
-		else if (nx == (row+1) && ny == (col+2)){
-			if (inCheck(nx, ny)){
-				return false;
+			else if (r == (row+1) && c == (col+2)){
+				if (inCheck(r, c)){
+					return false;
+				}
+				return true;
 			}
-			return true;
-		}
-		else if (nx == (row-1) && ny == (col+2)){
-			if (inCheck(nx, ny)){
-				return false;
+			else if (r == (row-1) && c == (col+2)){
+				if (inCheck(r, c)){
+					return false;
+				}
+				return true;
 			}
-			return true;
-		}
-		else if (nx == (row-2) && ny == (col+1)){
-			if (inCheck(nx, ny)){
-				return false;
+			else if (r == (row-2) && c == (col+1)){
+				if (inCheck(r, c)){
+					return false;
+				}
+				return true;
 			}
-			return true;
-		}
-		else if (nx == (row-2) && ny == (col-1)){
-			if (inCheck(nx, ny)){
-				return false;
+			else if (r == (row-2) && c == (col-1)){
+				if (inCheck(r, c)){
+					return false;
+				}
+				return true;
 			}
-			return true;
-		}
-		else if (nx == (row-1) && ny == (col-2)){
-			if (inCheck(nx, ny)){
-				return false;
+			else if (r == (row-1) && c == (col-2)){
+				if (inCheck(r, c)){
+					return false;
+				}
+				return true;
 			}
-			return true;
 		}
-		
 		return false;
 	}
 
 	public void showMoves() {
-
+		
+		Moves = new ArrayList<Move>(0);
+		
+		if(isValidMove(row - 1, col - 2)){
+			Moves.add(new Move(row - 1, col - 2));
+		}
+		if(isValidMove(row - 2, col - 1)){
+			Moves.add(new Move(row - 2, col - 1));
+		}
+		if(isValidMove(row - 1, col + 2)){
+			Moves.add(new Move(row - 1, col - 2));
+		}
+		if(isValidMove(row - 2, col + 1)){
+			Moves.add(new Move(row - 2, col - 1));
+		}
+		if(isValidMove(row + 1, col + 2)){
+			Moves.add(new Move(row - 1, col + 2));
+		}
+		if(isValidMove(row + 2, col + 1)){
+			Moves.add(new Move(row + 2, col + 1));
+		}
+		if(isValidMove(row + 1, col - 2)){
+			Moves.add(new Move(row - 1, col - 2));
+		}
+		if(isValidMove(row + 2, col - 1)){
+			Moves.add(new Move(row - 2, col - 1));
+		}
+		
 	}
 
 }
