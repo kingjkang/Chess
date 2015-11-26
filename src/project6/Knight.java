@@ -18,7 +18,6 @@ public class Knight extends ChessPiece{
 		}
 	}
 	
-	
 	public boolean isValidMove(int r, int c) {
 
 		if(r > 7 || r < 0 || c > 7 || c < 0){

@@ -1,10 +1,12 @@
 package project6;
 
+import java.util.ArrayList;
+
 public class King extends ChessPiece{
 
-	public King(int nx, int ny, boolean color){
-		row = nx;
-		col = ny;
+	public King(int r, int c, boolean color){
+		row = r;
+		col = c;
 		this.color = color;
 		value = 10;
 		ChessBoard[row][col] = this;
@@ -16,15 +18,39 @@ public class King extends ChessPiece{
 		}
 	}
 	
-
-	@Override
-	public boolean isValidMove(int nx, int ny) {
+	public boolean isValidMove(int r, int c) {
 		
-		return false;
+		if(r < 0 || r > 7 || c < 0 || c > 7){
+			return false;
+		}
+		
+		if(r == row && c == col){
+			return false;
+		}
+		
+		int deltaR = Math.abs(row - r);
+		int deltaC = Math.abs(col - c);
+		
+		if(deltaR > 1 || deltaC > 1){
+			return false;
+		}
+		
+		return ChessBoard[r][c].color != color && !inCheck(r, c);
+
 	}
 
-	@Override
 	public void showMoves() {
+		
+		Moves = new ArrayList<Move>(0);
+		
+		if(isValidMove(row, col + 1)){ Moves.add(new Move(row, col + 1)); }
+		if(isValidMove(row - 1, col + 1)){ Moves.add(new Move(row - 1, col + 1)); }
+		if(isValidMove(row - 1, col)){ Moves.add(new Move(row - 1, col)); }
+		if(isValidMove(row - 1, col - 1)){ Moves.add(new Move(row - 1, col - 1)); }
+		if(isValidMove(row, col - 1)){ Moves.add(new Move(row, col - 1)); }
+		if(isValidMove(row + 1, col - 1)){ Moves.add(new Move(row + 1, col - 1)); }
+		if(isValidMove(row + 1, col)){ Moves.add(new Move(row + 1, col)); }
+		if(isValidMove(row + 1, col + 1)){ Moves.add(new Move(row + 1, col + 1)); }
 
 	}
 	
