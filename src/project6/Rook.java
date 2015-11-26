@@ -117,8 +117,7 @@ public class Rook extends ChessPiece{
 		
 		Moves = new ArrayList<Move>(0);
 		
-		int r = Math.floorMod(row + 1, 8);		
-		while(r != row){
+		for(int r = row + 1; r <= 7; r++){
 			if(ChessBoard[r][col] != null){
 				if(isValidMove(r, col)){
 					Moves.add(new Move(r, col));
@@ -126,11 +125,9 @@ public class Rook extends ChessPiece{
 				break;
 			}
 			Moves.add(new Move(r, col));
-			r = Math.floorMod(r + 1, 8);
 		}
 		
-		r = Math.floorMod(row + 1, 8);
-		while(r != row){
+		for(int r = row - 1; r >= 0; row--){
 			if(ChessBoard[r][col] != null){
 				if(isValidMove(r, col)){
 					Moves.add(new Move(r, col));
@@ -138,11 +135,9 @@ public class Rook extends ChessPiece{
 				break;
 			}
 			Moves.add(new Move(r, col));
-			r = Math.floorMod(r - 1, 8);
 		}
 		
-		int c = Math.floorMod(col + 1, 8);
-		while(c != row){
+		for(int c = col + 1; c <= 7; c++){
 			if(ChessBoard[row][c] != null){
 				if(isValidMove(row, c)){
 					Moves.add(new Move(row, c));
@@ -150,10 +145,9 @@ public class Rook extends ChessPiece{
 				break;
 			}
 			Moves.add(new Move(row, c));
-			c = Math.floorMod(c + 1, 8);
 		}
 		
-		while(c != row){
+		for(int c = col - 1; c >= 0; c--){
 			if(ChessBoard[row][c] != null){
 				if(isValidMove(row, c)){
 					Moves.add(new Move(row, c));
@@ -161,8 +155,8 @@ public class Rook extends ChessPiece{
 				break;
 			}
 			Moves.add(new Move(row, c));
-			c = Math.floorMod(c - 1, 8);
 		}
+		
 		
 	}
 	
