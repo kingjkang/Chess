@@ -39,7 +39,12 @@ public abstract class ChessPiece {
 	}
 	
 	public static void move1(int orow, int ocol, int nrow, int ncol){
-		if (ChessBoard[orow][ocol].isValidMove(nrow, ncol)){	
+		if (ChessBoard[orow][ocol] == null){
+			System.out.println("invalid move, try again");
+		}
+		else if (ChessBoard[orow][ocol].isValidMove(nrow, ncol)){	
+			ChessBoard[orow][ocol].row = nrow;
+			ChessBoard[orow][ocol].col = ncol;
 			ChessBoard[nrow][ncol] = ChessBoard[orow][ocol];
 			ChessBoard[orow][ocol] = null;
 		}

@@ -30,6 +30,10 @@ public class Rook extends ChessPiece{
 	
 	public boolean isValidMove(int r, int c) {
 		
+		//just for testing purposes im going to return true
+		return true;
+		
+		/*
 		if(row == r && col == c){
 			return false;
 		}
@@ -108,8 +112,8 @@ public class Rook extends ChessPiece{
 				}
 			}
 		}
-		
-		return true;
+		*/
+		//return true;
 		
 	}
 
