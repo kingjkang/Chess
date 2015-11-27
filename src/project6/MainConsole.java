@@ -35,20 +35,23 @@ public class MainConsole {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		Scanner kb = new Scanner(System.in);
-		int xc, yc, ox, oy;
+		int ocol, orow, ncol, nrow;
 		
 		System.out.println("lol");
 		ChessPiece.initializeBoard();
 		printBoard();
 		
 		while (true){
-			ox = kb.nextInt();
-			oy = kb.nextInt();
+			orow = kb.nextInt();
+			ocol = kb.nextInt();
 			
-			xc = kb.nextInt();
-			yc = kb.nextInt();
+			nrow = kb.nextInt();
+			ncol = kb.nextInt();
 			
-			ChessPiece.move1(ox, oy, xc, yc);
+			// column then row convention
+			
+			//ChessPiece.move1(ox, oy, xc, yc);
+			ChessPiece.move1(orow, ocol, nrow, ncol);
 			
 			printBoard();
 		}

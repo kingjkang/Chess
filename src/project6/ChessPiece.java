@@ -38,9 +38,15 @@ public abstract class ChessPiece {
 		}
 	}
 	
-	public static void move1(int ox, int oy, int nx, int ny){
-		ChessBoard[nx][ny] = ChessBoard[ox][oy];
-		ChessBoard[ox][oy] = null;
+	public static void move1(int orow, int ocol, int nrow, int ncol){
+		if (ChessBoard[orow][ocol].isValidMove(nrow, ncol)){	
+			ChessBoard[nrow][ncol] = ChessBoard[orow][ocol];
+			ChessBoard[orow][ocol] = null;
+		}
+		else {
+			System.out.println(ChessBoard[orow][ocol].toString());
+			System.out.println("invalid move, try again");
+		}
 	}
 	
 	public abstract boolean isValidMove(int r, int c);
@@ -62,8 +68,8 @@ public abstract class ChessPiece {
 		}
 		
 		for(int i = 0; i < 8; i++){
-			ChessBoard[1][i] = new Pawn(1, i, black);
-			ChessBoard[6][i] = new Pawn(6, i, white);
+			//ChessBoard[1][i] = new Pawn(1, i, black);
+			//ChessBoard[6][i] = new Pawn(6, i, white);
 		}
 		
 		//Black Team
