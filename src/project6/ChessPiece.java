@@ -3,6 +3,10 @@ import java.util.ArrayList;
 
 public abstract class ChessPiece {
 	
+	public static boolean turn;
+	
+	protected boolean isMoving;
+	
 	protected int value;
 	
 	protected boolean color;
@@ -22,6 +26,7 @@ public abstract class ChessPiece {
 	public ArrayList<Move> Moves = new ArrayList<Move>();
 	
 	public void move(int r, int c){
+		isMoving = true;
 		if(isValidMove(r, c)){
 			ChessBoard[row][col] = null;
 			if(ChessBoard[r][c] != null){
@@ -36,6 +41,7 @@ public abstract class ChessPiece {
 			col = c;
 			ChessBoard[row][col] = this;
 		}
+		isMoving = false;
 	}
 	
 	public static void move1(int ox, int oy, int nx, int ny){
@@ -98,9 +104,30 @@ public abstract class ChessPiece {
 		
 	}
 	
-	public static boolean inCheck(int nx, int ny){
-		//check if the king is put in check
+	public static boolean inCheck(int r, int c){
 		
+		King king = null;
+		
+		if(turn == black){
+			for(ChessPiece cp: blacks){
+				if(cp instanceof King){
+					king = (King)cp;
+					break;
+				}
+			}
+		}
+		else{
+			for(ChessPiece cp: whites){
+				if(cp instanceof King){
+					king = (King)cp;
+					break;
+				}
+			}
+		}
+		
+		
+		
+				
 		return false;
 	}
 }
