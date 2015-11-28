@@ -13,7 +13,7 @@ public class MainConsole {
 	}
 	
 	public static void printBoard(){
-	    System.out.println("   "  + " 0 " + " 1 " + " 2 " + " 3 " + " 4 " + " 5 " + " 6 " + " 7 ");
+	    System.out.println("   " + " 0 " + " 1 " + " 2 " + " 3 " + " 4 " + " 5 " + " 6 " + " 7 ");
 	    System.out.println("  +" + " - " + " - " + " - " + " - " + " - " + " - " + " - " + " - " + "+");
 		
 		for(int i = 0; i < 8; i++){
@@ -26,7 +26,6 @@ public class MainConsole {
 					System.out.print(" " + ChessPiece.ChessBoard[i][j].toString() + " ");
 				}
 			}
-			//System.out.println("| " + i);
 			System.out.println("|");
 		}
 		
@@ -35,7 +34,7 @@ public class MainConsole {
 	}
 	
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+
 		Scanner kb = new Scanner(System.in);
 		int ocol, orow, ncol, nrow;
 		

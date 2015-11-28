@@ -18,6 +18,16 @@ public class King extends ChessPiece{
 		}
 	}
 	
+	protected void move(int r, int c){
+		super.move(r, c);
+		if(color == black){
+			ChessPiece.blackKing = this;
+		}
+		else{
+			ChessPiece.whiteKing = this;
+		}
+	}
+	
 	public boolean isValidMove(int r, int c) {
 		
 		if(r < 0 || r > 7 || c < 0 || c > 7){

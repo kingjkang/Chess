@@ -12,6 +12,9 @@ public abstract class ChessPiece {
 	public static boolean black = true;
 	public static boolean white = false;
 	
+	protected static ChessPiece blackKing = null;
+	protected static ChessPiece whiteKing = null; 
+	
 	public static boolean turn = white;
 	
 	protected int row;
@@ -135,32 +138,22 @@ public abstract class ChessPiece {
 		  }
 		}
 		
+		blackKing = ChessBoard[0][3];
+		whiteKing = ChessBoard[7][3];
 	}
 	
 	public static boolean inCheck(int r, int c){
 		
-		/*King king = null;
-		
+		King king = null;
 		if(turn == black){
-			for(ChessPiece cp: blacks){
-				if(cp instanceof King){
-					king = (King)cp;
-					break;
-				}
-			}
+			king = (King) ChessPiece.blackKing;
 		}
 		else{
-			for(ChessPiece cp: whites){
-				if(cp instanceof King){
-					king = (King)cp;
-					break;
-				}
-			}
-		}*/
+			king = (King) ChessPiece.whiteKing;
+		}
 		
 		
 		
-				
 		return false;
 	}
 }
