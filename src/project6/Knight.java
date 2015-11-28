@@ -24,53 +24,42 @@ public class Knight extends ChessPiece{
 			return false;
 		}
 		
-		if(ChessBoard[r][c].color != color){
+		if(row == r && col == c){
+			return false;
+		}
+		
+		if(ChessBoard[r][c] != null && ChessBoard[r][c].color == color){
+			return false;
+		}
+		
+		if(inCheck(r, c)){
+			return false;
+		}
+		
+		
+		if(ChessBoard[r][c] == null || ChessBoard[r][c].color != color){
 			if (r == (row+1) && c == (col-2)){
-				if (inCheck(r, c)){
-					return false;
-				}
 				return true;
 			}
 			else if (r == (row+2) && c == (col-1)){
-				if (inCheck(r, c)){
-					return false;
-				}
 				return true;
 			}
 			else if (r == (row+2) && c == (col+1)){
-				if (inCheck(r, c)){
-					return false;
-				}
 				return true;
 			}
 			else if (r == (row+1) && c == (col+2)){
-				if (inCheck(r, c)){
-					return false;
-				}
 				return true;
 			}
 			else if (r == (row-1) && c == (col+2)){
-				if (inCheck(r, c)){
-					return false;
-				}
 				return true;
 			}
 			else if (r == (row-2) && c == (col+1)){
-				if (inCheck(r, c)){
-					return false;
-				}
 				return true;
 			}
 			else if (r == (row-2) && c == (col-1)){
-				if (inCheck(r, c)){
-					return false;
-				}
 				return true;
 			}
 			else if (r == (row-1) && c == (col-2)){
-				if (inCheck(r, c)){
-					return false;
-				}
 				return true;
 			}
 		}

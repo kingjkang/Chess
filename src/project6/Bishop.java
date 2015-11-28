@@ -33,7 +33,11 @@ public class Bishop extends ChessPiece{
 			return false;
 		}
 		
-		if(ChessBoard[r][c].color == color){
+		if(ChessBoard[r][c] != null && ChessBoard[r][c].color == color){
+			return false;
+		}
+
+		if(inCheck(r, c)){
 			return false;
 		}
 		
@@ -45,27 +49,34 @@ public class Bishop extends ChessPiece{
 			return false;
 		}
 		
-		deltaR = row - r;
-		deltaC = col - c;
+		deltaR = r - row;
+		deltaC = c - col;
 		
+		int rr = row;
+		int cc = col;
 		if(deltaR < 0 && deltaC > 0){
 			direction = upRight;
+			rr--;
+			cc++;
 		}
 		else if(deltaR < 0 && deltaC < 0){
 			direction = upLeft;
+			rr--;
+			cc--;
 		}
 		else if(deltaR > 0 && deltaC < 0){
 			direction = downLeft;
+			rr++;
+			cc--;
 		}
 		else{
 			direction = downRight;
+			rr++;
+			cc++;
 		}
 		
-		boolean atPiece = false;
-		int rr = row;
-		int cc = col;
 		if(direction == upRight){
-			while(!atPiece || (rr == r && cc == c)){
+			while(!(rr == r && cc == c)){
 				if(ChessBoard[rr][cc] != null){
 					return false;
 				}
@@ -75,7 +86,7 @@ public class Bishop extends ChessPiece{
 			
 		}
 		else if(direction == upLeft){
-			while(!atPiece || (rr == r && cc == c)){
+			while(!(rr == r && cc == c)){
 				if(ChessBoard[rr][cc] != null){
 					return false;
 				}
@@ -84,7 +95,7 @@ public class Bishop extends ChessPiece{
 			}
 		}
 		else if(direction == downLeft){
-			while(!atPiece || (rr == r && cc == c)){
+			while(!(rr == r && cc == c)){
 				if(ChessBoard[rr][cc] != null){
 					return false;
 				}
@@ -93,7 +104,7 @@ public class Bishop extends ChessPiece{
 			}
 		}
 		else{
-			while(!atPiece || (rr == r && cc == c)){
+			while(!(rr == r && cc == c)){
 				if(ChessBoard[rr][cc] != null){
 					return false;
 				}
@@ -102,7 +113,7 @@ public class Bishop extends ChessPiece{
 			}
 		}
 		
-		return inCheck(r, c);
+		return true;
 	}
 
 	public void showMoves() {

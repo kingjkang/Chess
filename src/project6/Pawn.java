@@ -58,7 +58,7 @@ public class Pawn extends ChessPiece{
 	}
 	
 	@Override
-	public void move(int r, int c){
+	protected void move(int r, int c){
 		super.move(r, c);
 		firstStepDone = true;
 		boolean validPiece = false;
@@ -74,24 +74,65 @@ public class Pawn extends ChessPiece{
 	
 	public boolean isValidMove(int r, int c) {
 		
-		if(row == r && col == c){
-			return false;
-		}
-		
 		if(r > 7 || r < 0 || c > 7 || c < 0){
 			return false;
 		}
 		
-		int deltaX = Math.abs(r - row);
-		int deltaY = Math.abs(c - col);
+		if(row == r && col == c){
+			return false;
+		}
+		
+		if(ChessBoard[r][c] != null && ChessBoard[r][c].color == color){
+			return false;
+		}
+
+		if(inCheck(r, c)){
+			return false;
+		}
+		
+		
+		int deltaR = Math.abs(r - row);
+		int deltaC = Math.abs(c - col);
+		
 		
 		if(!firstStepDone){
-			if(deltaX > 0 || deltaY > 2){
+			if(deltaR == 2 && deltaC == 0){
+				if(color == black){
+					if(r > row){
+						if(ChessBoard[row+1][col] != null && ChessBoard[row+2][col] != null){
+							return false;
+						}
+						else{
+							return true;
+						}
+					}
+					else{
+						return false;
+					}
+				}
+				else{
+					if(r < row){
+						if(ChessBoard[row-1][col] != null && ChessBoard[row-2][col] != null){
+							return false;
+						}
+						else{
+							return true;
+						}
+					}
+					else{
+						return false;
+					}
+				}
+			}
+			else if(deltaR == 1 && deltaC <= 0){
+				
+			}
+			else{
 				return false;
 			}
 		}
 		else{
-			if(deltaX > 1 || deltaY > 1){
+			if(deltaR != 1 && deltaC > 1){
 				return false;
 			}
 		}
@@ -99,7 +140,7 @@ public class Pawn extends ChessPiece{
 		if(color == black){
 			if(r > row){
 				if(c == col){
-					if(ChessBoard[r][c] == null && !inCheck(r, c)){
+					if(ChessBoard[r][c] == null){
 						return true;
 					}
 					else{
@@ -107,7 +148,7 @@ public class Pawn extends ChessPiece{
 					}	
 				}
 				else{
-					if(ChessBoard[r][c].color != color  && !inCheck(r, c)){
+					if(ChessBoard[r][c].color != color){
 						return true;
 					}
 					else{
@@ -122,7 +163,7 @@ public class Pawn extends ChessPiece{
 		else{
 			if(r < row){
 				if(c == col){
-					if(ChessBoard[r][c] == null && !inCheck(r, c)){
+					if(ChessBoard[r][c] == null){
 						return true;
 					}
 					else{
@@ -130,7 +171,7 @@ public class Pawn extends ChessPiece{
 					}	
 				}
 				else{
-					if(ChessBoard[r][c].color == white && !inCheck(r, c)){
+					if(ChessBoard[r][c].color != color){
 						return true;
 					}
 					else{

@@ -30,19 +30,19 @@ public class Rook extends ChessPiece{
 	
 	public boolean isValidMove(int r, int c) {
 		
-		//just for testing purposes im going to return true
-		return true;
+		if(r > 7 || r < 0 || c > 7 || c < 0){
+			return false;
+		}
 		
-		/*
 		if(row == r && col == c){
 			return false;
 		}
 		
-		if(row != r && col != c){
+		if(ChessBoard[r][c] != null && ChessBoard[r][c].color == color){
 			return false;
 		}
-		
-		if(r < 0 || r > 7 || c < 0 || r > 0){
+
+		if(inCheck(r, c)){
 			return false;
 		}
 		
@@ -51,11 +51,16 @@ public class Rook extends ChessPiece{
 			if(col > c){
 				for(int yc = col-1; yc >= c; yc--){
 					if(yc == c){
-						if(ChessBoard[row][yc].color != color && !inCheck(r, c)){
-							return true;
+						if(ChessBoard[row][yc] != null){
+							if(ChessBoard[row][yc].color != color && !inCheck(r, c)){
+								return true;
+							}
+							else{
+								return false;
+							}
 						}
 						else{
-							return false;
+							return !inCheck(r, c);
 						}
 					}
 					else if(ChessBoard[row][yc] != null){
@@ -66,11 +71,16 @@ public class Rook extends ChessPiece{
 			else{
 				for(int yc = col+1; yc <= c; yc++){
 					if(yc == c){
-						if(ChessBoard[row][yc].color != color && !inCheck(r, c)){
-							return true;
+						if(ChessBoard[row][yc] != null){
+							if(ChessBoard[row][yc].color != color && !inCheck(r, c)){
+								return true;
+							}
+							else{
+								return false;
+							}
 						}
 						else{
-							return false;
+							return !inCheck(r, c);
 						}
 					}
 					else if(ChessBoard[row][yc] != null){
@@ -82,13 +92,18 @@ public class Rook extends ChessPiece{
 
 		else{
 			if(row > r){
-				for(int xc = row-1; xc >= c; xc--){
+				for(int xc = row-1; xc >= r; xc--){
 					if(xc == r){
-						if(ChessBoard[xc][col].color != color && !inCheck(r, c)){
-							return true;
+						if(ChessBoard[xc][col] != null){
+							if(ChessBoard[xc][col].color != color && !inCheck(r, c)){
+								return true;
+							}
+							else{
+								return false;
+							}
 						}
 						else{
-							return false;
+							return !inCheck(r, c);
 						}
 					}
 					else if(ChessBoard[xc][col] != null){
@@ -97,13 +112,18 @@ public class Rook extends ChessPiece{
 				}
 			}
 			else{
-				for(int xc = row+1; xc <= c; xc++){
+				for(int xc = row+1; xc <= r; xc++){
 					if(xc == r){
-						if(ChessBoard[xc][col].color != color && !inCheck(r, c)){
-							return true;
+						if(ChessBoard[xc][col] != null){
+							if(ChessBoard[xc][col].color != color && !inCheck(r, c)){
+								return true;
+							}
+							else{
+								return false;
+							}
 						}
 						else{
-							return false;
+							return !inCheck(r, c);
 						}
 					}
 					else if(ChessBoard[xc][col] != null){
@@ -112,8 +132,7 @@ public class Rook extends ChessPiece{
 				}
 			}
 		}
-		*/
-		//return true;
+		return true;
 		
 	}
 

@@ -34,23 +34,33 @@ public class Queen extends ChessPiece{
 			return false;
 		}
 		
-		if(ChessBoard[r][c].color == color){
+		if(ChessBoard[r][c] != null && ChessBoard[r][c].color == color){
+			return false;
+		}
+		
+		if(inCheck(r, c)){
 			return false;
 		}
 		
 		int deltaR = Math.abs(row - r);
 		int deltaC = Math.abs(col - c);
+		int direction = 0;
 		
 		if(deltaR != deltaC && (deltaR == 0 || deltaC == 0)){
 			if(row == r){
 				if(col > c){
 					for(int yc = col-1; yc >= c; yc--){
 						if(yc == c){
-							if(ChessBoard[row][yc].color != color && !inCheck(r, c)){
-								return true;
+							if(ChessBoard[row][yc] != null){
+								if(ChessBoard[row][yc].color != color && !inCheck(r, c)){
+									return true;
+								}
+								else{
+									return false;
+								}
 							}
 							else{
-								return false;
+								return !inCheck(r, c);
 							}
 						}
 						else if(ChessBoard[row][yc] != null){
@@ -61,11 +71,16 @@ public class Queen extends ChessPiece{
 				else{
 					for(int yc = col+1; yc <= c; yc++){
 						if(yc == c){
-							if(ChessBoard[row][yc].color != color && !inCheck(r, c)){
-								return true;
+							if(ChessBoard[row][yc] != null){
+								if(ChessBoard[row][yc].color != color && !inCheck(r, c)){
+									return true;
+								}
+								else{
+									return false;
+								}
 							}
 							else{
-								return false;
+								return !inCheck(r, c);
 							}
 						}
 						else if(ChessBoard[row][yc] != null){
@@ -77,13 +92,18 @@ public class Queen extends ChessPiece{
 
 			else{
 				if(row > r){
-					for(int xc = row-1; xc >= c; xc--){
+					for(int xc = row-1; xc >= r; xc--){
 						if(xc == r){
-							if(ChessBoard[xc][col].color != color && !inCheck(r, c)){
-								return true;
+							if(ChessBoard[xc][col] != null){
+								if(ChessBoard[xc][col].color != color && !inCheck(r, c)){
+									return true;
+								}
+								else{
+									return false;
+								}
 							}
 							else{
-								return false;
+								return !inCheck(r, c);
 							}
 						}
 						else if(ChessBoard[xc][col] != null){
@@ -92,13 +112,18 @@ public class Queen extends ChessPiece{
 					}
 				}
 				else{
-					for(int xc = row+1; xc <= c; xc++){
+					for(int xc = row+1; xc <= r; xc++){
 						if(xc == r){
-							if(ChessBoard[xc][col].color != color && !inCheck(r, c)){
-								return true;
+							if(ChessBoard[xc][col] != null){
+								if(ChessBoard[xc][col].color != color && !inCheck(r, c)){
+									return true;
+								}
+								else{
+									return false;
+								}
 							}
 							else{
-								return false;
+								return !inCheck(r, c);
 							}
 						}
 						else if(ChessBoard[xc][col] != null){
@@ -107,33 +132,38 @@ public class Queen extends ChessPiece{
 					}
 				}
 			}
-			
 			return true;
 		}
-		else{
+		else if(deltaR == deltaC){
 			
-			deltaR = row - r;
-			deltaC = col - c;
-			int direction = 0;
+			deltaR = r - row;
+			deltaC = c - col;
 			
+			int rr = row;
+			int cc = col;
 			if(deltaR < 0 && deltaC > 0){
 				direction = upRight;
+				rr--;
+				cc++;
 			}
 			else if(deltaR < 0 && deltaC < 0){
 				direction = upLeft;
+				rr--;
+				cc--;
 			}
 			else if(deltaR > 0 && deltaC < 0){
 				direction = downLeft;
+				rr++;
+				cc--;
 			}
 			else{
 				direction = downRight;
+				rr++;
+				cc++;
 			}
 			
-			boolean atPiece = false;
-			int rr = row;
-			int cc = col;
 			if(direction == upRight){
-				while(!atPiece || (rr == r && cc == c)){
+				while(!(rr == r && cc == c)){
 					if(ChessBoard[rr][cc] != null){
 						return false;
 					}
@@ -143,7 +173,7 @@ public class Queen extends ChessPiece{
 				
 			}
 			else if(direction == upLeft){
-				while(!atPiece || (rr == r && cc == c)){
+				while(!(rr == r && cc == c)){
 					if(ChessBoard[rr][cc] != null){
 						return false;
 					}
@@ -152,7 +182,7 @@ public class Queen extends ChessPiece{
 				}
 			}
 			else if(direction == downLeft){
-				while(!atPiece || (rr == r && cc == c)){
+				while(!(rr == r && cc == c)){
 					if(ChessBoard[rr][cc] != null){
 						return false;
 					}
@@ -161,7 +191,7 @@ public class Queen extends ChessPiece{
 				}
 			}
 			else{
-				while(!atPiece || (rr == r && cc == c)){
+				while(!(rr == r && cc == c)){
 					if(ChessBoard[rr][cc] != null){
 						return false;
 					}
@@ -170,9 +200,11 @@ public class Queen extends ChessPiece{
 				}
 			}
 			
-			return inCheck(r, c);
+			return true;
 			
 		}
+		
+		return false;
 		
 	}
 

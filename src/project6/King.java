@@ -28,6 +28,10 @@ public class King extends ChessPiece{
 			return false;
 		}
 		
+		if(ChessBoard[r][c] != null && ChessBoard[r][c].color == color){
+			return false;
+		}
+		
 		int deltaR = Math.abs(row - r);
 		int deltaC = Math.abs(col - c);
 		
@@ -35,7 +39,7 @@ public class King extends ChessPiece{
 			return false;
 		}
 		
-		return ChessBoard[r][c].color != color && !inCheck(r, c);
+		return !inCheck(r, c);
 
 	}
 

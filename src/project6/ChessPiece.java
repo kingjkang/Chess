@@ -3,8 +3,6 @@ import java.util.ArrayList;
 
 public abstract class ChessPiece {
 	
-	public static boolean turn;
-	
 	protected boolean isMoving;
 	
 	protected int value;
@@ -13,6 +11,8 @@ public abstract class ChessPiece {
 	
 	public static boolean black = true;
 	public static boolean white = false;
+	
+	public static boolean turn = white;
 	
 	protected int row;
 	protected int col;
@@ -25,7 +25,7 @@ public abstract class ChessPiece {
 	
 	public ArrayList<Move> Moves = new ArrayList<Move>();
 	
-	public void move(int r, int c){
+	protected void move(int r, int c){
 		isMoving = true;
 		if(isValidMove(r, c)){
 			ChessBoard[row][col] = null;
@@ -41,10 +41,13 @@ public abstract class ChessPiece {
 			col = c;
 			ChessBoard[row][col] = this;
 		}
+		else{
+			System.out.println("invalid move, try again");
+		}
 		isMoving = false;
 	}
 	
-	public static void move1(int orow, int ocol, int nrow, int ncol){
+	public static void moveDirectly(int orow, int ocol, int nrow, int ncol){
 		if (ChessBoard[orow][ocol] == null){
 			System.out.println("invalid move, try again");
 		}
@@ -58,6 +61,25 @@ public abstract class ChessPiece {
 			System.out.println(ChessBoard[orow][ocol].toString());
 			System.out.println("invalid move, try again");
 		}
+	}
+	
+	public static void movePiece(int or, int oc, int nr, int nc){
+
+		if(ChessBoard[or][oc] != null){
+			if(ChessBoard[or][oc].color == turn){
+				ChessBoard[or][oc].move(nr, nc);
+				if(ChessBoard[or][oc] == null){
+					turn = !turn;
+				}
+			}
+			else{
+				System.out.println("wrong turn!");
+			}
+		}
+		else{
+			System.out.println("no piece at specified coordinates, try again!");
+		}
+
 	}
 	
 	public abstract boolean isValidMove(int r, int c);
@@ -79,8 +101,8 @@ public abstract class ChessPiece {
 		}
 		
 		for(int i = 0; i < 8; i++){
-			//ChessBoard[1][i] = new Pawn(1, i, black);
-			//ChessBoard[6][i] = new Pawn(6, i, white);
+			ChessBoard[1][i] = new Pawn(1, i, black);
+			ChessBoard[6][i] = new Pawn(6, i, white);
 		}
 		
 		//Black Team
@@ -117,7 +139,7 @@ public abstract class ChessPiece {
 	
 	public static boolean inCheck(int r, int c){
 		
-		King king = null;
+		/*King king = null;
 		
 		if(turn == black){
 			for(ChessPiece cp: blacks){
@@ -134,7 +156,7 @@ public abstract class ChessPiece {
 					break;
 				}
 			}
-		}
+		}*/
 		
 		
 		
