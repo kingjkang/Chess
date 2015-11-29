@@ -63,6 +63,7 @@ public class Main extends Application{
 	
 	public GridPane createBoard(){
 		GridPane board = new GridPane();
+		Button addButton = null;
 		int size = 8;
 		for (int row = 0; row < size; row++){
 			for (int col = 0; col < size; col++){
@@ -75,24 +76,85 @@ public class Main extends Application{
 					color = "brown";
 				}
 				spot.setStyle("-fx-background-color: "+color+";");
-				board.add(spot, col, row);
+				String pieceToAdd;
+				//whwen the board is initialized and there is nothing there what do i print
+				if (ChessPiece.ChessBoard[row][col] == null){
+					pieceToAdd = "empty";
+					board.add(spot, col, row);
+					addButton = new Button(pieceToAdd);
+					//not sure exaclty if this gets rid of the button or makes the button the same color
+					addButton.setStyle("-fx-background-color: "+color+";");
+					board.add(addButton, col, row);
+					
+					int printR = row;
+					int printC = col;
+					
+					addButton.setOnAction(new EventHandler<ActionEvent>() {
+						@Override
+						public void handle(ActionEvent event) {
+							System.out.println(printR + "," + printC);
+						}
+					});
+				}
+				else {
+					pieceToAdd = ChessPiece.ChessBoard[row][col].toString();
+					board.add(spot, col, row);
+					addButton = new Button(pieceToAdd);
+					//not sure exaclty if this gets rid of the button or makes the button the same color
+					addButton.setStyle("-fx-background-color: "+color+";");
+					board.add(addButton, col, row);
+					
+					int printR = row;
+					int printC = col;
+					
+					addButton.setOnAction(new EventHandler<ActionEvent>() {
+						@Override
+						public void handle(ActionEvent event) {
+							System.out.println(printR + "," + printC);
+						}
+					});
+					
+				}
+				
+				//board.add(spot, col, row);
+				//board.add(addButton, col, row);
 			}
 		}
 		for (int i = 0; i < size; i++) {
             board.getColumnConstraints().add(new ColumnConstraints(5, Control.USE_COMPUTED_SIZE, Double.POSITIVE_INFINITY, Priority.ALWAYS, HPos.CENTER, true));
             board.getRowConstraints().add(new RowConstraints(5, Control.USE_COMPUTED_SIZE, Double.POSITIVE_INFINITY, Priority.ALWAYS, VPos.CENTER, true));
         }
+		
+		//event handler for the button press to move the piece
+		
 		return board;
+	}
+	
+	public GridPane printBoard(){
+		GridPane pieces = new GridPane();
+		//create buttons with a piece character on it 
+		//Button addStartButton = new Button("Start Simulation");
+		//GridPane.setConstraints(addStartButton, 1, row2);
+		//for (int row = 0; row < 8; row++){
+		//	for (int col = 0; col < 8; col++){
+				Button addButton = new Button(ChessPiece.ChessBoard[0][0].toString());
+				GridPane.setConstraints(addButton, 0, 0);
+				pieces.getChildren().add(addButton);
+		//	}
+		//}
+		return pieces;
 	}
 	
 	@Override
 	public void start(Stage primaryStage) {
+		ChessPiece.initializeBoard();
 		universe = new BorderPane();
 		
 		staplesCenter = primaryStage;
 		staplesCenter.setTitle("Wizard's Chess");
 		
 		universe.setCenter(createBoard());
+		//universe.setCenter(printBoard());
 		
 		tay1989 = new Scene(universe, 500, 500);
 		
