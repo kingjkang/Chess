@@ -49,7 +49,7 @@ public class King extends ChessPiece{
 			return false;
 		}
 		
-		return !inCheck(r, c);
+		return !inCheck(this.row, this.col, r, c);
 
 	}
 

@@ -1,5 +1,6 @@
 package project6;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 public abstract class ChessPiece {
 	
@@ -8,6 +9,8 @@ public abstract class ChessPiece {
 	protected int value;
 	
 	protected boolean color;
+	
+	public boolean check = false;
 	
 	public static boolean black = true;
 	public static boolean white = false;
@@ -48,6 +51,32 @@ public abstract class ChessPiece {
 			System.out.println("invalid move, try again");
 		}
 		isMoving = false;
+	}
+	
+	public static void checkMove(int orow, int ocol, int nrow, int ncol){
+		CheckChessBoard[orow][ocol].row = nrow;
+		CheckChessBoard[orow][ocol].col = ncol;
+		CheckChessBoard[nrow][ncol] = CheckChessBoard[orow][ocol];
+		CheckChessBoard[orow][ocol] = null;
+	}
+	
+	public static void checkMovePiece(int or, int oc, int nr, int nc){
+
+		if(CheckChessBoard[or][oc] != null){
+			if(CheckChessBoard[or][oc].color == turn){
+				//CheckChessBoard[or][oc].checkMove(nr, nc);
+				if(CheckChessBoard[or][oc] == null){
+					turn = !turn;
+				}
+			}
+			else{
+				System.out.println("wrong turn!");
+			}
+		}
+		else{
+			System.out.println("no piece at specified coordinates, try again!");
+		}
+
 	}
 	
 	public static void moveDirectly(int orow, int ocol, int nrow, int ncol){
@@ -91,6 +120,8 @@ public abstract class ChessPiece {
 	
 	public static ChessPiece[][] ChessBoard = new ChessPiece[8][8];
 	
+	public static ChessPiece[][] CheckChessBoard = new ChessPiece[8][8];
+	
 	public static ArrayList<ChessPiece> whites = new ArrayList<ChessPiece>();
 	
 	public static ArrayList<ChessPiece> blacks = new ArrayList<ChessPiece>();
@@ -119,7 +150,7 @@ public abstract class ChessPiece {
 		ChessBoard[0][7] = new Rook(0, 7, black);
 		for(int j = 0; j < 2; j++){
 		  for(int i = 0; i < 8; i++){
-		    blacks.add(ChessBoard[i][j]);
+		    blacks.add(ChessBoard[j][i]);
 		  }
 		}
 		
@@ -134,7 +165,7 @@ public abstract class ChessPiece {
 		ChessBoard[7][7] = new Rook(7, 7, white);
 		for(int j = 6; j < 8; j++){
 		  for(int i = 0; i < 8; i++){
-		    whites.add(ChessBoard[i][j]);
+		    whites.add(ChessBoard[j][i]);
 		  }
 		}
 		
@@ -142,18 +173,73 @@ public abstract class ChessPiece {
 		whiteKing = ChessBoard[7][3];
 	}
 	
-	public static boolean inCheck(int r, int c){
+	public static boolean inCheck(int or, int oc, int r, int c){
+		
+		for (int row = 0; row < 8; row++){
+			for (int col = 0; col < 8; col++){
+				CheckChessBoard[row][col] = ChessBoard[row][col];
+			}
+		}
+		//System.out.println(CheckChessBoard[0][0].toString());
+		//System.out.println(or + "," + oc + "," + r + "," + c);
+		checkMove(or, oc, r, c);
+		int opp = 0;
+		
+		//System.out.println("code getting here");
 		
 		King king = null;
 		if(turn == black){
 			king = (King) ChessPiece.blackKing;
+			//if we are checking the black king then we look to see if the whites can put him in check 
+			Iterator<ChessPiece> itr = whites.iterator();
+			while (itr.hasNext()){
+				ChessPiece checking = itr.next();
+				System.out.println("toCheckB"+checking.toString());
+				if (CheckChessBoard[checking.row][checking.col].isValidMove(king.row, king.col)){
+					return true;
+				}
+				
+			}
 		}
 		else{
 			king = (King) ChessPiece.whiteKing;
+			Iterator<ChessPiece> itr = blacks.iterator();
+			while (itr.hasNext()){
+				ChessPiece checking = itr.next();
+				System.out.println("toCheckW"+checking.toString());
+				if (CheckChessBoard[checking.row][checking.col].isValidMove(king.row, king.col)){
+					System.out.println("shouldent print rn ");
+					return true;
+				}
+			}
 		}
 		
-		
+		/*
+		System.out.println("breaking here null pointer");
+		System.out.println(r + "," + c + "," +  king.row + "," + king.col);
+		//null pointer because the piece hasnt moved yet
+		if (ChessBoard[r][c].isValidMove(king.row, king.col)){
+			System.out.println("King in Check");
+			return true;
+		}
+		*/
 		
 		return false;
 	}
 }
+
+
+/*
+ * checkmate checking code
+ * for (int row = 0; row < 8; row++){
+			for (int col = 0; col < 8; col++){
+				if (ChessBoard[row][col] != null){
+					//if there is a piece check its possible moves and see if it can take the king
+					//else just move on to the next piece
+					
+					
+				}
+			}
+		}
+ */
+
