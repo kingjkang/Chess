@@ -132,7 +132,7 @@ public class Pawn extends ChessPiece{
 			}
 		}
 		else{
-			if(deltaR != 1 && deltaC > 1){
+			if(!(deltaR == 1 && deltaC <= 1)){
 				return false;
 			}
 		}
