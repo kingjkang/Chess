@@ -155,7 +155,6 @@ public class Main extends Application{
 							}
 						}
 					});
-					
 				}
 				
 				//board.add(spot, col, row);

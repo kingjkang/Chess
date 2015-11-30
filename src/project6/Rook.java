@@ -42,7 +42,7 @@ public class Rook extends ChessPiece{
 			return false;
 		}
 
-		if(inCheck(r, c)){
+		if(inCheck(this.row, this.col, r, c)){
 			return false;
 		}
 		
@@ -52,7 +52,7 @@ public class Rook extends ChessPiece{
 				for(int yc = col-1; yc >= c; yc--){
 					if(yc == c){
 						if(ChessBoard[row][yc] != null){
-							if(ChessBoard[row][yc].color != color && !inCheck(r, c)){
+							if(ChessBoard[row][yc].color != color && !inCheck(this.row, this.col, r, c)){
 								return true;
 							}
 							else{
@@ -60,7 +60,7 @@ public class Rook extends ChessPiece{
 							}
 						}
 						else{
-							return !inCheck(r, c);
+							return !inCheck(this.row, this.col, r, c);
 						}
 					}
 					else if(ChessBoard[row][yc] != null){
@@ -72,7 +72,7 @@ public class Rook extends ChessPiece{
 				for(int yc = col+1; yc <= c; yc++){
 					if(yc == c){
 						if(ChessBoard[row][yc] != null){
-							if(ChessBoard[row][yc].color != color && !inCheck(r, c)){
+							if(ChessBoard[row][yc].color != color && !inCheck(this.row, this.col, r, c)){
 								return true;
 							}
 							else{
@@ -80,7 +80,7 @@ public class Rook extends ChessPiece{
 							}
 						}
 						else{
-							return !inCheck(r, c);
+							return !inCheck(this.row, this.col, r, c);
 						}
 					}
 					else if(ChessBoard[row][yc] != null){
@@ -95,7 +95,7 @@ public class Rook extends ChessPiece{
 				for(int xc = row-1; xc >= r; xc--){
 					if(xc == r){
 						if(ChessBoard[xc][col] != null){
-							if(ChessBoard[xc][col].color != color && !inCheck(r, c)){
+							if(ChessBoard[xc][col].color != color && !inCheck(this.row, this.col, r, c)){
 								return true;
 							}
 							else{
@@ -103,7 +103,7 @@ public class Rook extends ChessPiece{
 							}
 						}
 						else{
-							return !inCheck(r, c);
+							return !inCheck(this.row, this.col, r, c);
 						}
 					}
 					else if(ChessBoard[xc][col] != null){
@@ -115,7 +115,7 @@ public class Rook extends ChessPiece{
 				for(int xc = row+1; xc <= r; xc++){
 					if(xc == r){
 						if(ChessBoard[xc][col] != null){
-							if(ChessBoard[xc][col].color != color && !inCheck(r, c)){
+							if(ChessBoard[xc][col].color != color && !inCheck(this.row, this.col, r, c)){
 								return true;
 							}
 							else{
@@ -123,7 +123,7 @@ public class Rook extends ChessPiece{
 							}
 						}
 						else{
-							return !inCheck(r, c);
+							return !inCheck(this.row, this.col, r, c);
 						}
 					}
 					else if(ChessBoard[xc][col] != null){

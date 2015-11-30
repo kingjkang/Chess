@@ -32,7 +32,7 @@ public class Knight extends ChessPiece{
 			return false;
 		}
 		
-		if(inCheck(r, c)){
+		if(inCheck(this.row, this.col, r, c)){
 			return false;
 		}
 		
