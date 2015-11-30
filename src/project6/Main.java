@@ -53,6 +53,12 @@ public class Main extends Application{
 	BorderPane universe;
 	BorderPane borderPaneCenter, borderPaneRight, borderPaneLeft, borderPaneTop, borderPaneBottom;
 	ImageView whiteRook;
+	boolean initialPress = false;
+	boolean secondaryPress = false;
+	int printIR = 0;
+	int printIC = 0;
+	int printSR = 0;
+	int printSC = 0;
 	//http://www.javacodegeeks.com/2013/10/javafx-2-how-to-load-image.html
 	
 	public void getImages(){
@@ -92,7 +98,25 @@ public class Main extends Application{
 					addButton.setOnAction(new EventHandler<ActionEvent>() {
 						@Override
 						public void handle(ActionEvent event) {
-							System.out.println(printR + "," + printC);
+							if (initialPress == true){
+								secondaryPress = !secondaryPress;
+								printSR = printR;
+								printSC = printC;
+							}
+							else {
+								initialPress = !initialPress;
+								printIR = printR;
+								printIC = printC;
+							}
+							
+							System.out.println(printR + "," + printC + secondaryPress);
+							if (initialPress == true && secondaryPress == true){
+								System.out.println(printIR + "," + printIC + "," + printSR + "," + printSC);
+								initialPress = false;
+								secondaryPress = false;
+								ChessPiece.movePiece(printIR, printIC, printSR, printSC);
+								universe.setCenter(createBoard());
+							}
 						}
 					});
 				}
@@ -106,11 +130,29 @@ public class Main extends Application{
 					
 					int printR = row;
 					int printC = col;
+					//printIR = printR;
 					
 					addButton.setOnAction(new EventHandler<ActionEvent>() {
 						@Override
 						public void handle(ActionEvent event) {
-							System.out.println(printR + "," + printC);
+							if (initialPress == true){
+								secondaryPress = !secondaryPress;
+								printSR = printR;
+								printSC = printC;
+							}
+							else {
+								initialPress = !initialPress;
+								printIR = printR;
+								printIC = printC;
+							}
+							System.out.println(printR + "," + printC + initialPress);
+							if (initialPress == true && secondaryPress == true){
+								System.out.println(printIR + "," + printIC + "," + printSR + "," + printSC);
+								initialPress = false;
+								secondaryPress = false;
+								ChessPiece.movePiece(printIR, printIC, printSR, printSC);
+								universe.setCenter(createBoard());
+							}
 						}
 					});
 					
@@ -124,8 +166,6 @@ public class Main extends Application{
             board.getColumnConstraints().add(new ColumnConstraints(5, Control.USE_COMPUTED_SIZE, Double.POSITIVE_INFINITY, Priority.ALWAYS, HPos.CENTER, true));
             board.getRowConstraints().add(new RowConstraints(5, Control.USE_COMPUTED_SIZE, Double.POSITIVE_INFINITY, Priority.ALWAYS, VPos.CENTER, true));
         }
-		
-		//event handler for the button press to move the piece
 		
 		return board;
 	}
