@@ -176,7 +176,7 @@ public abstract class ChessPiece {
 		ChessBoard[7][5] = new Bishop(7, 5, white);
 		ChessBoard[7][6] = new Knight(7, 6, white);
 		ChessBoard[7][7] = new Rook(7, 7, white);
-		for(int r = 0; r <= 1; r++){
+		for(int r = 6; r <= 7; r++){
 			for(int c = 0; c <= 7; c++){
 				whites.add(ChessBoard[r][c]);
 			}

@@ -31,38 +31,34 @@ public class Knight extends ChessPiece{
 		if(ChessBoard[r][c] != null && ChessBoard[r][c].color == color){
 			return false;
 		}
-		
-//		if(inCheck(this.row, this.col, r, c)){
-//			return false;
-//		}
-		
+				
 		if(inCheck(r, c)){
 			return false;
 		}
 		
 		if(ChessBoard[r][c] == null || ChessBoard[r][c].color != color){
-			if (r == (row+1) && c == (col-2)){
+			if(r == row - 1 && c == col - 2){
 				return true;
 			}
-			else if (r == (row+2) && c == (col-1)){
+			if(r == row - 2 && c == col - 1){
 				return true;
 			}
-			else if (r == (row+2) && c == (col+1)){
+			if(r == row - 1 && c == col + 2){
 				return true;
 			}
-			else if (r == (row+1) && c == (col+2)){
+			if(r == row - 2 && c == col + 1){
 				return true;
 			}
-			else if (r == (row-1) && c == (col+2)){
+			if(r == row + 1 && c == col - 2){
 				return true;
 			}
-			else if (r == (row-2) && c == (col+1)){
+			if(r == row + 2 && c == col - 1){
 				return true;
 			}
-			else if (r == (row-2) && c == (col-1)){
+			if(r == row + 1 && c == col + 2){
 				return true;
 			}
-			else if (r == (row-1) && c == (col-2)){
+			if(r == row + 2 && c == col + 1){
 				return true;
 			}
 		}
@@ -86,16 +82,16 @@ public class Knight extends ChessPiece{
 			Moves.add(new Move(row - 2, col - 1));
 		}
 		if(isValidMove(row + 1, col + 2)){
-			Moves.add(new Move(row - 1, col + 2));
+			Moves.add(new Move(row + 1, col + 2));
 		}
 		if(isValidMove(row + 2, col + 1)){
 			Moves.add(new Move(row + 2, col + 1));
 		}
 		if(isValidMove(row + 1, col - 2)){
-			Moves.add(new Move(row - 1, col - 2));
+			Moves.add(new Move(row + 1, col - 2));
 		}
 		if(isValidMove(row + 2, col - 1)){
-			Moves.add(new Move(row - 2, col - 1));
+			Moves.add(new Move(row + 2, col - 1));
 		}
 		
 	}
