@@ -38,9 +38,9 @@ public class MainConsole {
 		Scanner kb = new Scanner(System.in);
 		int ocol, orow, ncol, nrow;
 		
-		System.out.println("Good Game");
 		ChessPiece.initializeBoard();
 		printBoard();
+		System.out.println("White Turn");
 		
 		boolean checkMate = false;
 		while (!checkMate){
@@ -70,16 +70,16 @@ public class MainConsole {
 			
 			if(checkMate){
 				System.out.println("Stalemate! No valid move can be made. It is a draw.");
+				break;
 			}
+
 			
-			System.out.println(color + "turn");
-			
-			System.out.print("Enter coordinates of the piece you want to move and press Enter> ");
+			//System.out.print("Enter coordinates of the piece you want to move and press Enter> ");
 			
 			orow = kb.nextInt();
 			ocol = kb.nextInt();
 			
-			System.out.print("Enter coordinates to desired location and press Enter>           ");
+			//System.out.print("Enter coordinates to desired location and press Enter>           ");
 			
 			nrow = kb.nextInt();
 			ncol = kb.nextInt();
@@ -87,6 +87,7 @@ public class MainConsole {
 			ChessPiece.movePiece(orow, ocol, nrow, ncol);
 			
 			printBoard();
+			System.out.println(ChessPiece.printColor + " Turn");
 		}
 		
 	}

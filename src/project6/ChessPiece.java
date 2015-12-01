@@ -51,7 +51,7 @@ public abstract class ChessPiece {
 			CCB[row][col] = this;
 		}
 		else{
-			System.out.println("invalid move, try again");
+			System.out.println("Invalid move, try again");
 		}
 	}
 	
@@ -98,29 +98,28 @@ public abstract class ChessPiece {
 	}
 	
 	public static void movePiece(int or, int oc, int nr, int nc){
-
+		
 		if(ChessBoard[or][oc] != null){
 			if(ChessBoard[or][oc].color == turn){
 				ChessBoard[or][oc].move(nr, nc);
 				if(ChessBoard[or][oc] == null){
 					turn = !turn;
 				}
-				if (turnColor == false){
-					printColor = "white";
-				} else {
-					printColor = "black";
+				if (turn == white){
+					printColor = "White";
+				} 
+				else {
+					printColor = "Black";
 				}
-				System.out.println(printColor + " turn");
-				turnColor = !turnColor;
 			}
 			else{
-				System.out.println("wrong turn!");
-				System.out.println(printColor + " turn");
+				System.out.println("Wrong Turn!");
+				System.out.println(printColor + " Turn");
 			}
 		}
 		else{
-			System.out.println("no piece at specified coordinates, try again!");
-			System.out.println(printColor + " turn");
+			System.out.println("No piece at specified coordinates, Try again!");
+			System.out.println(printColor + " Turn");
 		}
 
 	}
@@ -203,6 +202,8 @@ public abstract class ChessPiece {
 		ChessPiece removed = CCB[r][c];
 		
 		CCB[r][c] = this;
+		
+		CCB[row][col] = null;
 		
 		King king = null;
 		

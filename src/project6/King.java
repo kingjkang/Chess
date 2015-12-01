@@ -80,6 +80,8 @@ public class King extends ChessPiece{
 		
 		CCB[r][c] = this;
 		
+		CCB[row][col] = null;
+		
 		int rr; int cc;
 		
 		//Going right
