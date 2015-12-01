@@ -44,25 +44,31 @@ public class MainConsole {
 		
 		while (true){
 			
+			String color = null;
+			if(ChessPiece.turn){
+				color = "Black ";
+			}
+			else{
+				color = "White ";
+			}
+			
+			
 			if(ChessPiece.checkForKing()){
-				String color = null;
-				if(ChessPiece.turn){
-					color = "Black ";
-				}
-				else{
-					color = "White ";
-				}
 				System.out.println(color + "King is in Check!");
 			}
+			
+			System.out.println(color + "turn");
+			
+			System.out.print("Enter coordinates of the piece you want to move and press Enter> ");
 			
 			orow = kb.nextInt();
 			ocol = kb.nextInt();
 			
+			System.out.print("Enter coordinates to desired location and press Enter>           ");
+			
 			nrow = kb.nextInt();
 			ncol = kb.nextInt();
 			
-			
-			//ChessPiece.move1(ox, oy, xc, yc);
 			ChessPiece.movePiece(orow, ocol, nrow, ncol);
 			
 			printBoard();
