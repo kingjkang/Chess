@@ -42,7 +42,8 @@ public class MainConsole {
 		ChessPiece.initializeBoard();
 		printBoard();
 		
-		while (true){
+		boolean checkMate = false;
+		while (!checkMate){
 			
 			String color = null;
 			if(ChessPiece.turn){
@@ -54,7 +55,14 @@ public class MainConsole {
 			
 			
 			if(ChessPiece.checkForKing()){
-				System.out.println(color + "King is in Check!");
+				if(ChessPiece.checkMate()){
+					checkMate = true;
+					System.out.println("CheckMate! "+ color + " lost.");
+					break;
+				}
+				else{
+					System.out.println(color + "King is in Check!");
+				}
 			}
 			
 			System.out.println(color + "turn");

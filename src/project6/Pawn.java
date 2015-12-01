@@ -94,7 +94,6 @@ public class Pawn extends ChessPiece{
 //		}
 		
 		if(inCheck(r, c)){
-			System.out.println("Cannot move this because King would be in Check!");
 			return false;
 		}
 		

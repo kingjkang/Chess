@@ -190,6 +190,7 @@ public abstract class ChessPiece {
 		
 		King king = null;
 		
+		
 		if(turn == black){
 			king = (King) blackKing;
 		}
@@ -237,7 +238,7 @@ public abstract class ChessPiece {
 			rr = king.row-1;
 			cc = king.col;
 
-			while(rr >= 0){
+			while(rr >= 0 && rr <= 7 && col >= 0 && col <= 7){
 				if(CCB[rr][cc] != null){
 					break;
 				}
@@ -270,7 +271,7 @@ public abstract class ChessPiece {
 			rr = king.row;
 			cc = king.col-1;
 
-			while(cc >= 0){
+			while(rr >= 0 && rr <= 7 && col >= 0 && col <= 7){
 				if(CCB[rr][cc] != null){
 					break;
 				}
@@ -303,7 +304,7 @@ public abstract class ChessPiece {
 			rr = king.row+1;
 			cc = king.col;
 
-			while(rr <= 7){
+			while(rr >= 0 && rr <= 7 && col >= 0 && col <= 7){
 				if(CCB[rr][cc] != null){
 					break;
 				}
@@ -336,7 +337,7 @@ public abstract class ChessPiece {
 			rr = king.row-1;
 			cc = king.col+1;
 
-			while(rr >= 0 && cc <= 7){
+			while(rr >= 0 && rr <= 7 && col >= 0 && col <= 7){
 				if(CCB[rr][cc] != null){
 					break;
 				}
@@ -375,7 +376,7 @@ public abstract class ChessPiece {
 			rr = king.row-1;
 			cc = king.col-1;
 
-			while(rr >= 0 && cc <= 7){
+			while(rr >= 0 && rr <= 7 && col >= 0 && col <= 7){
 				if(CCB[rr][cc] != null){
 					break;
 				}
@@ -414,7 +415,7 @@ public abstract class ChessPiece {
 			rr = king.row+1;
 			cc = king.col-1;
 
-			while(rr >= 0 && cc <= 7){
+			while(rr >= 0 && rr <= 7 && col >= 0 && col <= 7){
 				if(CCB[rr][cc] != null){
 					break;
 				}
@@ -453,7 +454,7 @@ public abstract class ChessPiece {
 			rr = king.row+1;
 			cc = king.col+1;
 
-			while(rr >= 0 && cc <= 7){
+			while(rr >= 0 && rr <= 7 && col >= 0 && col <= 7){
 				if(CCB[rr][cc] != null){
 					break;
 				}
@@ -949,6 +950,34 @@ public abstract class ChessPiece {
 		}
 		
 		return false;
+		
+	}
+	
+	public static boolean checkMate(){
+		
+		if(turn == black){
+			for(ChessPiece cp : blacks){
+				cp.showMoves();
+			}
+			for(ChessPiece cp: blacks){
+				if(!cp.Moves.isEmpty()){
+					return false;
+				}
+			}
+		}
+		else{
+			for(ChessPiece cp: whites){
+				cp.showMoves();
+			}
+			for(ChessPiece cp: whites){
+				if(!cp.Moves.isEmpty()){
+					return false;
+				}
+			}
+		}
+		
+		
+		return true;
 		
 	}
 	

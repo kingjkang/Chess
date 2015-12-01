@@ -43,7 +43,6 @@ public class Queen extends ChessPiece{
 //		}
 		
 		if(inCheck(r, c)){
-			System.out.println("Cannot move this because King would be in Check!");
 			return false;
 		}
 		
@@ -293,13 +292,16 @@ public class Queen extends ChessPiece{
 		Moves = new ArrayList<Move>(0);
 		
 		for(int r = row + 1; r <= 7; r++){
+			
 			if(ChessBoard[r][col] != null){
 				if(isValidMove(r, col)){
 					Moves.add(new Move(r, col));
 				}
 				break;
 			}
-			Moves.add(new Move(r, col));
+			if(isValidMove(r, col)){
+				Moves.add(new Move(r, col));
+			}
 		}
 		
 		for(int r = row - 1; r >= 0; row--){
@@ -309,7 +311,9 @@ public class Queen extends ChessPiece{
 				}
 				break;
 			}
-			Moves.add(new Move(r, col));
+			if(isValidMove(r, col)){
+				Moves.add(new Move(r, col));
+			}
 		}
 		
 		for(int c = col + 1; c <= 7; c++){
@@ -319,8 +323,9 @@ public class Queen extends ChessPiece{
 				}
 				break;
 			}
-			Moves.add(new Move(row, c));
-		}
+			if(isValidMove(row, c)){
+				Moves.add(new Move(row, c));
+			}		}
 		
 		for(int c = col - 1; c >= 0; c--){
 			if(ChessBoard[row][c] != null){
@@ -329,7 +334,9 @@ public class Queen extends ChessPiece{
 				}
 				break;
 			}
-			Moves.add(new Move(row, c));
+			if(isValidMove(row, col)){
+				Moves.add(new Move(row, c));
+			}
 		}
 		
 		
