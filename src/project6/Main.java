@@ -115,6 +115,9 @@ public class Main extends Application{
 								initialPress = false;
 								secondaryPress = false;
 								ChessPiece.movePiece(printIR, printIC, printSR, printSC);
+								if(ChessPiece.checkForKing()){
+									System.out.println(color + "King is in Check!");
+								}
 								universe.setCenter(createBoard());
 							}
 						}
@@ -151,6 +154,9 @@ public class Main extends Application{
 								initialPress = false;
 								secondaryPress = false;
 								ChessPiece.movePiece(printIR, printIC, printSR, printSC);
+								if(ChessPiece.checkForKing()){
+									System.out.println(color + "King is in Check!");
+								}
 								universe.setCenter(createBoard());
 							}
 						}
