@@ -19,6 +19,9 @@ public abstract class ChessPiece {
 	
 	public static boolean turn = white;
 	
+	static Boolean turnColor = true;
+	static String printColor;
+	
 	protected int row;
 	protected int col;
 	
@@ -101,13 +104,22 @@ public abstract class ChessPiece {
 				if(ChessBoard[or][oc] == null){
 					turn = !turn;
 				}
+				if (turnColor == false){
+					printColor = "white";
+				} else {
+					printColor = "black";
+				}
+				System.out.println(printColor + " turn");
+				turnColor = !turnColor;
 			}
 			else{
 				System.out.println("wrong turn!");
+				System.out.println(printColor + " turn");
 			}
 		}
 		else{
 			System.out.println("no piece at specified coordinates, try again!");
+			System.out.println(printColor + " turn");
 		}
 
 	}

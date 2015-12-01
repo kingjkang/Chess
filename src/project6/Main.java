@@ -53,6 +53,7 @@ public class Main extends Application{
 	BorderPane universe;
 	BorderPane borderPaneCenter, borderPaneRight, borderPaneLeft, borderPaneTop, borderPaneBottom;
 	ImageView whiteRook;
+	
 	boolean initialPress = false;
 	boolean secondaryPress = false;
 	int printIR = 0;
@@ -109,9 +110,7 @@ public class Main extends Application{
 								printIC = printC;
 							}
 							
-							System.out.println(printR + "," + printC + secondaryPress);
 							if (initialPress == true && secondaryPress == true){
-								System.out.println(printIR + "," + printIC + "," + printSR + "," + printSC);
 								initialPress = false;
 								secondaryPress = false;
 								ChessPiece.movePiece(printIR, printIC, printSR, printSC);
@@ -148,9 +147,7 @@ public class Main extends Application{
 								printIR = printR;
 								printIC = printC;
 							}
-							System.out.println(printR + "," + printC + initialPress);
 							if (initialPress == true && secondaryPress == true){
-								System.out.println(printIR + "," + printIC + "," + printSR + "," + printSC);
 								initialPress = false;
 								secondaryPress = false;
 								ChessPiece.movePiece(printIR, printIC, printSR, printSC);
@@ -213,7 +210,8 @@ public class Main extends Application{
 		//System.out.println("Test 1");
 		
 		//System.out.println("Chess");
-		
+		System.out.println("Welcome to Wizards Chess");
+		System.out.println("white turn");
 		launch(args);
 	}
 
