@@ -89,6 +89,8 @@ public class Pawn extends ChessPiece{
 			return false;
 		}
 
+		
+		
 //		if(inCheck(this.row, this.col, r, c)){
 //			return false;
 //		}
@@ -106,7 +108,7 @@ public class Pawn extends ChessPiece{
 			if(deltaR == 2 && deltaC == 0){
 				if(color == black){
 					if(r > row){
-						if(ChessBoard[row+1][col] != null && ChessBoard[row+2][col] != null){
+						if(ChessBoard[row+1][col] != null || ChessBoard[row+2][col] != null){
 							return false;
 						}
 						else{
@@ -119,7 +121,7 @@ public class Pawn extends ChessPiece{
 				}
 				else{
 					if(r < row){
-						if(ChessBoard[row-1][col] != null && ChessBoard[row-2][col] != null){
+						if(ChessBoard[row-1][col] != null || ChessBoard[row-2][col] != null){
 							return false;
 						}
 						else{
@@ -155,7 +157,7 @@ public class Pawn extends ChessPiece{
 					}	
 				}
 				else{
-					if(ChessBoard[r][c].color != color){
+					if(ChessBoard[r][c] != null && ChessBoard[r][c].color != color){
 						return true;
 					}
 					else{
@@ -178,7 +180,7 @@ public class Pawn extends ChessPiece{
 					}	
 				}
 				else{
-					if(ChessBoard[r][c].color != color){
+					if(ChessBoard[r][c] != null && ChessBoard[r][c].color != color){
 						return true;
 					}
 					else{

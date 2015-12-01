@@ -86,290 +86,305 @@ public class King extends ChessPiece{
 		if(king.col < 7){
 			rr = king.row;
 			cc = king.col+1;
-			while(cc <= 7){
+			while(rr >= 0 && rr <= 7 && cc >= 0 && cc <= 7){
 				if(CCB[rr][cc] != null){
 					break;
 				}
 				cc++;
 			}
-
-			if(CCB[rr][cc] != null){
-				if(CCB[rr][cc].color != turn){
-					if(CCB[rr][cc] instanceof Queen){
-						CCB[r][c] = removed;
-						CCB[row][col] = this;
-						return true;
-					}
-					if(CCB[rr][cc] instanceof Rook){
-						CCB[r][c] = removed;
-						CCB[row][col] = this;
-						return true;
-					}
-					if(CCB[rr][cc] instanceof King && cc == king.col+1){
-						CCB[r][c] = removed;
-						CCB[row][col] = this;
-						return true;
+		
+			if(rr >= 0 && rr <= 7 && cc >= 0 && cc <= 7){
+				if(CCB[rr][cc] != null){
+					if(CCB[rr][cc].color != turn){
+						if(CCB[rr][cc] instanceof Queen){
+							CCB[r][c] = removed;
+							CCB[row][col] = this;
+							return true;
+						}
+						if(CCB[rr][cc] instanceof Rook){
+							CCB[r][c] = removed;
+							CCB[row][col] = this;
+							return true;
+						}
+						if(CCB[rr][cc] instanceof King && cc == king.col+1){
+							CCB[r][c] = removed;
+							CCB[row][col] = this;
+							return true;
+						}
 					}
 				}
 			}
-
 		}
-
+		
 		//Going up
 		if(king.row > 0){
 			rr = king.row-1;
 			cc = king.col;
 
-			while(rr >= 0 && rr <= 7 && col >= 0 && col <= 7){
+			while(rr >= 0 && rr <= 7 && cc >= 0 && cc <= 7){
 				if(CCB[rr][cc] != null){
 					break;
 				}
 				rr--;
 			}
-
-			if(CCB[rr][cc] != null){
-				if(CCB[rr][cc].color != turn){
-					if(CCB[rr][cc] instanceof Queen){
-						CCB[r][c] = removed;
-						CCB[row][col] = this;
-						return true;
-					}
-					if(CCB[rr][cc] instanceof Rook){
-						CCB[r][c] = removed;
-						CCB[row][col] = this;
-						return true;
-					}
-					if(CCB[rr][cc] instanceof King && rr == king.row-1){
-						CCB[r][c] = removed;
-						CCB[row][col] = this;
-						return true;
+			
+			if(rr >= 0 && rr <= 7 && cc >= 0 && cc <= 7){
+				if(CCB[rr][cc] != null){
+					if(CCB[rr][cc].color != turn){
+						if(CCB[rr][cc] instanceof Queen){
+							CCB[r][c] = removed;
+							CCB[row][col] = this;
+							return true;
+						}
+						if(CCB[rr][cc] instanceof Rook){
+							CCB[r][c] = removed;
+							CCB[row][col] = this;
+							return true;
+						}
+						if(CCB[rr][cc] instanceof King && rr == king.row-1){
+							CCB[r][c] = removed;
+							CCB[row][col] = this;
+							return true;
+						}
 					}
 				}
 			}
 		}
-
+		
 		//Going left
 		if(king.col > 0){
 			rr = king.row;
 			cc = king.col-1;
 
-			while(rr >= 0 && rr <= 7 && col >= 0 && col <= 7){
+			while(rr >= 0 && rr <= 7 && cc >= 0 && cc <= 7){
 				if(CCB[rr][cc] != null){
 					break;
 				}
 				cc--;
 			}
 
-			if(CCB[rr][cc] != null){
-				if(CCB[rr][cc].color != turn){
-					if(CCB[rr][cc] instanceof Queen){
-						CCB[r][c] = removed;
-						CCB[row][col] = this;
-						return true;
-					}
-					if(CCB[rr][cc] instanceof Rook){
-						CCB[r][c] = removed;
-						CCB[row][col] = this;
-						return true;
-					}
-					if(CCB[rr][cc] instanceof King && cc == king.col-1){
-						CCB[r][c] = removed;
-						CCB[row][col] = this;
-						return true;
+			if(rr >= 0 && rr <= 7 && cc >= 0 && cc <= 7){
+				if(CCB[rr][cc] != null){
+					if(CCB[rr][cc].color != turn){
+						if(CCB[rr][cc] instanceof Queen){
+							CCB[r][c] = removed;
+							CCB[row][col] = this;
+							return true;
+						}
+						if(CCB[rr][cc] instanceof Rook){
+							CCB[r][c] = removed;
+							CCB[row][col] = this;
+							return true;
+						}
+						if(CCB[rr][cc] instanceof King && cc == king.col-1){
+							CCB[r][c] = removed;
+							CCB[row][col] = this;
+							return true;
+						}
 					}
 				}
 			}
 		}
-
+		
 		//Going down
 		if(king.row < 7){
 			rr = king.row+1;
 			cc = king.col;
 
-			while(rr >= 0 && rr <= 7 && col >= 0 && col <= 7){
+			while(rr >= 0 && rr <= 7 && cc >= 0 && cc <= 7){
 				if(CCB[rr][cc] != null){
 					break;
 				}
 				rr++;
 			}
-
-			if(CCB[rr][cc] != null){
-				if(CCB[rr][cc].color != turn){
-					if(CCB[rr][cc] instanceof Queen){
-						CCB[r][c] = removed;
-						CCB[row][col] = this;
-						return true;
-					}
-					if(CCB[rr][cc] instanceof Rook){
-						CCB[r][c] = removed;
-						CCB[row][col] = this;
-						return true;
-					}
-					if(CCB[rr][cc] instanceof King && rr == king.row+1){
-						CCB[r][c] = removed;
-						CCB[row][col] = this;
-						return true;
+			 
+			if(rr >= 0 && rr <= 7 && cc >= 0 && cc <= 7){
+				if(CCB[rr][cc] != null){
+					if(CCB[rr][cc].color != turn){
+						if(CCB[rr][cc] instanceof Queen){
+							CCB[r][c] = removed;
+							CCB[row][col] = this;
+							return true;
+						}
+						if(CCB[rr][cc] instanceof Rook){
+							CCB[r][c] = removed;
+							CCB[row][col] = this;
+							return true;
+						}
+						if(CCB[rr][cc] instanceof King && rr == king.row+1){
+							CCB[r][c] = removed;
+							CCB[row][col] = this;
+							return true;
+						}
 					}
 				}
 			}
 		}
-
+		
 		//Going Up & Right
 		if(king.row > 0 && king.col < 7){
 			rr = king.row-1;
 			cc = king.col+1;
 
-			while(rr >= 0 && rr <= 7 && col >= 0 && col <= 7){
+			while(rr >= 0 && rr <= 7 && cc >= 0 && cc <= 7){
 				if(CCB[rr][cc] != null){
 					break;
 				}
 				rr--;
 				cc++;
 			}
-
-			if(CCB[rr][cc] != null){
-				if(CCB[rr][cc].color != turn){
-					if(CCB[rr][cc] instanceof Queen){
-						CCB[r][c] = removed;
-						CCB[row][col] = this;
-						return true;
-					}
-					if(CCB[rr][cc] instanceof Bishop){
-						CCB[r][c] = removed;
-						CCB[row][col] = this;
-						return true;
-					}
-					if(CCB[rr][cc] instanceof King && cc == king.col+1 && rr == king.row-1){
-						CCB[r][c] = removed;
-						CCB[row][col] = this;
-						return true;
-					}
-					if(CCB[rr][cc] instanceof Pawn && cc == king.col+1 && rr == king.row-1){
-						CCB[r][c] = removed;
-						CCB[row][col] = this;
-						return true;
+			
+			if(rr >= 0 && rr <= 7 && cc >= 0 && cc <= 7){
+				if(CCB[rr][cc] != null){
+					if(CCB[rr][cc].color != turn){
+						if(CCB[rr][cc] instanceof Queen){
+							CCB[r][c] = removed;
+							CCB[row][col] = this;
+							return true;
+						}
+						if(CCB[rr][cc] instanceof Bishop){
+							CCB[r][c] = removed;
+							CCB[row][col] = this;
+							return true;
+						}
+						if(CCB[rr][cc] instanceof King && cc == king.col+1 && rr == king.row-1){
+							CCB[r][c] = removed;
+							CCB[row][col] = this;
+							return true;
+						}
+						if(CCB[rr][cc] instanceof Pawn && cc == king.col+1 && rr == king.row-1){
+							CCB[r][c] = removed;
+							CCB[row][col] = this;
+							return true;
+						}
 					}
 				}
 			}
 		}
-
+		
 		//Going Up & Left
 		if(king.row > 0 && king.col > 0){
 			rr = king.row-1;
 			cc = king.col-1;
 
-			while(rr >= 0 && rr <= 7 && col >= 0 && col <= 7){
+			while(rr >= 0 && rr <= 7 && cc >= 0 && cc <= 7){
 				if(CCB[rr][cc] != null){
 					break;
 				}
 				rr--;
 				cc--;
 			}
-
-			if(CCB[rr][cc] != null){
-				if(CCB[rr][cc].color != turn){
-					if(CCB[rr][cc] instanceof Queen){
-						CCB[r][c] = removed;
-						CCB[row][col] = this;
-						return true;
-					}
-					if(CCB[rr][cc] instanceof Bishop){
-						CCB[r][c] = removed;
-						CCB[row][col] = this;
-						return true;
-					}
-					if(CCB[rr][cc] instanceof King && cc == king.col-1 && rr == king.row-1){
-						CCB[r][c] = removed;
-						CCB[row][col] = this;
-						return true;
-					}
-					if(CCB[rr][cc] instanceof Pawn && cc == king.col-1 && rr == king.row-1){
-						CCB[r][c] = removed;
-						CCB[row][col] = this;
-						return true;
+			
+			if(rr >= 0 && rr <= 7 && cc >= 0 && cc <= 7){
+				if(CCB[rr][cc] != null){
+					if(CCB[rr][cc].color != turn){
+						if(CCB[rr][cc] instanceof Queen){
+							CCB[r][c] = removed;
+							CCB[row][col] = this;
+							return true;
+						}
+						if(CCB[rr][cc] instanceof Bishop){
+							CCB[r][c] = removed;
+							CCB[row][col] = this;
+							return true;
+						}
+						if(CCB[rr][cc] instanceof King && cc == king.col-1 && rr == king.row-1){
+							CCB[r][c] = removed;
+							CCB[row][col] = this;
+							return true;
+						}
+						if(CCB[rr][cc] instanceof Pawn && cc == king.col-1 && rr == king.row-1){
+							CCB[r][c] = removed;
+							CCB[row][col] = this;
+							return true;
+						}
 					}
 				}
 			}
 		}
-
+		
 		//Going Down & Left
 		if(king.row < 7 && king.col > 0){
 			rr = king.row+1;
 			cc = king.col-1;
 
-			while(rr >= 0 && rr <= 7 && col >= 0 && col <= 7){
+			while(rr >= 0 && rr <= 7 && cc >= 0 && cc <= 7){
 				if(CCB[rr][cc] != null){
 					break;
 				}
 				rr++;
 				cc--;
 			}
-
-			if(CCB[rr][cc] != null){
-				if(CCB[rr][cc].color != turn){
-					if(CCB[rr][cc] instanceof Queen){
-						CCB[r][c] = removed;
-						CCB[row][col] = this;
-						return true;
-					}
-					if(CCB[rr][cc] instanceof Bishop){
-						CCB[r][c] = removed;
-						CCB[row][col] = this;
-						return true;
-					}
-					if(CCB[rr][cc] instanceof King && cc == king.col-1 && rr == king.row+1){
-						CCB[r][c] = removed;
-						CCB[row][col] = this;
-						return true;
-					}
-					if(CCB[rr][cc] instanceof Pawn && cc == king.col-1 && rr == king.row+1){
-						CCB[r][c] = removed;
-						CCB[row][col] = this;
-						return true;
+			
+			if(rr >= 0 && rr <= 7 && cc >= 0 && cc <= 7){
+				if(CCB[rr][cc] != null){
+					if(CCB[rr][cc].color != turn){
+						if(CCB[rr][cc] instanceof Queen){
+							CCB[r][c] = removed;
+							CCB[row][col] = this;
+							return true;
+						}
+						if(CCB[rr][cc] instanceof Bishop){
+							CCB[r][c] = removed;
+							CCB[row][col] = this;
+							return true;
+						}
+						if(CCB[rr][cc] instanceof King && cc == king.col-1 && rr == king.row+1){
+							CCB[r][c] = removed;
+							CCB[row][col] = this;
+							return true;
+						}
+						if(CCB[rr][cc] instanceof Pawn && cc == king.col-1 && rr == king.row+1){
+							CCB[r][c] = removed;
+							CCB[row][col] = this;
+							return true;
+						}
 					}
 				}
 			}
 		}
-
+		
 		//Going Down & Right
 		if(king.row < 7 && king.col < 7){
 			rr = king.row+1;
 			cc = king.col+1;
 
-			while(rr >= 0 && rr <= 7 && col >= 0 && col <= 7){
+			while(rr >= 0 && rr <= 7 && cc >= 0 && cc <= 7){
 				if(CCB[rr][cc] != null){
 					break;
 				}
 				rr++;
 				cc++;
 			}
-
-			if(CCB[rr][cc] != null){
-				if(CCB[rr][cc].color != turn){
-					if(CCB[rr][cc] instanceof Queen){
-						CCB[r][c] = removed;
-						CCB[row][col] = this;
-						return true;
-					}
-					if(CCB[rr][cc] instanceof Bishop){
-						CCB[r][c] = removed;
-						CCB[row][col] = this;
-						return true;
-					}
-					if(CCB[rr][cc] instanceof King && cc == king.col+1 && rr == king.row+1){
-						CCB[r][c] = removed;
-						CCB[row][col] = this;
-						return true;
-					}
-					if(CCB[rr][cc] instanceof Pawn && cc == king.col+1 && rr == king.row+1){
-						CCB[r][c] = removed;
-						CCB[row][col] = this;
-						return true;
+			
+			if(rr >= 0 && rr <= 7 && cc >= 0 && cc <= 7){
+				if(CCB[rr][cc] != null){
+					if(CCB[rr][cc].color != turn){
+						if(CCB[rr][cc] instanceof Queen){
+							CCB[r][c] = removed;
+							CCB[row][col] = this;
+							return true;
+						}
+						if(CCB[rr][cc] instanceof Bishop){
+							CCB[r][c] = removed;
+							CCB[row][col] = this;
+							return true;
+						}
+						if(CCB[rr][cc] instanceof King && cc == king.col+1 && rr == king.row+1){
+							CCB[r][c] = removed;
+							CCB[row][col] = this;
+							return true;
+						}
+						if(CCB[rr][cc] instanceof Pawn && cc == king.col+1 && rr == king.row+1){
+							CCB[r][c] = removed;
+							CCB[row][col] = this;
+							return true;
+						}
 					}
 				}
 			}
 		}
-
+		
 		//Knight Cases
 		rr = king.row + 1;
 		cc = king.col + 2;
@@ -384,7 +399,7 @@ public class King extends ChessPiece{
 				}
 			}
 		}
-
+		
 		rr = king.row + 2;
 		cc = king.col + 1;
 		if(rr >= 0 && rr <= 7 && cc >= 0 && cc <= 7){
@@ -398,7 +413,7 @@ public class King extends ChessPiece{
 				}
 			}
 		}
-
+		
 		rr = king.row + 2;
 		cc = king.col - 1;
 		if(rr >= 0 && rr <= 7 && cc >= 0 && cc <= 7){
@@ -412,7 +427,7 @@ public class King extends ChessPiece{
 				}
 			}
 		}
-
+		
 		rr = king.row + 1;
 		cc = king.col - 2;
 		if(rr >= 0 && rr <= 7 && cc >= 0 && cc <= 7){
@@ -426,7 +441,7 @@ public class King extends ChessPiece{
 				}
 			}
 		}
-
+		
 		rr = king.row - 1;
 		cc = king.col + 2;
 		if(rr >= 0 && rr <= 7 && cc >= 0 && cc <= 7){
@@ -440,7 +455,7 @@ public class King extends ChessPiece{
 				}
 			}
 		}
-
+		
 		rr = king.row - 2;
 		cc = king.col + 1;
 		if(rr >= 0 && rr <= 7 && cc >= 0 && cc <= 7){
@@ -454,7 +469,7 @@ public class King extends ChessPiece{
 				}
 			}
 		}
-
+		
 		rr = king.row - 2;
 		cc = king.col - 1;
 		if(rr >= 0 && rr <= 7 && cc >= 0 && cc <= 7){
@@ -468,7 +483,7 @@ public class King extends ChessPiece{
 				}
 			}
 		}
-
+		
 		rr = king.row - 1;
 		cc = king.col - 2;
 		if(rr >= 0 && rr <= 7 && cc >= 0 && cc <= 7){
@@ -482,7 +497,7 @@ public class King extends ChessPiece{
 				}
 			}
 		}
-
+		
 		CCB[r][c] = removed;
 		CCB[row][col] = this;
 		return false;

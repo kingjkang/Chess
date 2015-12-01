@@ -46,23 +46,30 @@ public class MainConsole {
 		while (!checkMate){
 			
 			String color = null;
+			String other = null;
 			if(ChessPiece.turn){
 				color = "Black ";
+				other = "White ";
 			}
 			else{
+				other = "Black ";
 				color = "White ";
 			}
 			
+			checkMate = ChessPiece.checkMate();
 			
 			if(ChessPiece.checkForKing()){
-				if(ChessPiece.checkMate()){
-					checkMate = true;
-					System.out.println("CheckMate! "+ color + " lost.");
+				if(checkMate){
+					System.out.println("CheckMate! "+ other + "won.");
 					break;
 				}
 				else{
 					System.out.println(color + "King is in Check!");
 				}
+			}
+			
+			if(checkMate){
+				System.out.println("Stalemate! No valid move can be made. It is a draw.");
 			}
 			
 			System.out.println(color + "turn");
