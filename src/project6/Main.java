@@ -53,6 +53,7 @@ public class Main extends Application{
 	BorderPane universe;
 	BorderPane borderPaneCenter, borderPaneRight, borderPaneLeft, borderPaneTop, borderPaneBottom;
 	ImageView whiteRook;
+	String turnColor;
 	boolean initialPress = false;
 	boolean secondaryPress = false;
 	int printIR = 0;
@@ -77,9 +78,11 @@ public class Main extends Application{
 				String color;
 				if ((row+col)%2 == 0){
 					color = "chocolate";
+					turnColor = color;
 				}
 				else {
 					color = "brown";
+					turnColor = color;
 				}
 				spot.setStyle("-fx-background-color: "+color+";");
 				String pieceToAdd;
@@ -109,9 +112,7 @@ public class Main extends Application{
 								printIC = printC;
 							}
 							
-							System.out.println(printR + "," + printC + secondaryPress);
 							if (initialPress == true && secondaryPress == true){
-								System.out.println(printIR + "," + printIC + "," + printSR + "," + printSC);
 								initialPress = false;
 								secondaryPress = false;
 								ChessPiece.movePiece(printIR, printIC, printSR, printSC);
@@ -148,9 +149,7 @@ public class Main extends Application{
 								printIR = printR;
 								printIC = printC;
 							}
-							System.out.println(printR + "," + printC + initialPress);
 							if (initialPress == true && secondaryPress == true){
-								System.out.println(printIR + "," + printIC + "," + printSR + "," + printSC);
 								initialPress = false;
 								secondaryPress = false;
 								ChessPiece.movePiece(printIR, printIC, printSR, printSC);
@@ -171,7 +170,7 @@ public class Main extends Application{
             board.getColumnConstraints().add(new ColumnConstraints(5, Control.USE_COMPUTED_SIZE, Double.POSITIVE_INFINITY, Priority.ALWAYS, HPos.CENTER, true));
             board.getRowConstraints().add(new RowConstraints(5, Control.USE_COMPUTED_SIZE, Double.POSITIVE_INFINITY, Priority.ALWAYS, VPos.CENTER, true));
         }
-		
+		System.out.println(turnColor + " turn");
 		return board;
 	}
 	
