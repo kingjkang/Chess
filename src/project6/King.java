@@ -49,8 +49,14 @@ public class King extends ChessPiece{
 			return false;
 		}
 		
-		return !inCheck(this.row, this.col, r, c);
-
+		if(inCheck(r, c)){
+			System.out.println("Cannot move this because King is in Check!");
+			return false;
+		}
+		
+		return true;
+		
+		//return !inCheck(this.row, this.col, r, c);
 	}
 
 	public void showMoves() {

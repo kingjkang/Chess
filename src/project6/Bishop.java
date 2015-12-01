@@ -36,8 +36,13 @@ public class Bishop extends ChessPiece{
 		if(ChessBoard[r][c] != null && ChessBoard[r][c].color == color){
 			return false;
 		}
-
-		if(inCheck(this.row, this.col, r, c)){
+		
+//		if(inCheck(this.row, this.col, r, c)){
+//			return false;
+//		}
+		
+		if(inCheck(r, c)){
+			System.out.println("Cannot move this because King would be in Check!");
 			return false;
 		}
 		

@@ -38,7 +38,12 @@ public class Queen extends ChessPiece{
 			return false;
 		}
 		
-		if(inCheck(this.row, this.col, r, c)){
+//		if(inCheck(this.row, this.col, r, c)){
+//			return false;
+//		}
+		
+		if(inCheck(r, c)){
+			System.out.println("Cannot move this because King would be in Check!");
 			return false;
 		}
 		
@@ -47,6 +52,81 @@ public class Queen extends ChessPiece{
 		int direction = 0;
 		
 		if(deltaR != deltaC && (deltaR == 0 || deltaC == 0)){
+			if(row == r){
+				if(col > c){
+					for(int yc = col-1; yc >= c; yc--){
+						if(yc == c){
+							if(ChessBoard[row][yc] != null){
+								if(ChessBoard[row][yc].color != color){
+									return true;
+								}
+								else{
+									return false;
+								}
+							}
+						}
+						else if(ChessBoard[row][yc] != null){
+							return false;
+						}
+					}
+				}
+				else{
+					for(int yc = col+1; yc <= c; yc++){
+						if(yc == c){
+							if(ChessBoard[row][yc] != null){
+								if(ChessBoard[row][yc].color != color){
+									return true;
+								}
+								else{
+									return false;
+								}
+							}
+						}
+						else if(ChessBoard[row][yc] != null){
+							return false;
+						}
+					}
+				}
+			}
+
+			else{
+				if(row > r){
+					for(int xc = row-1; xc >= r; xc--){
+						if(xc == r){
+							if(ChessBoard[xc][col] != null){
+								if(ChessBoard[xc][col].color != color){	
+									return true;
+								}
+								else{
+									return false;
+								}
+							}
+						}
+						else if(ChessBoard[xc][col] != null){
+							return false;
+						}
+					}
+				}
+				else{
+					for(int xc = row+1; xc <= r; xc++){
+						if(xc == r){
+							if(ChessBoard[xc][col] != null){
+								if(ChessBoard[xc][col].color != color){
+									return true;
+								}
+								else{
+									return false;
+								}
+							}
+						}
+						else if(ChessBoard[xc][col] != null){
+							return false;
+						}
+					}
+				}
+			}
+			return true;
+			/*
 			if(row == r){
 				if(col > c){
 					for(int yc = col-1; yc >= c; yc--){
@@ -132,7 +212,7 @@ public class Queen extends ChessPiece{
 					}
 				}
 			}
-			return true;
+			return true;*/
 		}
 		else if(deltaR == deltaC){
 			

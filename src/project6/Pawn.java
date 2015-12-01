@@ -68,6 +68,9 @@ public class Pawn extends ChessPiece{
 				System.out.print("What Piece> ");
 				String piece = kb.nextLine();
 				validPiece = evolve(piece);
+				if(!validPiece){
+					System.out.println(piece + " is not a valid piece.");
+				}
 			}
 		}
 	}
@@ -86,7 +89,12 @@ public class Pawn extends ChessPiece{
 			return false;
 		}
 
-		if(inCheck(this.row, this.col, r, c)){
+//		if(inCheck(this.row, this.col, r, c)){
+//			return false;
+//		}
+		
+		if(inCheck(r, c)){
+			System.out.println("Cannot move this because King would be in Check!");
 			return false;
 		}
 		
@@ -190,19 +198,19 @@ public class Pawn extends ChessPiece{
 		boolean validPiece = false;
 		
 		ChessPiece upgrade = null;
-		if(piece == "Queen"){
+		if(piece.equals("Queen")){
 			upgrade = new Queen(row, col, color);
 			validPiece = true;
 		}
-		else if(piece == "Rook"){
+		else if(piece.equals("Rook")){
 			upgrade = new Rook(row, col, color);
 			validPiece = true;
 		}
-		else if(piece == "Bishop"){
+		else if(piece.equals("Bishop")){
 			upgrade = new Bishop(row, col, color);
 			validPiece = true;
 		}
-		else if(piece == "Knight"){
+		else if(piece.equals("Knight")){
 			upgrade = new Knight(row, col, color);
 			validPiece = true;
 		}

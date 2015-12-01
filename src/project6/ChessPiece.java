@@ -4,7 +4,6 @@ import java.util.Iterator;
 
 public abstract class ChessPiece {
 	
-	protected boolean isMoving;
 	
 	protected int value;
 	
@@ -32,7 +31,6 @@ public abstract class ChessPiece {
 	public ArrayList<Move> Moves = new ArrayList<Move>();
 	
 	protected void move(int r, int c){
-		isMoving = true;
 		if(isValidMove(r, c)){
 			ChessBoard[row][col] = null;
 			if(ChessBoard[r][c] != null){
@@ -46,11 +44,11 @@ public abstract class ChessPiece {
 			row = r;
 			col = c;
 			ChessBoard[row][col] = this;
+			CCB[row][col] = this;
 		}
 		else{
 			System.out.println("invalid move, try again");
 		}
-		isMoving = false;
 	}
 	
 	public static void checkMove(int orow, int ocol, int nrow, int ncol){
@@ -120,6 +118,8 @@ public abstract class ChessPiece {
 	
 	public static ChessPiece[][] ChessBoard = new ChessPiece[8][8];
 	
+	public static ChessPiece[][] CCB = new ChessPiece[8][8];
+	
 	public static ChessPiece[][] CheckChessBoard = new ChessPiece[8][8];
 	
 	public static ArrayList<ChessPiece> whites = new ArrayList<ChessPiece>();
@@ -171,9 +171,790 @@ public abstract class ChessPiece {
 		
 		blackKing = ChessBoard[0][3];
 		whiteKing = ChessBoard[7][3];
+		
+		for(int r = 0; r <= 7; r++){
+			for(int c = 0; c <= 7; c++){
+				if(ChessBoard[r][c] != null){
+					CCB[ChessBoard[r][c].row][ChessBoard[r][c].col] = ChessBoard[r][c];
+				}
+			}
+		}
+		
 	}
 	
+	public boolean inCheck(int r, int c){
+		
+		ChessPiece removed = CCB[r][c];
+		
+		CCB[r][c] = this;
+		
+		King king = null;
+		
+		if(turn == black){
+			king = (King) blackKing;
+		}
+		else{
+			king = (King) whiteKing;
+		}
+		
+		int rr; int cc;
+		
+		//Going right
+		if(king.col < 7){
+			rr = king.row;
+			cc = king.col+1;
+			while(cc <= 7){
+				if(CCB[rr][cc] != null){
+					break;
+				}
+				cc++;
+			}
+			
+			if(CCB[rr][cc] != null){
+				if(CCB[rr][cc].color != turn){
+					if(CCB[rr][cc] instanceof Queen){
+						CCB[r][c] = removed;
+						CCB[row][col] = this;
+						return true;
+					}
+					if(CCB[rr][cc] instanceof Rook){
+						CCB[r][c] = removed;
+						CCB[row][col] = this;
+						return true;
+					}
+					if(CCB[rr][cc] instanceof King && cc == king.col+1){
+						CCB[r][c] = removed;
+						CCB[row][col] = this;
+						return true;
+					}
+				}
+			}
+
+		}
+		
+		//Going up
+		if(king.row > 0){
+			rr = king.row-1;
+			cc = king.col;
+
+			while(rr >= 0){
+				if(CCB[rr][cc] != null){
+					break;
+				}
+				rr--;
+			}
+			
+			if(CCB[rr][cc] != null){
+				if(CCB[rr][cc].color != turn){
+					if(CCB[rr][cc] instanceof Queen){
+						CCB[r][c] = removed;
+						CCB[row][col] = this;
+						return true;
+					}
+					if(CCB[rr][cc] instanceof Rook){
+						CCB[r][c] = removed;
+						CCB[row][col] = this;
+						return true;
+					}
+					if(CCB[rr][cc] instanceof King && rr == king.row-1){
+						CCB[r][c] = removed;
+						CCB[row][col] = this;
+						return true;
+					}
+				}
+			}
+		}
+		
+		//Going left
+		if(king.col > 0){
+			rr = king.row;
+			cc = king.col-1;
+
+			while(cc >= 0){
+				if(CCB[rr][cc] != null){
+					break;
+				}
+				cc--;
+			}
+
+			if(CCB[rr][cc] != null){
+				if(CCB[rr][cc].color != turn){
+					if(CCB[rr][cc] instanceof Queen){
+						CCB[r][c] = removed;
+						CCB[row][col] = this;
+						return true;
+					}
+					if(CCB[rr][cc] instanceof Rook){
+						CCB[r][c] = removed;
+						CCB[row][col] = this;
+						return true;
+					}
+					if(CCB[rr][cc] instanceof King && cc == king.col-1){
+						CCB[r][c] = removed;
+						CCB[row][col] = this;
+						return true;
+					}
+				}
+			}
+		}
+		
+		//Going down
+		if(king.row < 7){
+			rr = king.row+1;
+			cc = king.col;
+
+			while(rr <= 7){
+				if(CCB[rr][cc] != null){
+					break;
+				}
+				rr++;
+			}
+
+			if(CCB[rr][cc] != null){
+				if(CCB[rr][cc].color != turn){
+					if(CCB[rr][cc] instanceof Queen){
+						CCB[r][c] = removed;
+						CCB[row][col] = this;
+						return true;
+					}
+					if(CCB[rr][cc] instanceof Rook){
+						CCB[r][c] = removed;
+						CCB[row][col] = this;
+						return true;
+					}
+					if(CCB[rr][cc] instanceof King && rr == king.row+1){
+						CCB[r][c] = removed;
+						CCB[row][col] = this;
+						return true;
+					}
+				}
+			}
+		}
+		
+		//Going Up & Right
+		if(king.row > 0 && king.col < 7){
+			rr = king.row-1;
+			cc = king.col+1;
+
+			while(rr >= 0 && cc <= 7){
+				if(CCB[rr][cc] != null){
+					break;
+				}
+				rr--;
+				cc++;
+			}
+			
+			if(CCB[rr][cc] != null){
+				if(CCB[rr][cc].color != turn){
+					if(CCB[rr][cc] instanceof Queen){
+						CCB[r][c] = removed;
+						CCB[row][col] = this;
+						return true;
+					}
+					if(CCB[rr][cc] instanceof Bishop){
+						CCB[r][c] = removed;
+						CCB[row][col] = this;
+						return true;
+					}
+					if(CCB[rr][cc] instanceof King && cc == king.col+1 && rr == king.row-1){
+						CCB[r][c] = removed;
+						CCB[row][col] = this;
+						return true;
+					}
+					if(CCB[rr][cc] instanceof Pawn && cc == king.col+1 && rr == king.row-1){
+						CCB[r][c] = removed;
+						CCB[row][col] = this;
+						return true;
+					}
+				}
+			}
+		}
+		
+		//Going Up & Left
+		if(king.row > 0 && king.col > 0){
+			rr = king.row-1;
+			cc = king.col-1;
+
+			while(rr >= 0 && cc <= 7){
+				if(CCB[rr][cc] != null){
+					break;
+				}
+				rr--;
+				cc--;
+			}
+			
+			if(CCB[rr][cc] != null){
+				if(CCB[rr][cc].color != turn){
+					if(CCB[rr][cc] instanceof Queen){
+						CCB[r][c] = removed;
+						CCB[row][col] = this;
+						return true;
+					}
+					if(CCB[rr][cc] instanceof Bishop){
+						CCB[r][c] = removed;
+						CCB[row][col] = this;
+						return true;
+					}
+					if(CCB[rr][cc] instanceof King && cc == king.col-1 && rr == king.row-1){
+						CCB[r][c] = removed;
+						CCB[row][col] = this;
+						return true;
+					}
+					if(CCB[rr][cc] instanceof Pawn && cc == king.col-1 && rr == king.row-1){
+						CCB[r][c] = removed;
+						CCB[row][col] = this;
+						return true;
+					}
+				}
+			}
+		}
+		
+		//Going Down & Left
+		if(king.row < 7 && king.col > 0){
+			rr = king.row+1;
+			cc = king.col-1;
+
+			while(rr >= 0 && cc <= 7){
+				if(CCB[rr][cc] != null){
+					break;
+				}
+				rr++;
+				cc--;
+			}
+			
+			if(CCB[rr][cc] != null){
+				if(CCB[rr][cc].color != turn){
+					if(CCB[rr][cc] instanceof Queen){
+						CCB[r][c] = removed;
+						CCB[row][col] = this;
+						return true;
+					}
+					if(CCB[rr][cc] instanceof Bishop){
+						CCB[r][c] = removed;
+						CCB[row][col] = this;
+						return true;
+					}
+					if(CCB[rr][cc] instanceof King && cc == king.col-1 && rr == king.row+1){
+						CCB[r][c] = removed;
+						CCB[row][col] = this;
+						return true;
+					}
+					if(CCB[rr][cc] instanceof Pawn && cc == king.col-1 && rr == king.row+1){
+						CCB[r][c] = removed;
+						CCB[row][col] = this;
+						return true;
+					}
+				}
+			}
+		}
+		
+		//Going Down & Right
+		if(king.row < 7 && king.col < 7){
+			rr = king.row+1;
+			cc = king.col+1;
+
+			while(rr >= 0 && cc <= 7){
+				if(CCB[rr][cc] != null){
+					break;
+				}
+				rr++;
+				cc++;
+			}
+			
+			if(CCB[rr][cc] != null){
+				if(CCB[rr][cc].color != turn){
+					if(CCB[rr][cc] instanceof Queen){
+						CCB[r][c] = removed;
+						CCB[row][col] = this;
+						return true;
+					}
+					if(CCB[rr][cc] instanceof Bishop){
+						CCB[r][c] = removed;
+						CCB[row][col] = this;
+						return true;
+					}
+					if(CCB[rr][cc] instanceof King && cc == king.col+1 && rr == king.row+1){
+						CCB[r][c] = removed;
+						CCB[row][col] = this;
+						return true;
+					}
+					if(CCB[rr][cc] instanceof Pawn && cc == king.col+1 && rr == king.row+1){
+						CCB[r][c] = removed;
+						CCB[row][col] = this;
+						return true;
+					}
+				}
+			}
+		}
+		
+		//Knight Cases
+		rr = king.row + 1;
+		cc = king.col + 2;
+		if(rr >= 0 && rr <= 7 && cc >= 0 && cc <= 7){
+			if(CCB[rr][cc] != null){
+				if(CCB[rr][cc].color != turn){
+					if(CCB[rr][cc] instanceof Knight){
+						CCB[r][c] = removed;
+						CCB[row][col] = this;
+						return true;
+					}
+				}
+			}
+		}
+		
+		rr = king.row + 2;
+		cc = king.col + 1;
+		if(rr >= 0 && rr <= 7 && cc >= 0 && cc <= 7){
+			if(CCB[rr][cc] != null){
+				if(CCB[rr][cc].color != turn){
+					if(CCB[rr][cc] instanceof Knight){
+						CCB[r][c] = removed;
+						CCB[row][col] = this;
+						return true;
+					}
+				}
+			}
+		}
+		
+		rr = king.row + 2;
+		cc = king.col - 1;
+		if(rr >= 0 && rr <= 7 && cc >= 0 && cc <= 7){
+			if(CCB[rr][cc] != null){
+				if(CCB[rr][cc].color != turn){
+					if(CCB[rr][cc] instanceof Knight){
+						CCB[r][c] = removed;
+						CCB[row][col] = this;
+						return true;
+					}
+				}
+			}
+		}
+		
+		rr = king.row + 1;
+		cc = king.col - 2;
+		if(rr >= 0 && rr <= 7 && cc >= 0 && cc <= 7){
+			if(CCB[rr][cc] != null){
+				if(CCB[rr][cc].color != turn){
+					if(CCB[rr][cc] instanceof Knight){
+						CCB[r][c] = removed;
+						CCB[row][col] = this;
+						return true;
+					}
+				}
+			}
+		}
+		
+		rr = king.row - 1;
+		cc = king.col + 2;
+		if(rr >= 0 && rr <= 7 && cc >= 0 && cc <= 7){
+			if(CCB[rr][cc] != null){
+				if(CCB[rr][cc].color != turn){
+					if(CCB[rr][cc] instanceof Knight){
+						CCB[r][c] = removed;
+						CCB[row][col] = this;
+						return true;
+					}
+				}
+			}
+		}
+		
+		rr = king.row - 2;
+		cc = king.col + 1;
+		if(rr >= 0 && rr <= 7 && cc >= 0 && cc <= 7){
+			if(CCB[rr][cc] != null){
+				if(CCB[rr][cc].color != turn){
+					if(CCB[rr][cc] instanceof Knight){
+						CCB[r][c] = removed;
+						CCB[row][col] = this;
+						return true;
+					}
+				}
+			}
+		}
+		
+		rr = king.row - 2;
+		cc = king.col - 1;
+		if(rr >= 0 && rr <= 7 && cc >= 0 && cc <= 7){
+			if(CCB[rr][cc] != null){
+				if(CCB[rr][cc].color != turn){
+					if(CCB[rr][cc] instanceof Knight){
+						CCB[r][c] = removed;
+						CCB[row][col] = this;
+						return true;
+					}
+				}
+			}
+		}
+		
+		rr = king.row - 1;
+		cc = king.col - 2;
+		if(rr >= 0 && rr <= 7 && cc >= 0 && cc <= 7){
+			if(CCB[rr][cc] != null){
+				if(CCB[rr][cc].color != turn){
+					if(CCB[rr][cc] instanceof Knight){
+						CCB[r][c] = removed;
+						CCB[row][col] = this;
+						return true;
+					}
+				}
+			}
+		}
+		
+		CCB[r][c] = removed;
+		CCB[row][col] = this;
+		return false;
+	}
+
+	public static boolean checkForKing(){
+		
+		King king = null;
+		
+		if(turn == black){
+			king = (King) blackKing;
+		}
+		else{
+			king = (King) whiteKing;
+		}
+		
+		int rr; int cc;
+		
+		//Going right
+		if(king.col < 7){
+			rr = king.row;
+			cc = king.col+1;
+			while(cc <= 7){
+				if(CCB[rr][cc] != null){
+					break;
+				}
+				cc++;
+			}
+			
+			if(CCB[rr][cc] != null){
+				if(CCB[rr][cc].color != turn){
+					if(CCB[rr][cc] instanceof Queen){
+						return true;
+					}
+					if(CCB[rr][cc] instanceof Rook){
+						return true;
+
+					}
+					if(CCB[rr][cc] instanceof King && cc == king.col+1){
+						return true;
+					}
+				}
+			}
+
+		}
+		
+		//Going up
+		if(king.row > 0){
+			rr = king.row-1;
+			cc = king.col;
+
+			while(rr >= 0){
+				if(CCB[rr][cc] != null){
+					break;
+				}
+				rr--;
+			}
+			
+			if(CCB[rr][cc] != null){
+				if(CCB[rr][cc].color != turn){
+					if(CCB[rr][cc] instanceof Queen){
+						return true;
+					}
+					if(CCB[rr][cc] instanceof Rook){
+						return true;
+					}
+					if(CCB[rr][cc] instanceof King && rr == king.row-1){
+						return true;
+					}
+				}
+			}
+		}
+		
+		//Going left
+		if(king.col > 0){
+			rr = king.row;
+			cc = king.col-1;
+
+			while(cc >= 0){
+				if(CCB[rr][cc] != null){
+					break;
+				}
+				cc--;
+			}
+
+			if(CCB[rr][cc] != null){
+				if(CCB[rr][cc].color != turn){
+					if(CCB[rr][cc] instanceof Queen){
+						return true;
+					}
+					if(CCB[rr][cc] instanceof Rook){
+						return true;
+					}
+					if(CCB[rr][cc] instanceof King && cc == king.col-1){
+						return true;
+					}
+				}
+			}
+		}
+		
+		//Going down
+		if(king.row < 7){
+			rr = king.row+1;
+			cc = king.col;
+
+			while(rr <= 7){
+				if(CCB[rr][cc] != null){
+					break;
+				}
+				rr++;
+			}
+
+			if(CCB[rr][cc] != null){
+				if(CCB[rr][cc].color != turn){
+					if(CCB[rr][cc] instanceof Queen){
+						return true;
+					}
+					if(CCB[rr][cc] instanceof Rook){
+						return true;
+					}
+					if(CCB[rr][cc] instanceof King && rr == king.row+1){
+						return true;
+					}
+				}
+			}
+		}
+		
+		//Going Up & Right
+		if(king.row > 0 && king.col < 7){
+			rr = king.row-1;
+			cc = king.col+1;
+
+			while(rr >= 0 && cc <= 7){
+				if(CCB[rr][cc] != null){
+					break;
+				}
+				rr--;
+				cc++;
+			}
+			
+			if(CCB[rr][cc] != null){
+				if(CCB[rr][cc].color != turn){
+					if(CCB[rr][cc] instanceof Queen){
+						return true;
+					}
+					if(CCB[rr][cc] instanceof Bishop){
+						return true;
+					}
+					if(CCB[rr][cc] instanceof King && cc == king.col+1 && rr == king.row-1){
+						return true;
+					}
+					if(CCB[rr][cc] instanceof Pawn && cc == king.col+1 && rr == king.row-1){
+						return true;
+					}
+				}
+			}
+		}
+		
+		//Going Up & Left
+		if(king.row > 0 && king.col > 0){
+			rr = king.row-1;
+			cc = king.col-1;
+
+			while(rr >= 0 && cc <= 7){
+				if(CCB[rr][cc] != null){
+					break;
+				}
+				rr--;
+				cc--;
+			}
+			
+			if(CCB[rr][cc] != null){
+				if(CCB[rr][cc].color != turn){
+					if(CCB[rr][cc] instanceof Queen){
+						return true;
+					}
+					if(CCB[rr][cc] instanceof Bishop){
+						return true;
+					}
+					if(CCB[rr][cc] instanceof King && cc == king.col-1 && rr == king.row-1){
+						return true;
+					}
+					if(CCB[rr][cc] instanceof Pawn && cc == king.col-1 && rr == king.row-1){
+						return true;
+					}
+				}
+			}
+		}
+		
+		//Going Down & Left
+		if(king.row < 7 && king.col > 0){
+			rr = king.row+1;
+			cc = king.col-1;
+
+			while(rr >= 0 && cc <= 7){
+				if(CCB[rr][cc] != null){
+					break;
+				}
+				rr++;
+				cc--;
+			}
+			
+			if(CCB[rr][cc] != null){
+				if(CCB[rr][cc].color != turn){
+					if(CCB[rr][cc] instanceof Queen){
+						return true;
+					}
+					if(CCB[rr][cc] instanceof Bishop){
+						return true;
+					}
+					if(CCB[rr][cc] instanceof King && cc == king.col-1 && rr == king.row+1){
+						return true;
+					}
+					if(CCB[rr][cc] instanceof Pawn && cc == king.col-1 && rr == king.row+1){
+						return true;
+					}
+				}
+			}
+		}
+		
+		//Going Down & Right
+		if(king.row < 7 && king.col < 7){
+			rr = king.row+1;
+			cc = king.col+1;
+
+			while(rr >= 0 && cc <= 7){
+				if(CCB[rr][cc] != null){
+					break;
+				}
+				rr++;
+				cc++;
+			}
+			
+			if(CCB[rr][cc] != null){
+				if(CCB[rr][cc].color != turn){
+					if(CCB[rr][cc] instanceof Queen){
+						return true;
+					}
+					if(CCB[rr][cc] instanceof Bishop){
+						return true;
+					}
+					if(CCB[rr][cc] instanceof King && cc == king.col+1 && rr == king.row+1){
+						return true;
+					}
+					if(CCB[rr][cc] instanceof Pawn && cc == king.col+1 && rr == king.row+1){
+						return true;
+					}
+				}
+			}
+		}
+		
+		//Knight Cases
+		rr = king.row + 1;
+		cc = king.col + 2;
+		if(rr >= 0 && rr <= 7 && cc >= 0 && cc <= 7){
+			if(CCB[rr][cc] != null){
+				if(CCB[rr][cc].color != turn){
+					if(CCB[rr][cc] instanceof Knight){
+						return true;
+					}
+				}
+			}
+		}
+		
+		rr = king.row + 2;
+		cc = king.col + 1;
+		if(rr >= 0 && rr <= 7 && cc >= 0 && cc <= 7){
+			if(CCB[rr][cc] != null){
+				if(CCB[rr][cc].color != turn){
+					if(CCB[rr][cc] instanceof Knight){
+						return true;
+					}
+				}
+			}
+		}
+		
+		rr = king.row + 2;
+		cc = king.col - 1;
+		if(rr >= 0 && rr <= 7 && cc >= 0 && cc <= 7){
+			if(CCB[rr][cc] != null){
+				if(CCB[rr][cc].color != turn){
+					if(CCB[rr][cc] instanceof Knight){
+						return true;
+					}
+				}
+			}
+		}
+		
+		rr = king.row + 1;
+		cc = king.col - 2;
+		if(rr >= 0 && rr <= 7 && cc >= 0 && cc <= 7){
+			if(CCB[rr][cc] != null){
+				if(CCB[rr][cc].color != turn){
+					if(CCB[rr][cc] instanceof Knight){
+						return true;
+					}
+				}
+			}
+		}
+		
+		rr = king.row - 1;
+		cc = king.col + 2;
+		if(rr >= 0 && rr <= 7 && cc >= 0 && cc <= 7){
+			if(CCB[rr][cc] != null){
+				if(CCB[rr][cc].color != turn){
+					if(CCB[rr][cc] instanceof Knight){
+						return true;
+					}
+				}
+			}
+		}
+		
+		rr = king.row - 2;
+		cc = king.col + 1;
+		if(rr >= 0 && rr <= 7 && cc >= 0 && cc <= 7){
+			if(CCB[rr][cc] != null){
+				if(CCB[rr][cc].color != turn){
+					if(CCB[rr][cc] instanceof Knight){
+						return true;
+					}
+				}
+			}
+		}
+		
+		rr = king.row - 2;
+		cc = king.col - 1;
+		if(rr >= 0 && rr <= 7 && cc >= 0 && cc <= 7){
+			if(CCB[rr][cc] != null){
+				if(CCB[rr][cc].color != turn){
+					if(CCB[rr][cc] instanceof Knight){
+						return true;
+					}
+				}
+			}
+		}
+		
+		rr = king.row - 1;
+		cc = king.col - 2;
+		if(rr >= 0 && rr <= 7 && cc >= 0 && cc <= 7){
+			if(CCB[rr][cc] != null){
+				if(CCB[rr][cc].color != turn){
+					if(CCB[rr][cc] instanceof Knight){
+						return true;
+					}
+				}
+			}
+		}
+		
+		return false;
+		
+	}
+	
+	
 	public static boolean inCheck(int or, int oc, int r, int c){
+		
 		
 		for (int row = 0; row < 8; row++){
 			for (int col = 0; col < 8; col++){
@@ -229,17 +1010,4 @@ public abstract class ChessPiece {
 }
 
 
-/*
- * checkmate checking code
- * for (int row = 0; row < 8; row++){
-			for (int col = 0; col < 8; col++){
-				if (ChessBoard[row][col] != null){
-					//if there is a piece check its possible moves and see if it can take the king
-					//else just move on to the next piece
-					
-					
-				}
-			}
-		}
- */
 

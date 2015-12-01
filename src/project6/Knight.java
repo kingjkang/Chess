@@ -32,10 +32,14 @@ public class Knight extends ChessPiece{
 			return false;
 		}
 		
-		if(inCheck(this.row, this.col, r, c)){
+//		if(inCheck(this.row, this.col, r, c)){
+//			return false;
+//		}
+		
+		if(inCheck(r, c)){
+			System.out.println("Cannot move this because King would be in Check!");
 			return false;
 		}
-		
 		
 		if(ChessBoard[r][c] == null || ChessBoard[r][c].color != color){
 			if (r == (row+1) && c == (col-2)){

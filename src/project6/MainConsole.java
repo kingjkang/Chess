@@ -44,6 +44,17 @@ public class MainConsole {
 		
 		while (true){
 			
+			if(ChessPiece.checkForKing()){
+				String color = null;
+				if(ChessPiece.turn){
+					color = "Black ";
+				}
+				else{
+					color = "White ";
+				}
+				System.out.println(color + "King is in Check!");
+			}
+			
 			orow = kb.nextInt();
 			ocol = kb.nextInt();
 			
