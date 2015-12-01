@@ -952,7 +952,6 @@ public abstract class ChessPiece {
 		
 	}
 	
-	
 	public static boolean inCheck(int or, int oc, int r, int c){
 		
 		
