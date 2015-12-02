@@ -54,6 +54,9 @@ public class Main extends Application{
 
 	Stage staplesCenter;
 	Scene tay1989;
+	Stage ATTStadium = new Stage();
+	Scene georgeStrait;
+	BorderPane gg;
 	BorderPane universe;
 	BorderPane borderPaneCenter, borderPaneRight, borderPaneLeft, borderPaneTop, borderPaneBottom;
 	Image blank = new Image("file:emptyPiece.png");
@@ -66,12 +69,6 @@ public class Main extends Application{
 	int printSR = 0;
 	int printSC = 0;
 	//http://www.javacodegeeks.com/2013/10/javafx-2-how-to-load-image.html
-	
-	public void getImages(){
-		//Image piece = new Image();
-		//var rootDir; 
-		//rootDir = "{__DIR__}".replaceAll("%20", " ");
-	}
 	
 	public GridPane createBoard(){
 		GridPane board = new GridPane();
@@ -125,16 +122,19 @@ public class Main extends Application{
 								if(ChessPiece.checkForKing()){
 									if(checkMate){
 										System.out.println("CheckMate! lol won.");
-										//break;
+										staplesCenter.close();
+										showGG();
+										
 									}
 									else{
-										System.out.println(color + "King is in Check!");
+										System.out.println(ChessPiece.printColor + "King is in Check!");
 									}
 								}
 								
 								if(checkMate){
 									System.out.println("Stalemate! No valid move can be made. It is a draw.");
-									//break;
+									staplesCenter.close();
+									//showTie
 								}
 								ChessPiece.movePiece(printIR, printIC, printSR, printSC);
 								System.out.println(ChessPiece.printColor + " Turn");
@@ -178,16 +178,17 @@ public class Main extends Application{
 								if(ChessPiece.checkForKing()){
 									if(checkMate){
 										System.out.println("CheckMate! lol won.");
-										System.exit(0);
+										staplesCenter.close();
+										showGG();
 									}
 									else{
-										System.out.println(color + "King is in Check!");
+										System.out.println(ChessPiece.printColor + "King is in Check!");
 									}
 								}
 								
 								if(checkMate){
 									System.out.println("Stalemate! No valid move can be made. It is a draw.");
-									System.exit(0);
+									staplesCenter.close();
 								}
 								ChessPiece.movePiece(printIR, printIC, printSR, printSC);
 								System.out.println(ChessPiece.printColor + " Turn");
@@ -211,7 +212,16 @@ public class Main extends Application{
 		return board;
 	}
 	
-	
+	public void showGG(){
+		gg = new BorderPane();
+		ATTStadium.setTitle("Game Over");
+		Label printGG = new Label(ChessPiece.printColor + " king is in check");
+		gg.setCenter(printGG);
+		georgeStrait = new Scene(gg, 300, 300);
+		ATTStadium.centerOnScreen();
+		ATTStadium.setScene(georgeStrait);
+		ATTStadium.show();
+	}
 	
 	@Override
 	public void start(Stage primaryStage) {

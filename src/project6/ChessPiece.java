@@ -23,7 +23,7 @@ public abstract class ChessPiece {
 	public static boolean turn = white;
 	
 	static Boolean turnColor = true;
-	static String printColor;
+	static String printColor = "white";
 	
 	protected int row;
 	protected int col;
