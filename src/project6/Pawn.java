@@ -3,7 +3,17 @@ package project6;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
+import javafx.stage.Stage;
 
 public class Pawn extends ChessPiece{
 	
@@ -102,13 +112,15 @@ public class Pawn extends ChessPiece{
 		
 		boolean validPiece = false;
 		if(row == 7 || row == 0){
-			Scanner kb = new Scanner(System.in);
-			while(!validPiece){
-				System.out.print("What Piece> ");
-				String piece = kb.nextLine();
-				validPiece = evolve(piece);
-				if(!validPiece){
-					System.out.println(piece + " is not a valid piece.");
+			if (!GUI){
+				Scanner kb = new Scanner(System.in);
+				while(!validPiece){
+					System.out.print("What Piece> ");
+					String piece = kb.nextLine();
+					validPiece = evolve(piece);
+					if(!validPiece){
+						System.out.println(piece + " is not a valid piece.");
+					}
 				}
 			}
 		}
