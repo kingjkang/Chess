@@ -28,6 +28,7 @@ import javafx.scene.control.Control;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseDragEvent;
 import javafx.scene.layout.BorderPane;
@@ -52,10 +53,11 @@ public class Main extends Application{
 	Scene tay1989;
 	BorderPane universe;
 	BorderPane borderPaneCenter, borderPaneRight, borderPaneLeft, borderPaneTop, borderPaneBottom;
-	ImageView whiteRook;
+	Image blank = new Image("file:emptyPiece.png");
 	
 	boolean initialPress = false;
 	boolean secondaryPress = false;
+	boolean checkMate = false;
 	int printIR = 0;
 	int printIC = 0;
 	int printSR = 0;
@@ -84,11 +86,12 @@ public class Main extends Application{
 				}
 				spot.setStyle("-fx-background-color: "+color+";");
 				String pieceToAdd;
+				Image picToAdd;
 				//whwen the board is initialized and there is nothing there what do i print
 				if (ChessPiece.ChessBoard[row][col] == null){
-					pieceToAdd = "empty";
+					picToAdd = blank;
 					board.add(spot, col, row);
-					addButton = new Button(pieceToAdd);
+					addButton = new Button("", new ImageView(picToAdd));
 					//not sure exaclty if this gets rid of the button or makes the button the same color
 					addButton.setStyle("-fx-background-color: "+color+";");
 					board.add(addButton, col, row);
@@ -113,19 +116,36 @@ public class Main extends Application{
 							if (initialPress == true && secondaryPress == true){
 								initialPress = false;
 								secondaryPress = false;
-								ChessPiece.movePiece(printIR, printIC, printSR, printSC);
+								
+								checkMate = ChessPiece.checkMate();
+								
 								if(ChessPiece.checkForKing()){
-									System.out.println(color + "King is in Check!");
+									if(checkMate){
+										System.out.println("CheckMate! lol won.");
+										//break;
+									}
+									else{
+										System.out.println(color + "King is in Check!");
+									}
 								}
+								
+								if(checkMate){
+									System.out.println("Stalemate! No valid move can be made. It is a draw.");
+									//break;
+								}
+								ChessPiece.movePiece(printIR, printIC, printSR, printSC);
+								System.out.println(ChessPiece.printColor + " Turn");
 								universe.setCenter(createBoard());
 							}
 						}
 					});
 				}
 				else {
-					pieceToAdd = ChessPiece.ChessBoard[row][col].toString();
+					picToAdd = ChessPiece.ChessBoard[row][col].toImage();
+					//pieceToAdd = ChessPiece.ChessBoard[row][col].toString();
 					board.add(spot, col, row);
-					addButton = new Button(pieceToAdd);
+					addButton = new Button("", new ImageView(picToAdd));
+					//addButton = new Button(pieceToAdd);
 					//not sure exaclty if this gets rid of the button or makes the button the same color
 					addButton.setStyle("-fx-background-color: "+color+";");
 					board.add(addButton, col, row);
@@ -150,10 +170,24 @@ public class Main extends Application{
 							if (initialPress == true && secondaryPress == true){
 								initialPress = false;
 								secondaryPress = false;
-								ChessPiece.movePiece(printIR, printIC, printSR, printSC);
+								checkMate = ChessPiece.checkMate();
+								
 								if(ChessPiece.checkForKing()){
-									System.out.println(color + "King is in Check!");
+									if(checkMate){
+										System.out.println("CheckMate! lol won.");
+										//break;
+									}
+									else{
+										System.out.println(color + "King is in Check!");
+									}
 								}
+								
+								if(checkMate){
+									System.out.println("Stalemate! No valid move can be made. It is a draw.");
+									//break;
+								}
+								ChessPiece.movePiece(printIR, printIC, printSR, printSC);
+								System.out.println(ChessPiece.printColor + " Turn");
 								universe.setCenter(createBoard());
 							}
 						}
@@ -165,9 +199,11 @@ public class Main extends Application{
 			}
 		}
 		for (int i = 0; i < size; i++) {
-            board.getColumnConstraints().add(new ColumnConstraints(5, Control.USE_COMPUTED_SIZE, Double.POSITIVE_INFINITY, Priority.ALWAYS, HPos.CENTER, true));
-            board.getRowConstraints().add(new RowConstraints(5, Control.USE_COMPUTED_SIZE, Double.POSITIVE_INFINITY, Priority.ALWAYS, VPos.CENTER, true));
-        }
+            //board.getColumnConstraints().add(new ColumnConstraints(5, Control.USE_COMPUTED_SIZE, Double.POSITIVE_INFINITY, Priority.ALWAYS, HPos.CENTER, true));
+            //board.getRowConstraints().add(new RowConstraints(5, Control.USE_COMPUTED_SIZE, Double.POSITIVE_INFINITY, Priority.ALWAYS, VPos.CENTER, true));
+			board.getColumnConstraints().add(new ColumnConstraints(5, 300, 300, Priority.ALWAYS, HPos.CENTER, true));
+            board.getRowConstraints().add(new RowConstraints(5, 300, 300, Priority.ALWAYS, VPos.CENTER, true));
+		}
 		
 		return board;
 	}
@@ -198,7 +234,7 @@ public class Main extends Application{
 		universe.setCenter(createBoard());
 		//universe.setCenter(printBoard());
 		
-		tay1989 = new Scene(universe, 500, 500);
+		tay1989 = new Scene(universe, 800, 800);
 		
 		staplesCenter.centerOnScreen();
 		staplesCenter.setScene(tay1989);

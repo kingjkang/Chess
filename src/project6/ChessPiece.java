@@ -2,6 +2,8 @@ package project6;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+import javafx.scene.image.Image;
+
 public abstract class ChessPiece {
 	
 	
@@ -26,9 +28,14 @@ public abstract class ChessPiece {
 	protected int col;
 	
 	protected String label = "C";
+	protected Image piece;
 	
 	public String toString(){
 		return label;
+	}
+	
+	public Image toImage(){
+		return piece;
 	}
 	
 	public ArrayList<Move> Moves = new ArrayList<Move>();

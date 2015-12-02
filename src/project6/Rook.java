@@ -2,8 +2,15 @@ package project6;
 
 import java.util.ArrayList;
 
-public class Rook extends ChessPiece{
+import javafx.scene.image.Image;
 
+public class Rook extends ChessPiece{
+	
+	//Image blackRook = new Image(getClass().getResourceAsStream("file:blackRook.png"));
+	//Image whiteRook = new Image(getClass().getResourceAsStream("file:whiteRook.png"));
+	Image blackRook = new Image("file:blackRook.png");
+	Image whiteRook = new Image("file:whiteRook.png");
+	
 	private boolean firstStepDone;
 	
 	public Rook(int r, int c, boolean color){
@@ -14,9 +21,11 @@ public class Rook extends ChessPiece{
 		ChessBoard[row][col] = this;
 		if(color == black){
 			label = "R";
+			piece = blackRook;
 		}
 		else{
 			label = "r";
+			piece = whiteRook;
 		}
 	}
 	
