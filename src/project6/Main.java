@@ -175,7 +175,7 @@ public class Main extends Application{
 								if(ChessPiece.checkForKing()){
 									if(checkMate){
 										System.out.println("CheckMate! lol won.");
-										//break;
+										System.exit(0);
 									}
 									else{
 										System.out.println(color + "King is in Check!");
@@ -184,7 +184,7 @@ public class Main extends Application{
 								
 								if(checkMate){
 									System.out.println("Stalemate! No valid move can be made. It is a draw.");
-									//break;
+									System.exit(0);
 								}
 								ChessPiece.movePiece(printIR, printIC, printSR, printSC);
 								System.out.println(ChessPiece.printColor + " Turn");
