@@ -134,6 +134,7 @@ public class Main extends Application{
 								if(checkMate){
 									System.out.println("Stalemate! No valid move can be made. It is a draw.");
 									staplesCenter.close();
+									showStalemate();
 									//showTie
 								}
 								ChessPiece.movePiece(printIR, printIC, printSR, printSC);
@@ -189,6 +190,7 @@ public class Main extends Application{
 								if(checkMate){
 									System.out.println("Stalemate! No valid move can be made. It is a draw.");
 									staplesCenter.close();
+									showStalemate();
 								}
 								ChessPiece.movePiece(printIR, printIC, printSR, printSC);
 								System.out.println(ChessPiece.printColor + " Turn");
@@ -216,6 +218,17 @@ public class Main extends Application{
 		gg = new BorderPane();
 		ATTStadium.setTitle("Game Over");
 		Label printGG = new Label(ChessPiece.printColor + " king is in check");
+		gg.setCenter(printGG);
+		georgeStrait = new Scene(gg, 300, 300);
+		ATTStadium.centerOnScreen();
+		ATTStadium.setScene(georgeStrait);
+		ATTStadium.show();
+	}
+	
+	public void showStalemate(){
+		gg = new BorderPane();
+		ATTStadium.setTitle("Game Over");
+		Label printGG = new Label("Stalemate");
 		gg.setCenter(printGG);
 		georgeStrait = new Scene(gg, 300, 300);
 		ATTStadium.centerOnScreen();
