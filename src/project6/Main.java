@@ -48,6 +48,9 @@ import javafx.util.Duration;
 import javafx.scene.shape.*;
 
 public class Main extends Application{
+	
+	/*
+	 * */
 
 	Stage staplesCenter;
 	Scene tay1989;
@@ -247,7 +250,7 @@ public class Main extends Application{
 		
 		//System.out.println("Chess");
 		System.out.println("Welcome to Wizards Chess");
-		System.out.println("white turn");
+		System.out.println("White Turn");
 		launch(args);
 	}
 

@@ -36,7 +36,7 @@ public class MainConsole {
 	public static void main(String[] args) {
 
 		Scanner kb = new Scanner(System.in);
-		int ocol, orow, ncol, nrow;
+		int ocol = 0, orow = 0, ncol = 0, nrow = 0;
 		
 		ChessPiece.initializeBoard();
 		printBoard();
@@ -76,13 +76,17 @@ public class MainConsole {
 			
 			//System.out.print("Enter coordinates of the piece you want to move and press Enter> ");
 			
+
 			orow = kb.nextInt();
 			ocol = kb.nextInt();
+
 			
 			//System.out.print("Enter coordinates to desired location and press Enter>           ");
 			
 			nrow = kb.nextInt();
 			ncol = kb.nextInt();
+
+			
 			
 			ChessPiece.movePiece(orow, ocol, nrow, ncol);
 			
