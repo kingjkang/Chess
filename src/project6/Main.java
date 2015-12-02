@@ -56,6 +56,9 @@ public class Main extends Application{
 	Scene tay1989;
 	Stage ATTStadium = new Stage();
 	Scene georgeStrait;
+	Stage Zilker;
+	Scene ACL;
+	GridPane bumblebee;
 	BorderPane gg;
 	BorderPane universe;
 	BorderPane borderPaneCenter, borderPaneRight, borderPaneLeft, borderPaneTop, borderPaneBottom;
@@ -138,6 +141,88 @@ public class Main extends Application{
 									//showTie
 								}
 								ChessPiece.movePiece(printIR, printIC, printSR, printSC);
+								if (ChessPiece.ChessBoard[printSR][printSC] instanceof Pawn){
+									if (printSR == 0 || printSR == 7){
+										Pawn pawn = (Pawn) ChessPiece.ChessBoard[printSR][printSC];
+										Zilker = new Stage();
+										bumblebee = new GridPane();
+										bumblebee.setHgap(10);
+										bumblebee.setVgap(10);
+										bumblebee.setPadding(new Insets(25, 25, 25, 25));
+										
+										Zilker.setTitle("Evolution");
+										String winner = "";
+										Label printGG = new Label("Whaat? It's Evolving! \nPlease select the type of the piece you would like to transform into");
+										bumblebee.setConstraints(printGG, 0, 0);
+										
+										Button Q = new Button("Queen");
+										bumblebee.setConstraints(Q, 0, 2);
+										
+										Button R = new Button("Rook");
+										bumblebee.setConstraints(R, 0, 4);
+										
+										Button B = new Button("Bishop");
+										bumblebee.setConstraints(B, 0, 6);
+										
+										Button K = new Button("Knight");
+										bumblebee.setConstraints(K, 0, 8);
+										
+										bumblebee.getChildren().addAll(printGG, Q, R, B, K);
+										
+										bumblebee.setAlignment(Pos.CENTER);
+										ACL = new Scene(bumblebee, 600, 300);
+										Zilker.centerOnScreen();
+										Zilker.setScene(ACL);
+										Zilker.show();
+										Q.setOnAction(new EventHandler<ActionEvent>() {
+
+											@Override
+											public void handle(ActionEvent event) {
+												pawn.evolve("Queen");
+												universe.setCenter(createBoard());
+												Zilker.close();
+												
+											}
+											
+										});
+										
+										R.setOnAction(new EventHandler<ActionEvent>() {
+
+											@Override
+											public void handle(ActionEvent event) {
+												pawn.evolve("Rook");
+												universe.setCenter(createBoard());
+												Zilker.close();
+												
+											}
+											
+										});
+										
+										B.setOnAction(new EventHandler<ActionEvent>() {
+
+											@Override
+											public void handle(ActionEvent event) {
+												pawn.evolve("Bishop");
+												universe.setCenter(createBoard());
+												Zilker.close();
+												
+											}
+											
+										});
+										
+										K.setOnAction(new EventHandler<ActionEvent>() {
+
+											@Override
+											public void handle(ActionEvent event) {
+												pawn.evolve("Knight");
+												universe.setCenter(createBoard());
+												Zilker.close();
+												
+											}
+											
+										});
+									}
+								}
 								System.out.println(ChessPiece.printColor + " Turn");
 								universe.setCenter(createBoard());
 							}
@@ -194,6 +279,88 @@ public class Main extends Application{
 									showStalemate();
 								}
 								ChessPiece.movePiece(printIR, printIC, printSR, printSC);
+								if (ChessPiece.ChessBoard[printSR][printSC] instanceof Pawn){
+									if (printSR == 0 || printSR == 7){
+										Pawn pawn = (Pawn) ChessPiece.ChessBoard[printSR][printSC];
+										Zilker = new Stage();
+										bumblebee = new GridPane();
+										bumblebee.setHgap(10);
+										bumblebee.setVgap(10);
+										bumblebee.setPadding(new Insets(25, 25, 25, 25));
+										
+										Zilker.setTitle("Evolution");
+										String winner = "";
+										Label printGG = new Label("Whaat? It's Evolving! \nPlease select the type of the piece you would like to transform into");
+										bumblebee.setConstraints(printGG, 0, 0);
+										
+										Button Q = new Button("Queen");
+										bumblebee.setConstraints(Q, 0, 2);
+										
+										Button R = new Button("Rook");
+										bumblebee.setConstraints(R, 0, 4);
+										
+										Button B = new Button("Bishop");
+										bumblebee.setConstraints(B, 0, 6);
+										
+										Button K = new Button("Knight");
+										bumblebee.setConstraints(K, 0, 8);
+										
+										bumblebee.getChildren().addAll(printGG, Q, R, B, K);
+										
+										bumblebee.setAlignment(Pos.CENTER);
+										ACL = new Scene(bumblebee, 600, 300);
+										Zilker.centerOnScreen();
+										Zilker.setScene(ACL);
+										Zilker.show();
+										Q.setOnAction(new EventHandler<ActionEvent>() {
+
+											@Override
+											public void handle(ActionEvent event) {
+												pawn.evolve("Queen");
+												universe.setCenter(createBoard());
+												Zilker.close();
+												
+											}
+											
+										});
+										
+										R.setOnAction(new EventHandler<ActionEvent>() {
+
+											@Override
+											public void handle(ActionEvent event) {
+												pawn.evolve("Rook");
+												universe.setCenter(createBoard());
+												Zilker.close();
+												
+											}
+											
+										});
+										
+										B.setOnAction(new EventHandler<ActionEvent>() {
+
+											@Override
+											public void handle(ActionEvent event) {
+												pawn.evolve("Bishop");
+												universe.setCenter(createBoard());
+												Zilker.close();
+												
+											}
+											
+										});
+										
+										K.setOnAction(new EventHandler<ActionEvent>() {
+
+											@Override
+											public void handle(ActionEvent event) {
+												pawn.evolve("Knight");
+												universe.setCenter(createBoard());
+												Zilker.close();
+												
+											}
+											
+										});
+									}
+								}
 								System.out.println(ChessPiece.printColor + " Turn");
 								universe.setCenter(createBoard());
 							}
