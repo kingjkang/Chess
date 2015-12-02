@@ -124,7 +124,7 @@ public class Main extends Application{
 										System.out.println("CheckMate! lol won.");
 										staplesCenter.close();
 										showGG();
-										
+										checkMate = false;
 									}
 									else{
 										System.out.println(ChessPiece.printColor + "King is in Check!");
@@ -181,6 +181,7 @@ public class Main extends Application{
 										System.out.println("CheckMate! lol won.");
 										staplesCenter.close();
 										showGG();
+										checkMate = false;
 									}
 									else{
 										System.out.println(ChessPiece.printColor + "King is in Check!");
@@ -217,7 +218,14 @@ public class Main extends Application{
 	public void showGG(){
 		gg = new BorderPane();
 		ATTStadium.setTitle("Game Over");
-		Label printGG = new Label(ChessPiece.printColor + " king is in check");
+		String winner = "";
+		if (ChessPiece.printColor == "white"){
+			winner = "black";
+		}
+		else {
+			winner = "white";
+		}
+		Label printGG = new Label("Checkmate: " + ChessPiece.printColor + " king is in checkmate \n" + winner + " wins!");
 		gg.setCenter(printGG);
 		georgeStrait = new Scene(gg, 300, 300);
 		ATTStadium.centerOnScreen();
