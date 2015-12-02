@@ -211,20 +211,7 @@ public class Main extends Application{
 		return board;
 	}
 	
-	public GridPane printBoard(){
-		GridPane pieces = new GridPane();
-		//create buttons with a piece character on it 
-		//Button addStartButton = new Button("Start Simulation");
-		//GridPane.setConstraints(addStartButton, 1, row2);
-		//for (int row = 0; row < 8; row++){
-		//	for (int col = 0; col < 8; col++){
-				Button addButton = new Button(ChessPiece.ChessBoard[0][0].toString());
-				GridPane.setConstraints(addButton, 0, 0);
-				pieces.getChildren().add(addButton);
-		//	}
-		//}
-		return pieces;
-	}
+	
 	
 	@Override
 	public void start(Stage primaryStage) {
