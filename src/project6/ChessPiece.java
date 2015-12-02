@@ -55,48 +55,6 @@ public abstract class ChessPiece {
 		}
 	}
 	
-	public static void checkMove(int orow, int ocol, int nrow, int ncol){
-		CheckChessBoard[orow][ocol].row = nrow;
-		CheckChessBoard[orow][ocol].col = ncol;
-		CheckChessBoard[nrow][ncol] = CheckChessBoard[orow][ocol];
-		CheckChessBoard[orow][ocol] = null;
-	}
-	
-	public static void checkMovePiece(int or, int oc, int nr, int nc){
-
-		if(CheckChessBoard[or][oc] != null){
-			if(CheckChessBoard[or][oc].color == turn){
-				//CheckChessBoard[or][oc].checkMove(nr, nc);
-				if(CheckChessBoard[or][oc] == null){
-					turn = !turn;
-				}
-			}
-			else{
-				System.out.println("wrong turn!");
-			}
-		}
-		else{
-			System.out.println("no piece at specified coordinates, try again!");
-		}
-
-	}
-	
-	public static void moveDirectly(int orow, int ocol, int nrow, int ncol){
-		if (ChessBoard[orow][ocol] == null){
-			System.out.println("invalid move, try again");
-		}
-		else if (ChessBoard[orow][ocol].isValidMove(nrow, ncol)){	
-			ChessBoard[orow][ocol].row = nrow;
-			ChessBoard[orow][ocol].col = ncol;
-			ChessBoard[nrow][ncol] = ChessBoard[orow][ocol];
-			ChessBoard[orow][ocol] = null;
-		}
-		else {
-			System.out.println(ChessBoard[orow][ocol].toString());
-			System.out.println("invalid move, try again");
-		}
-	}
-	
 	public static void movePiece(int or, int oc, int nr, int nc){
 		
 		if(ChessBoard[or][oc] != null){
@@ -131,9 +89,7 @@ public abstract class ChessPiece {
 	public static ChessPiece[][] ChessBoard = new ChessPiece[8][8];
 	
 	public static ChessPiece[][] CCB = new ChessPiece[8][8];
-	
-	public static ChessPiece[][] CheckChessBoard = new ChessPiece[8][8];
-	
+		
 	public static ArrayList<ChessPiece> whites = new ArrayList<ChessPiece>();
 	
 	public static ArrayList<ChessPiece> blacks = new ArrayList<ChessPiece>();
@@ -1027,60 +983,6 @@ public abstract class ChessPiece {
 		
 	}
 	
-	public static boolean inCheck(int or, int oc, int r, int c){
-		
-		
-		for (int row = 0; row < 8; row++){
-			for (int col = 0; col < 8; col++){
-				CheckChessBoard[row][col] = ChessBoard[row][col];
-			}
-		}
-		//System.out.println(CheckChessBoard[0][0].toString());
-		//System.out.println(or + "," + oc + "," + r + "," + c);
-		checkMove(or, oc, r, c);
-		int opp = 0;
-		
-		//System.out.println("code getting here");
-		
-		King king = null;
-		if(turn == black){
-			king = (King) ChessPiece.blackKing;
-			//if we are checking the black king then we look to see if the whites can put him in check 
-			Iterator<ChessPiece> itr = whites.iterator();
-			while (itr.hasNext()){
-				ChessPiece checking = itr.next();
-				System.out.println("toCheckB"+checking.toString());
-				if (CheckChessBoard[checking.row][checking.col].isValidMove(king.row, king.col)){
-					return true;
-				}
-				
-			}
-		}
-		else{
-			king = (King) ChessPiece.whiteKing;
-			Iterator<ChessPiece> itr = blacks.iterator();
-			while (itr.hasNext()){
-				ChessPiece checking = itr.next();
-				System.out.println("toCheckW"+checking.toString());
-				if (CheckChessBoard[checking.row][checking.col].isValidMove(king.row, king.col)){
-					System.out.println("shouldent print rn ");
-					return true;
-				}
-			}
-		}
-		
-		/*
-		System.out.println("breaking here null pointer");
-		System.out.println(r + "," + c + "," +  king.row + "," + king.col);
-		//null pointer because the piece hasnt moved yet
-		if (ChessBoard[r][c].isValidMove(king.row, king.col)){
-			System.out.println("King in Check");
-			return true;
-		}
-		*/
-		
-		return false;
-	}
 }
 
 

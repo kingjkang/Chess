@@ -255,9 +255,9 @@ public class Queen extends ChessPiece{
 		int rr;
 		int cc;
 		
-		rr = row;
-		cc = col;
-		while(rr >= 0 && cc <= 7){
+		rr = row - 1;
+		cc = col + 1;
+		while(rr >= 0 && rr <= 7 && cc >= 0 && cc <= 7){
 			if(ChessBoard[rr][cc] != null){
 				if(isValidMove(rr, cc)){
 					Moves.add(new Move(rr, cc));
@@ -271,9 +271,9 @@ public class Queen extends ChessPiece{
 			cc++;
 		}
 		
-		rr = row;
-		cc = col;
-		while(rr >= 0 && cc <= 7){
+		rr = row - 1;
+		cc = col - 1;
+		while(rr >= 0 && rr <= 7 && cc >= 0 && cc <= 7){
 			if(ChessBoard[rr][cc] != null){
 				if(isValidMove(rr, cc)){
 					Moves.add(new Move(rr, cc));
@@ -287,9 +287,9 @@ public class Queen extends ChessPiece{
 			cc--;
 		}
 		
-		rr = row;
-		cc = col;
-		while(rr >= 0 && cc <= 7){
+		rr = row + 1;
+		cc = col - 1;
+		while(rr >= 0 && rr <= 7 && cc >= 0 && cc <= 7){
 			if(ChessBoard[rr][cc] != null){
 				if(isValidMove(rr, cc)){
 					Moves.add(new Move(rr, cc));
@@ -303,9 +303,9 @@ public class Queen extends ChessPiece{
 			cc--;
 		}
 		
-		rr = row;
-		cc = col;
-		while(rr >= 0 && cc <= 7){
+		rr = row + 1;
+		cc = col + 1;
+		while(rr >= 0 && rr <= 7 && cc >= 0 && cc <= 7){
 			if(ChessBoard[rr][cc] != null){
 				if(isValidMove(rr, cc)){
 					Moves.add(new Move(rr, cc));
