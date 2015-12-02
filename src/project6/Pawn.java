@@ -3,7 +3,14 @@ package project6;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import javafx.scene.image.Image;
+
 public class Pawn extends ChessPiece{
+	
+	//Image blackPawn = new Image(getClass().getResourceAsStream("file:blackPawn.png"));
+	//Image whitePawn = new Image(getClass().getResourceAsStream("file:whitePawn.png"));
+	Image blackPawn = new Image("file:blackPawn.png");
+	Image whitePawn = new Image("file:whitePawn.png");
 	
 	private boolean firstStepDone;
 
@@ -16,9 +23,11 @@ public class Pawn extends ChessPiece{
 		firstStepDone = false;
 		if(color == black){
 			label = "P";
+			piece = blackPawn;
 		}
 		else{
 			label = "p";
+			piece = whitePawn;
 		}
 	}
 	

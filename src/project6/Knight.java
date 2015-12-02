@@ -2,7 +2,14 @@ package project6;
 
 import java.util.ArrayList;
 
+import javafx.scene.image.Image;
+
 public class Knight extends ChessPiece{
+	
+	//Image blackKnight = new Image(getClass().getResourceAsStream("file:blackKnight.png"));
+	//Image whiteKnight = new Image(getClass().getResourceAsStream("file:whiteKnight.png"));
+	Image blackKnight = new Image("file:blackKnight.png");
+	Image whiteKnight = new Image("file:whiteKnight.png");
 
 	public Knight(int r, int c, boolean color){
 		row = r;
@@ -12,9 +19,11 @@ public class Knight extends ChessPiece{
 		ChessBoard[row][col] = this;
 		if(color == black){
 			label = "H";
+			piece = blackKnight;
 		}
 		else{
 			label = "h";
+			piece = whiteKnight;
 		}
 	}
 	

@@ -2,7 +2,14 @@ package project6;
 
 import java.util.ArrayList;
 
+import javafx.scene.image.Image;
+
 public class Bishop extends ChessPiece{
+	
+	//Image blackBishop = new Image(getClass().getResourceAsStream("file:blackBishop.png"));
+	//Image whiteBishop = new Image(getClass().getResourceAsStream("file:whiteBishop.png"));
+	Image blackBishop = new Image("file:blackBishop.png");
+	Image whiteBishop = new Image("file:whiteBishop.png");
 	
 	private static int upRight = 1;
 	private static int upLeft = 2;
@@ -17,9 +24,11 @@ public class Bishop extends ChessPiece{
 		ChessBoard[row][col] = this;
 		if(color == black){
 			label = "B";
+			piece = blackBishop;
 		}
 		else{
 			label = "b";
+			piece = whiteBishop;
 		}
 	}
 
