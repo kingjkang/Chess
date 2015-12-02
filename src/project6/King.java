@@ -62,8 +62,8 @@ public class King extends ChessPiece{
 				firstStepDone = true;
 				
 				Rook right = (Rook)ChessBoard[row][7];
-				ChessBoard[row][0] = null;
-				CCB[row][0] = null;
+				ChessBoard[row][7] = null;
+				CCB[row][7] = null;
 				right.row = r;
 				right.col = c-1;
 				ChessBoard[right.row][right.col] = right;
