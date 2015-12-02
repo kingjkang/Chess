@@ -8,6 +8,8 @@ public class King extends ChessPiece{
 
 	Image blackKing;
 	Image whiteKing;
+	
+	private boolean firstStepDone = false;
 
 	public King(int r, int c, boolean color){
 		if(GUI){
@@ -46,7 +48,68 @@ public class King extends ChessPiece{
 	}
 	
 	protected void move(int r, int c){
-		super.move(r, c);
+//		super.move(r, c);
+		if(isValidMove(r, c)){
+			
+			//Castling
+			if(col + 2 == c){
+				ChessBoard[row][col] = null;
+				CCB[row][col] = null;
+				row = r;
+				col = c;
+				ChessBoard[row][col] = this;
+				CCB[row][col] = this;
+				firstStepDone = true;
+				
+				Rook right = (Rook)ChessBoard[row][7];
+				ChessBoard[row][0] = null;
+				CCB[row][0] = null;
+				right.row = r;
+				right.col = c-1;
+				ChessBoard[right.row][right.col] = right;
+				CCB[right.row][right.col] = right;
+				right.firstStepDone = true;
+			}
+			else if(col - 2  == c){
+				ChessBoard[row][col] = null;
+				CCB[row][col] = null;
+				row = r;
+				col = c;
+				ChessBoard[row][col] = this;
+				CCB[row][col] = this;
+				firstStepDone = true;
+				
+				Rook left = (Rook)ChessBoard[row][0];
+				ChessBoard[row][0] = null;
+				CCB[row][0] = null;
+				left.row = r;
+				left.col = c+1;
+				ChessBoard[left.row][left.col] = left;
+				CCB[left.row][left.col] = left;
+				left.firstStepDone = true;
+			}
+			else{
+				ChessBoard[row][col] = null;
+				CCB[row][col] = null;
+				if(ChessBoard[r][c] != null){
+					if(color == black){
+						whites.remove(ChessBoard[r][c]);
+					}
+					else{
+						blacks.remove(ChessBoard[r][c]);
+					}
+				}
+				row = r;
+				col = c;
+				ChessBoard[row][col] = this;
+				CCB[row][col] = this;
+				firstStepDone = true;
+			}
+		}
+		else{
+			System.out.println("Invalid move, try again");
+		}
+		
 		if(color == black){
 			ChessPiece.blackKing = this;
 		}
@@ -69,6 +132,38 @@ public class King extends ChessPiece{
 			return false;
 		}
 		
+		if(inCheck(r, c)){
+			return false;
+		}
+		
+		if(!firstStepDone && !inCheck(row, col)){
+			if(row == r && (col + 2 == c || col - 2 == c)){
+				Rook castle;
+				if(col + 2 == c){
+					if(ChessBoard[row][7] instanceof Rook){
+						castle = (Rook)ChessBoard[row][7];
+						if(!castle.firstStepDone && castle.color == color){
+							if(ChessBoard[row][5] == null && ChessBoard[row][6] == null){
+								return true;
+							}
+						}
+					}
+					return false;
+				}
+				else{
+					if(ChessBoard[row][0] instanceof Rook){
+						castle  = (Rook)ChessBoard[row][0];
+						if(!castle.firstStepDone && castle.color == color){
+							if(ChessBoard[row][1] == null && ChessBoard[row][2] == null && ChessBoard[row][3] == null){
+								return true;
+							}
+						}
+					}
+					return false;
+				}
+			}
+		}
+		
 		int deltaR = Math.abs(row - r);
 		int deltaC = Math.abs(col - c);
 		
@@ -76,9 +171,6 @@ public class King extends ChessPiece{
 			return false;
 		}
 		
-		if(inCheck(r, c)){
-			return false;
-		}
 		
 		return true;
 		

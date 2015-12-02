@@ -9,7 +9,7 @@ public class Rook extends ChessPiece{
 	Image blackRook;
 	Image whiteRook;
 	
-	private boolean firstStepDone;
+	public boolean firstStepDone;
 	
 	public Rook(int r, int c, boolean color){
 		if(GUI){
@@ -35,13 +35,6 @@ public class Rook extends ChessPiece{
 		}
 	}
 	
-	public boolean canCastle(){
-		if(firstStepDone){
-			//if king can do it
-			return true;
-		}
-		return false;
-	}
 	
 	public boolean isValidMove(int r, int c) {
 		
@@ -195,8 +188,5 @@ public class Rook extends ChessPiece{
 		
 	}
 	
-	public void castle(){
-		
-	}
 
 }
