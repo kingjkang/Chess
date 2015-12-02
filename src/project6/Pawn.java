@@ -74,8 +74,32 @@ public class Pawn extends ChessPiece{
 	
 	@Override
 	protected void move(int r, int c){
-		super.move(r, c);
+		
+		if(isValidMove(r, c)){
+			ChessBoard[row][col] = null;
+			CCB[row][col] = null;
+			if(ChessBoard[r][c] != null){
+				if(color == black){
+					whites.remove(ChessBoard[r][c]);
+				}
+				else{
+					blacks.remove(ChessBoard[r][c]);
+				}
+			}
+			row = r;
+			col = c;
+			ChessBoard[row][col] = this;
+			CCB[row][col] = this;
+		}
+		else{
+			System.out.println("Invalid move, try again");
+			return;
+		}
+		
+		//super.move(r, c);
+		
 		firstStepDone = true;
+		
 		boolean validPiece = false;
 		if(row == 7 || row == 0){
 			Scanner kb = new Scanner(System.in);
