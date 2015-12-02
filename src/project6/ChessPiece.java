@@ -6,6 +6,7 @@ import javafx.scene.image.Image;
 
 public abstract class ChessPiece {
 	
+	public static boolean GUI;
 	
 	protected int value;
 	

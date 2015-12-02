@@ -6,10 +6,8 @@ import javafx.scene.image.Image;
 
 public class Bishop extends ChessPiece{
 	
-	//Image blackBishop = new Image(getClass().getResourceAsStream("file:blackBishop.png"));
-	//Image whiteBishop = new Image(getClass().getResourceAsStream("file:whiteBishop.png"));
-	Image blackBishop = new Image("file:blackBishop.png");
-	Image whiteBishop = new Image("file:whiteBishop.png");
+	Image blackBishop;
+	Image whiteBishop;
 	
 	private static int upRight = 1;
 	private static int upLeft = 2;
@@ -17,6 +15,10 @@ public class Bishop extends ChessPiece{
 	private static int downRight = 4;
 
 	public Bishop(int r, int c, boolean color){
+		if(GUI){
+			blackBishop = new Image("file:blackBishop.png");
+			whiteBishop = new Image("file:whiteBishop.png");
+		}
 		row = r;
 		col = c;
 		this.color = color;
@@ -24,11 +26,15 @@ public class Bishop extends ChessPiece{
 		ChessBoard[row][col] = this;
 		if(color == black){
 			label = "B";
-			piece = blackBishop;
+			if(GUI){
+				piece = blackBishop;
+			}
 		}
 		else{
 			label = "b";
-			piece = whiteBishop;
+			if(GUI){
+				piece = whiteBishop;
+			}
 		}
 	}
 

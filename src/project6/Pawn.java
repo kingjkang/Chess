@@ -7,14 +7,16 @@ import javafx.scene.image.Image;
 
 public class Pawn extends ChessPiece{
 	
-	//Image blackPawn = new Image(getClass().getResourceAsStream("file:blackPawn.png"));
-	//Image whitePawn = new Image(getClass().getResourceAsStream("file:whitePawn.png"));
-	Image blackPawn = new Image("file:blackPawn.png");
-	Image whitePawn = new Image("file:whitePawn.png");
+	Image blackPawn;
+	Image whitePawn;
 	
 	private boolean firstStepDone;
 
 	public Pawn(int r, int c, boolean color){
+		if(GUI){
+			blackPawn = new Image("file:blackPawn.png");
+			whitePawn = new Image("file:whitePawn.png");
+		}
 		row = r;
 		col = c;
 		this.color = color;
@@ -23,11 +25,15 @@ public class Pawn extends ChessPiece{
 		firstStepDone = false;
 		if(color == black){
 			label = "P";
-			piece = blackPawn;
+			if(GUI){
+				piece = blackPawn;
+			}
 		}
 		else{
 			label = "p";
-			piece = whitePawn;
+			if(GUI){
+				piece = whitePawn;
+			}
 		}
 	}
 	

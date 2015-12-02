@@ -34,6 +34,8 @@ public class MainConsole {
 	}
 	
 	public static void main(String[] args) {
+		
+		ChessPiece.GUI = false;
 
 		Scanner kb = new Scanner(System.in);
 		int ocol = 0, orow = 0, ncol = 0, nrow = 0;

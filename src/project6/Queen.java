@@ -6,10 +6,8 @@ import javafx.scene.image.Image;
 
 public class Queen extends ChessPiece{
 	
-	//Image blackQueen = new Image(getClass().getResourceAsStream("file:blackQueen.png"));
-	//Image whiteQueen = new Image(getClass().getResourceAsStream("file:whiteQueen.png"));
-	Image blackQueen = new Image("file:blackQueen.png");
-	Image whiteQueen = new Image("file:whiteQueen.png");
+	Image blackQueen;
+	Image whiteQueen;
 	
 	private static int upRight = 1;
 	private static int upLeft = 2;
@@ -17,6 +15,10 @@ public class Queen extends ChessPiece{
 	private static int downRight = 4;
 
 	public Queen(int r, int c, boolean color){
+		if(GUI){
+			blackQueen = new Image("file:blackQueen.png");
+			whiteQueen = new Image("file:whiteQueen.png");
+		}
 		row = r;
 		col = c;
 		this.color = color;
@@ -24,11 +26,15 @@ public class Queen extends ChessPiece{
 		ChessBoard[row][col] = this;
 		if(color == black){
 			label = "Q";
-			piece = blackQueen;
+			if(GUI){
+				piece = blackQueen;
+			}
 		}
 		else{
 			label = "q";
-			piece = whiteQueen;
+			if(GUI){
+				piece = whiteQueen;
+			}
 		}
 	}
 	

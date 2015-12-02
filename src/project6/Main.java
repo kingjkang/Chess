@@ -245,10 +245,7 @@ public class Main extends Application{
 	}
 	
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		//System.out.println("Test 1");
-		
-		//System.out.println("Chess");
+		ChessPiece.GUI = true;
 		System.out.println("Welcome to Wizards Chess");
 		System.out.println("White Turn");
 		launch(args);

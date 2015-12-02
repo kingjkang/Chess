@@ -6,12 +6,14 @@ import javafx.scene.image.Image;
 
 public class Knight extends ChessPiece{
 	
-	//Image blackKnight = new Image(getClass().getResourceAsStream("file:blackKnight.png"));
-	//Image whiteKnight = new Image(getClass().getResourceAsStream("file:whiteKnight.png"));
-	Image blackKnight = new Image("file:blackKnight.png");
-	Image whiteKnight = new Image("file:whiteKnight.png");
+	Image blackKnight;
+	Image whiteKnight;
 
 	public Knight(int r, int c, boolean color){
+		if(GUI){
+			blackKnight = new Image("file:blackKnight.png");
+			whiteKnight = new Image("file:whiteKnight.png");
+		}
 		row = r;
 		col = c;
 		this.color = color;
@@ -19,11 +21,15 @@ public class Knight extends ChessPiece{
 		ChessBoard[row][col] = this;
 		if(color == black){
 			label = "H";
-			piece = blackKnight;
+			if(GUI){
+				piece = blackKnight;
+			}
 		}
 		else{
 			label = "h";
-			piece = whiteKnight;
+			if(GUI){
+				piece = whiteKnight;
+			}
 		}
 	}
 	

@@ -6,14 +6,16 @@ import javafx.scene.image.Image;
 
 public class Rook extends ChessPiece{
 	
-	//Image blackRook = new Image(getClass().getResourceAsStream("file:blackRook.png"));
-	//Image whiteRook = new Image(getClass().getResourceAsStream("file:whiteRook.png"));
-	Image blackRook = new Image("file:blackRook.png");
-	Image whiteRook = new Image("file:whiteRook.png");
+	Image blackRook;
+	Image whiteRook;
 	
 	private boolean firstStepDone;
 	
 	public Rook(int r, int c, boolean color){
+		if(GUI){
+			blackRook = new Image("file:blackRook.png");
+			whiteRook = new Image("file:whiteRook.png");
+		}
 		row = r;
 		col = c;
 		this.color = color;
@@ -21,11 +23,15 @@ public class Rook extends ChessPiece{
 		ChessBoard[row][col] = this;
 		if(color == black){
 			label = "R";
-			piece = blackRook;
+			if(GUI){
+				piece = blackRook;
+			}
 		}
 		else{
 			label = "r";
-			piece = whiteRook;
+			if(GUI){
+				piece = whiteRook;
+			}
 		}
 	}
 	
