@@ -269,6 +269,7 @@ public class Pawn extends ChessPiece{
 		
 		if(validPiece){
 			ChessBoard[row][col] = upgrade;
+			CCB[row][col] = upgrade;
 			if(color == black){
 				blacks.remove(this);
 				blacks.add(upgrade);
