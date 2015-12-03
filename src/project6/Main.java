@@ -123,7 +123,6 @@ public class Main extends Application{
 								checkMate = ChessPiece.checkMate();
 								
 								if(ChessPiece.checkForKing()){
-									universe.setCenter(createBoard());
 									if(checkMate){
 										System.out.println("CheckMate! lol won.");
 										staplesCenter.close();
@@ -261,7 +260,7 @@ public class Main extends Application{
 								initialPress = false;
 								secondaryPress = false;
 								checkMate = ChessPiece.checkMate();
-								universe.setCenter(createBoard());
+								
 								if(ChessPiece.checkForKing()){
 									if(checkMate){
 										System.out.println("CheckMate! lol won.");
