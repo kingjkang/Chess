@@ -184,11 +184,21 @@ public class Pawn extends ChessPiece{
 					}
 				}
 			}
-			else if(deltaR == 1 && deltaC <= 0){
-				
+			else if(deltaR == 1 && deltaC == 0){
+				if(ChessBoard[r][c] == null){
+					return true;
+				}
+				else{
+					return false;
+				}
 			}
-			else{
-				return false;
+			else if(deltaR == 1 && deltaC == 1){
+				if(ChessBoard[r][c] != null && ChessBoard[r][c].color != color){
+					return true;
+				}
+				else{
+					return false;
+				}
 			}
 		}
 		else{
@@ -269,6 +279,7 @@ public class Pawn extends ChessPiece{
 		
 		if(validPiece){
 			ChessBoard[row][col] = upgrade;
+			CCB[row][col] = upgrade;
 			if(color == black){
 				blacks.remove(this);
 				blacks.add(upgrade);
