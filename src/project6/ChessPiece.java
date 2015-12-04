@@ -638,23 +638,24 @@ public abstract class ChessPiece {
 				cc++;
 			}
 			
-			if(CCB[rr][cc] != null){
-				if(CCB[rr][cc].color != turn){
-					if(CCB[rr][cc] instanceof Queen){
-						return true;
-					}
-					if(CCB[rr][cc] instanceof Rook){
-						return true;
+			if(rr >= 0 && rr <= 7 && cc >= 0 && cc <= 7){
+				if(CCB[rr][cc] != null){
+					if(CCB[rr][cc].color != turn){
+						if(CCB[rr][cc] instanceof Queen){
+							return true;
+						}
+						if(CCB[rr][cc] instanceof Rook){
+							return true;
 
-					}
-					if(CCB[rr][cc] instanceof King && cc == king.col+1){
-						return true;
+						}
+						if(CCB[rr][cc] instanceof King && cc == king.col+1){
+							return true;
+						}
 					}
 				}
-			}
 
+			}
 		}
-		
 		//Going up
 		if(king.row > 0){
 			rr = king.row-1;

@@ -153,11 +153,6 @@ public class Pawn extends ChessPiece{
 		}
 
 		
-		
-//		if(inCheck(this.row, this.col, r, c)){
-//			return false;
-//		}
-		
 		if(inCheck(r, c)){
 			return false;
 		}
@@ -211,6 +206,9 @@ public class Pawn extends ChessPiece{
 				else{
 					return false;
 				}
+			}
+			else{
+				return false;
 			}
 		}
 		else{
