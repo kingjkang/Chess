@@ -413,7 +413,7 @@ public class Main extends Application{
 		else {
 			winner = "white";
 		}
-		Label printGG = new Label("Checkmate: " + ChessPiece.printColor + " king is in checkmate \n" + winner + " wins!");
+		Label printGG = new Label("Sike: " + ChessPiece.printColor + " king is in checkmate \n" + winner + " wins!");
 		gg.setCenter(printGG);
 		georgeStrait = new Scene(gg, 300, 300);
 		ATTStadium.centerOnScreen();
