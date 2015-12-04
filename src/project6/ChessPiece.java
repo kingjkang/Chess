@@ -16,12 +16,21 @@ import java.util.Iterator;
 
 import javafx.scene.image.Image;
 
+/* Main component of the Chess Game
+ * The Pawn, Bishop, Knight, Rook, Queen, King all extend this abstract class
+ * Contains checkmate, check, stalemate, move, validMove function
+ * Contains the ChessBoard */
 public abstract class ChessPiece {
 	
+	//Toggle for GUI/Console
 	public static boolean GUI;
 	
+	//The importance of each piece
+	//Ex: King has the most value, Pawn has the least value
+	//Intended for the AI
 	protected int value;
 	
+	//White or Black
 	protected boolean color;
 	
 	public boolean check = false;
@@ -51,8 +60,12 @@ public abstract class ChessPiece {
 		return piece;
 	}
 	
+	//Contains all the valid moves of the piece at each turn
 	public ArrayList<Move> Moves = new ArrayList<Move>();
 	
+	/* Checks if the move is valid and then moves
+	 * Pawn overrides because of firstStep and evolve
+	 * King overrides because of castling */
 	protected void move(int r, int c){
 		if(isValidMove(r, c)){
 			ChessBoard[row][col] = null;
@@ -75,6 +88,9 @@ public abstract class ChessPiece {
 		}
 	}
 	
+	/* For the console
+	 * Gets the coordinates of the piece you want to move
+	 * Then moves it to the correct coordinates */
 	public static void movePiece(int or, int oc, int nr, int nc){
 		
 		if(ChessBoard[or][oc] != null){
@@ -102,18 +118,25 @@ public abstract class ChessPiece {
 
 	}
 	
+	/* Checks if move is Valid
+	 * I.E. the move checks if the movement is consistent with the piece's movement
+	 * checks if the move doesn't put king in check or take king out of check */
 	public abstract boolean isValidMove(int r, int c);
 	
+	/* Gets all the validMoves for the respective ChessPiece */
 	public abstract void showMoves();
 	
+	/* Actual gameboard */
 	public static ChessPiece[][] ChessBoard = new ChessPiece[8][8];
 	
+	/* Backend gameboard to check for King in check */
 	public static ChessPiece[][] CCB = new ChessPiece[8][8];
 		
 	public static ArrayList<ChessPiece> whites = new ArrayList<ChessPiece>();
 	
 	public static ArrayList<ChessPiece> blacks = new ArrayList<ChessPiece>();
 	
+	/* Sets the initial pieces up */
 	public static void initializeBoard(){
 		
 		for(int i = 0; i < 8; i++){
@@ -173,6 +196,10 @@ public abstract class ChessPiece {
 		
 	}
 	
+	/* Checks if the king is in check if a move is to be made to (r, c)
+	 * Temporarily moves the piece in the backend chessboard and checks if the move
+	 * Does not yield its king in check
+	 * Then moves the piece back in the backend chessboard */
 	public boolean inCheck(int r, int c){
 		
 		ChessPiece removed = CCB[r][c];
@@ -614,6 +641,8 @@ public abstract class ChessPiece {
 		return false;
 	}
 
+	/* Checks if the king is in check at the beginning of check
+	 * Very similar to inCheck except nothing has to be updated in CCB */
 	public static boolean checkForKing(){
 				
 		King king = null;
@@ -976,6 +1005,13 @@ public abstract class ChessPiece {
 		
 	}
 	
+	/* Checks if the king is in Stalemate or Checkmate
+	 * Essentially goes through all the pieces on black team
+	 * or white team, if no piece has a valid move then the king
+	 * is either in checkmate or stalemate
+	 * King is in Checkmate when the king is also in check
+	 * King is in Stalemate when the king is not in check but none of the pieces
+	 * can make a valid move */
 	public static boolean checkMate(){
 		
 		if(turn == black){

@@ -14,8 +14,11 @@ package project6;
 
 import java.util.Scanner;
 
+/* Console part of the game 
+ * Depends crucially on the GUI toggle in ChessPiece */
 public class MainConsole {
 	
+	/* Initializes board */
 	public static void initBoard(){
 		System.out.print("+" + " - " + " - " + " - " + " - " + " - " + " - " + " - " + " - " + "+\n");
 		for (int i = 0; i < 8; i++){
@@ -24,7 +27,13 @@ public class MainConsole {
 		System.out.print("+" + " - " + " - " + " - " + " - " + " - " + " - " + " - " + " - " + "+\n");
 	}
 	
+	/* Outputs state of the board on console with the toStrings of each piece
+	 * Blacks are Uppercase
+	 * Whites are Lowercase
+	 * Border around the game board
+	 * Coordinates around the game board*/
 	public static void printBoard(){
+
 	    System.out.println("   " + " 0 " + " 1 " + " 2 " + " 3 " + " 4 " + " 5 " + " 6 " + " 7 ");
 	    System.out.println("  +" + " - " + " - " + " - " + " - " + " - " + " - " + " - " + " - " + "+");
 		
@@ -44,6 +53,8 @@ public class MainConsole {
 		System.out.println("  +" + " - " + " - " + " - " + " - " + " - " + " - " + " - " + " - " + "+");
 		
 	}
+	
+	/* Execution of the console portion */
 	
 	public static void main(String[] args) {
 		

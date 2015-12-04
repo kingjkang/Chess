@@ -12,7 +12,11 @@ package project6;
  * Fall 2015
  */
 
+/* Used only to determine if the king is in checkmate or stalemate
+ * If pieces have no valid moves game should end
+ * Just made a class because its easier to put in Moves intead of row and col */
 public class Move {
+	
 	public int row;
 	public int col;
 	

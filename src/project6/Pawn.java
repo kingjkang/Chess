@@ -27,13 +27,19 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
+/* Extension of ChessPiece
+ * All the moves descriptions are same
+ * but some are overridden */
 public class Pawn extends ChessPiece{
 	
 	Image blackPawn;
 	Image whitePawn;
 	
 	private boolean firstStepDone;
-
+	
+	/* Initializes Pawn to the place on board with unchangeable color
+	 * Value of Pawn is 1
+	 * Use GUI flag to determine if need to associate toString or Image */
 	public Pawn(int r, int c, boolean color){
 		if(GUI){
 			blackPawn = new Image("file:blackPawn.png");
@@ -265,6 +271,9 @@ public class Pawn extends ChessPiece{
 		}
 	}
 
+	/* Special function exclusive to the Pawn
+	 * Happens when the Pawn is at the enemy's end
+	 * Pawn can evolve to any piece except Pawn and King */
 	public boolean evolve(String piece){
 		
 		boolean validPiece = false;

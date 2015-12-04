@@ -16,13 +16,21 @@ import java.util.ArrayList;
 
 import javafx.scene.image.Image;
 
+/* Extension of ChessPiece
+ * All the moves descriptions are same
+ * but some are overridden
+ * The queen will use the rooks move code as well */
 public class Rook extends ChessPiece{
 	
 	Image blackRook;
 	Image whiteRook;
 	
+	//For castling
 	public boolean firstStepDone;
 	
+	/* Initializes Rook to the place on board with unchangeable color
+	 * Value of Rook is 5
+	 * Use GUI flag to determine if need to associate toString or Image */
 	public Rook(int r, int c, boolean color){
 		if(GUI){
 			blackRook = new Image("file:blackRook.png");
@@ -46,7 +54,6 @@ public class Rook extends ChessPiece{
 			}
 		}
 	}
-	
 	
 	public boolean isValidMove(int r, int c) {
 		

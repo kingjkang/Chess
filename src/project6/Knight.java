@@ -16,11 +16,17 @@ import java.util.ArrayList;
 
 import javafx.scene.image.Image;
 
+/* Extension of ChessPiece
+ * All the moves descriptions are same
+ * but some are overridden */
 public class Knight extends ChessPiece{
 	
 	Image blackKnight;
 	Image whiteKnight;
 
+	/* Initializes Knight to the place on board with unchangeable color
+	 * Value of Knight is 3
+	 * Use GUI flag to determine if need to associate toString or Image */	
 	public Knight(int r, int c, boolean color){
 		if(GUI){
 			blackKnight = new Image("file:blackKnight.png");

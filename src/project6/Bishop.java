@@ -16,16 +16,24 @@ import java.util.ArrayList;
 
 import javafx.scene.image.Image;
 
+/* Extension of ChessPiece
+ * All the moves descriptions are same
+ * but some are overridden
+ * The queen will use the bishops move code as well */
 public class Bishop extends ChessPiece{
 	
 	Image blackBishop;
 	Image whiteBishop;
 	
+	//Directions to determine which diagonal bishop is moving
 	private static int upRight = 1;
 	private static int upLeft = 2;
 	private static int downLeft = 3;
 	private static int downRight = 4;
 
+	/* Initializes Bishop to the place on board with unchangeable color
+	 * Value of Bishop is 3
+	 * Use GUI flag to determine if need to associate toString or Image */	
 	public Bishop(int r, int c, boolean color){
 		if(GUI){
 			blackBishop = new Image("file:blackBishop.png");

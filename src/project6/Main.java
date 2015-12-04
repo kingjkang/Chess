@@ -59,6 +59,8 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 import javafx.scene.shape.*;
 
+/* GUI part of the Game
+ * Depends crucially on the GUI toggle in ChessPiece */
 public class Main extends Application{
 	
 	/*
@@ -85,6 +87,11 @@ public class Main extends Application{
 	int printSC = 0;
 	//http://www.javacodegeeks.com/2013/10/javafx-2-how-to-load-image.html
 	
+	/* Creates the chessboard with alternating colours
+	 * The initial pieces are made here
+	 * Game is set to go
+	 * Images are also attached to the pieces
+	 * Made the pieces with buttons */
 	public GridPane createBoard(){
 		GridPane board = new GridPane();
 		Button addButton = null;
@@ -102,7 +109,7 @@ public class Main extends Application{
 				spot.setStyle("-fx-background-color: "+color+";");
 				String pieceToAdd;
 				Image picToAdd;
-				//whwen the board is initialized and there is nothing there what do i print
+				//when the board is initialized and there is nothing there what do i print
 				if (ChessPiece.ChessBoard[row][col] == null){
 					picToAdd = blank;
 					board.add(spot, col, row);
@@ -394,6 +401,8 @@ public class Main extends Application{
 		return board;
 	}
 	
+	/* New pop up window when checkmate function 
+	 * Prints text to see who the winner is */
 	public void showGG(){
 		gg = new BorderPane();
 		ATTStadium.setTitle("Game Over");
@@ -412,6 +421,8 @@ public class Main extends Application{
 		ATTStadium.show();
 	}
 	
+	/* New pop up window when stalemate function
+	 * Prints text to see it is stalemate */
 	public void showStalemate(){
 		gg = new BorderPane();
 		ATTStadium.setTitle("Game Over");

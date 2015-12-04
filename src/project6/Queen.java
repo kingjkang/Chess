@@ -16,16 +16,27 @@ import java.util.ArrayList;
 
 import javafx.scene.image.Image;
 
+/* Extension of ChessPiece
+ * All the moves descriptions are same
+ * but some are overridden
+ * The queen is a combination of the rook and bishop
+ * without the castling move
+ * So the queen's code is done when the bishop and rook
+ * code is done */
 public class Queen extends ChessPiece{
 	
 	Image blackQueen;
 	Image whiteQueen;
 	
+	//Diagonals to use the bishop's directions
 	private static int upRight = 1;
 	private static int upLeft = 2;
 	private static int downLeft = 3;
 	private static int downRight = 4;
 
+	/* Initializes Queen to the place on board with unchangeable color
+	 * Value of Queen is 9
+	 * Use GUI flag to determine if need to associate toString or Image */
 	public Queen(int r, int c, boolean color){
 		if(GUI){
 			blackQueen = new Image("file:blackQueen.png");
@@ -50,7 +61,6 @@ public class Queen extends ChessPiece{
 		}
 	}
 	
-
 	public boolean isValidMove(int r, int c) {
 		
 		if(r > 7 || r < 0 || c > 7 || c < 0){

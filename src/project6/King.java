@@ -16,13 +16,21 @@ import java.util.ArrayList;
 
 import javafx.scene.image.Image;
 
+/* Extension of ChessPiece
+ * All the moves descriptions are same
+ * but some are overridden
+ * Extra moves are added from chessPiece */
 public class King extends ChessPiece{
 
 	Image blackKing;
 	Image whiteKing;
 	
+	//For castling
 	private boolean firstStepDone = false;
 
+	/* Initializes King to the place on board with unchangeable color
+	 * Value of King is 10
+	 * Use GUI flag to determine if need to associate toString or Image */
 	public King(int r, int c, boolean color){
 		if(GUI){
 			blackKing = new Image("file:blackKing.png");
@@ -47,6 +55,8 @@ public class King extends ChessPiece{
 		}
 	}
 	
+	/* Used in one the methods to check if the king is in check 
+	 * Should not be visible to anyone else */
 	private King(King k){
 		row = k.row;
 		col = k.col;
@@ -59,6 +69,8 @@ public class King extends ChessPiece{
 		}
 	}
 	
+	/* Pawn and the King are the only ChessPiece's that override move
+	 * King overrides it because of castling and also because of special check conditions */
 	protected void move(int r, int c){
 //		super.move(r, c);
 		if(isValidMove(r, c)){
@@ -189,6 +201,7 @@ public class King extends ChessPiece{
 		//return !inCheck(this.row, this.col, r, c);
 	}
 	
+	/* Only for the king, special case thats why normal inCheck in the ChessPiece can't work */
 	public boolean inCheck(int r, int c){
 		
 		King king = new King(this);
