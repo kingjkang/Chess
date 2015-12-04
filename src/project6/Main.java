@@ -1,4 +1,16 @@
 package project6;
+/* GAME PROJECT <MyClass.java>
+ * EE422C Project 6 submission by
+ * Replace <...> with your actual data.
+ * <Anurag Andoji>
+ * <aka888>
+ * <16340>
+ * <Student2 Justin Kang>
+ * <jk36542>
+ * <16340>
+ * Slip days used: <0>
+ * Fall 2015
+ */
 
 import java.awt.geom.AffineTransform;
 import java.util.ArrayList;
